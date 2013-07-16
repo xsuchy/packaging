@@ -1,24 +1,24 @@
-%if (0%{?fedora} > 12 || 0%{?rhel} > 6)
-%{!?python_sitelib: %global python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())")}
-%endif
-
 Name:           osc
-Version:        0.132.4
-Release:        4%{?dist}
+Version:        0.140.1
+Release:        107.1%{?dist}
 Group:          Development/Tools
 License:        GPLv2+
-Url:            http://www.gitorious.org/opensuse/osc
+Url:            https://github.com/openSUSE/osc
 #the tarball come from gitourious.
 #i check out the latest version, same as openSUSE version.
-#git clone git://gitorious.org/opensuse/osc.git
-#git archive --prefix="osc-0.132.4/" --format=tar 0.132.4| gzip > osc-0.132.4.tar.gz
+#git clone git@github.com:openSUSE/osc.git
+#git archive --prefix="osc-0.140.1/" --format=tar 0.140.1| gzip > osc-0.140.1.tar.gz
 Source:         osc-%{version}.tar.gz
 Summary:        The openSUSE Build Service Commander
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
 BuildRequires:  python-devel
-Requires:       rpm-python m2crypto python-lxml python-urlgrabber fuse-python
+BuildRequires:  rpm-python
+Requires:       rpm-python
+Requires:       m2crypto
+Requires:       python-lxml
+Requires:       python-urlgrabber
+Requires:       fuse-python
 
 #Recommends:     osc-source_validator
 
@@ -38,31 +38,25 @@ iconv -f ISO8859-1 -t UTF-8 -o TODO.new TODO
 mv TODO.new TODO
 
 %build
-%{__python} setup.py build
+CFLAGS="%{optflags}" %{__python} setup.py build
 
 %install
 %{__python} setup.py install -O1 --prefix=%{_prefix} --root %{buildroot}
 %__ln_s osc-wrapper.py %{buildroot}/%{_bindir}/osc
-%__mkdir_p %{buildroot}/var/lib/osc-plugins
-%__mkdir_p %{buildroot}%{_datadir}/%{name}/complete
-%__install -m 0644 dist/complete.csh %{buildroot}%{_datadir}/%{name}/complete/osc.csh
-%__install -m 0644 dist/complete.sh %{buildroot}%{_datadir}/%{name}/complete/osc.sh
-%__mkdir_p %{buildroot}/%{_prefix}/lib/osc
-%__install -m 0755 dist/osc.complete %{buildroot}/%{_prefix}/lib/osc/complete
-
-%clean
-%{__rm} -rf %{buildroot}
+%__mkdir_p %{buildroot}%{_localstatedir}/lib/osc-plugins
+install -Dm0644 dist/complete.csh %{buildroot}%{_sysconfdir}/profile.d/osc.csh
+install -Dm0644 dist/complete.sh %{buildroot}%{_sysconfdir}/profile.d/osc.sh
+install -Dm0755 dist/osc.complete %{buildroot}/%{_prefix}/lib/osc/complete
 
 %files
-
-%defattr(-,root,root,-)
 %doc AUTHORS README TODO NEWS
 %{_bindir}/osc*
 %{python_sitelib}/*
-%{_prefix}/lib/osc/complete
-%dir /var/lib/osc-plugins
+%config %{_sysconfdir}/profile.d/osc.csh
+%config %{_sysconfdir}/profile.d/osc.sh
+%dir %{_localstatedir}/lib/osc-plugins
 %{_mandir}/man1/osc.*
-%{_datadir}/%{name}/*
+%{_prefix}/lib/osc
 
 %changelog
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.132.4-4
