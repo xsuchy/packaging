@@ -1,6 +1,6 @@
 Name:           osc
 Version:        0.140.1
-Release:        107.1.0%{?dist}
+Release:        107.1.1%{?dist}
 Group:          Development/Tools
 License:        GPLv2+
 Url:            https://github.com/openSUSE/osc
@@ -59,6 +59,11 @@ install -Dm0755 dist/osc.complete %{buildroot}/%{_prefix}/lib/osc/complete
 %{_prefix}/lib/osc
 
 %changelog
+* Wed Jul 17 2013 Miroslav Suchý <msuchy@redhat.com> 0.140.1-107.1.1
+- add one number to release so we can distinguish from OpenSuse v-r
+  (msuchy@redhat.com)
+- rebase to 0.140.1 (msuchy@redhat.com)
+
 * Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.132.4-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
 
