@@ -1,6 +1,6 @@
 Name:           osc
 Version:        0.140.1
-Release:        107.1%{?dist}
+Release:        107.1.0%{?dist}
 Group:          Development/Tools
 License:        GPLv2+
 Url:            https://github.com/openSUSE/osc
