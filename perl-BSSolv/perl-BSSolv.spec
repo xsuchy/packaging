@@ -35,7 +35,7 @@ BuildRequires:  libneon0.26-devel
 %endif
 %if 0%{?fedora}
 BuildRequires:  libdb4-devel
-BuildRequires:  perl-devel
+#BuildRequires:  perl-devel
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 %endif
 %if 0%{?suse_version}
@@ -52,7 +52,7 @@ BuildRequires:  expat-devel
 BuildRequires:  db4-devel
 %endif
 BuildRequires:  cmake
-BuildRequires:  gcc-c++
+#BuildRequires:  gcc-c++
 BuildRequires:  perl
 BuildRequires:  rpm-devel
 BuildRequires:  xz-devel
