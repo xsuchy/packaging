@@ -17,7 +17,7 @@
 
 Name:           perl-BSSolv
 Version:        0.18.2
-Release:        0
+Release:        1
 Url:            https://github.com/openSUSE/libsolv
 Source:         libsolv-0.2.0.tar.bz2
 Source1:        Makefile.PL
@@ -130,3 +130,6 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 18 2013 Miroslav Suchý <msuchy@redhat.com> 0.18.2-1
+- new package
+
