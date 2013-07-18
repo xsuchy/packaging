@@ -15,10 +15,14 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+%global gitrev 228d412
+
 Name:           perl-BSSolv
 Version:        0.18.2
-Release:        1
+Release:        1.git%{gitrev}%{?dist}
 Url:            https://github.com/openSUSE/libsolv
+# git clone https://github.com/openSUSE/libsolv.git
+# git archive %{gitrev} --prefix=libsolv/ | xz > libsolv-%{gitrev}.tar.xz
 Source:         libsolv-0.2.0.tar.bz2
 Source1:        Makefile.PL
 Source2:        BSSolv.pm
