@@ -69,7 +69,7 @@ Group:          Development/Libraries
 Using a Satisfyability Solver to compute package dependencies.
 
 %prep
-%setup -c
+%setup -c -q
 ln -s libsolv-* libsolv
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} .
 pushd libsolv
