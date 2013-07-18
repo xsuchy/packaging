@@ -19,7 +19,7 @@
 
 Name:           perl-BSSolv
 Version:        0.18.2
-Release:        1.git%{gitrev}%{?dist}
+Release:        2.git%{gitrev}%{?dist}
 Url:            https://github.com/openSUSE/libsolv
 # git clone https://github.com/openSUSE/libsolv.git
 # git archive %{gitrev} --prefix=libsolv/ | xz > libsolv-%{gitrev}.tar.xz
@@ -133,6 +133,17 @@ rm -rf $RPM_BUILD_ROOT
 %endif
 
 %changelog
+* Thu Jul 18 2013 Miroslav Suchý <msuchy@redhat.com> 0.18.2-2.git228d412
+- Take BSSolv.* from obs-server backend (msuchy@redhat.com)
+- Use libsolv 0.3.0 (msuchy@redhat.com)
+- add git hash to release and comment how to get source (msuchy@redhat.com)
+- perl-BSSolv.src: W: invalid-license BSD-3-Clause (msuchy@redhat.com)
+- perl-BSSolv.src:93: W: mixed-use-of-spaces-and-tabs (spaces: line 18, tab:
+  line 93) (msuchy@redhat.com)
+- perl-BSSolv.src:72: W: setup-not-quiet (msuchy@redhat.com)
+- perl-BSSolv.src: W: non-standard-group Development/Libraries/C and C++
+  (msuchy@redhat.com)
+
 * Thu Jul 18 2013 Miroslav Suchý <msuchy@redhat.com> 0.18.2-1
 - new package
 
