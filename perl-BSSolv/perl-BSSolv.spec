@@ -58,7 +58,7 @@ BuildRequires:  perl(ExtUtils::MakeMaker)
 # the testsuite uses the check framework
 BuildRequires:  check-devel
 Summary:        A new approach to package dependency solving
-License:        BSD-3-Clause
+License:        BSD
 Group:          Development/Libraries
 # probably needed for rhel/centos on x86_64
 %if 0%{!?perl_vendorarch}
