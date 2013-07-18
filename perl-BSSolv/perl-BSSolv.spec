@@ -23,7 +23,7 @@ Release:        1.git%{gitrev}%{?dist}
 Url:            https://github.com/openSUSE/libsolv
 # git clone https://github.com/openSUSE/libsolv.git
 # git archive %{gitrev} --prefix=libsolv/ | xz > libsolv-%{gitrev}.tar.xz
-Source:         libsolv-0.2.0.tar.bz2
+Source:         libsolv-%{gitrev}.tar.xz
 Source1:        Makefile.PL
 Source2:        BSSolv.pm
 Source3:        BSSolv.xs
@@ -73,8 +73,7 @@ Group:          Development/Libraries
 Using a Satisfyability Solver to compute package dependencies.
 
 %prep
-%setup -c -q
-ln -s libsolv-* libsolv
+%setup -c -q -n libsolv
 cp %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} .
 pushd libsolv
 popd
