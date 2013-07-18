@@ -59,7 +59,7 @@ BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  check-devel
 Summary:        A new approach to package dependency solving
 License:        BSD-3-Clause
-Group:          Development/Libraries/C and C++
+Group:          Development/Libraries
 # probably needed for rhel/centos on x86_64
 %if 0%{!?perl_vendorarch}
 %define perl_vendorarch %(eval "`%{__perl} -V:installvendorarch`"; echo $installvendorarch)
