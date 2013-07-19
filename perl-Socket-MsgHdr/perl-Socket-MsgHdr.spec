@@ -10,6 +10,13 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Socket-MsgHdr/
 Source0:        http://www.cpan.org/authors/id/M/MJ/MJP/Socket-MsgHdr-%{version}.tar.gz
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl
+BuildRequires:  perl(bytes)
+BuildRequires:  perl(Exporter)
+BuildRequires:  perl(Socket)
+BuildRequires:  perl(strict)
+BuildRequires:  perl(Test::More)
+BuildRequires:  perl(XSLoader)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -21,7 +28,7 @@ parameters, instead stuffing a lot of information into a complex structure.
 %setup -q -n Socket-MsgHdr-%{version}
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
+perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
 make %{?_smp_mflags}
 
 %install
@@ -29,7 +36,6 @@ make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
 find $RPM_BUILD_ROOT -type f -name '*.bs' -size 0 -exec rm -f {} \;
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 
 %{_fixperms} $RPM_BUILD_ROOT/*
 
