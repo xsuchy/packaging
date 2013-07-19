@@ -3,7 +3,7 @@
 
 Name:           perl-Socket-MsgHdr
 Version:        0.04
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Sendmsg, recvmsg and ancillary data operations
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -49,6 +49,10 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Fri Jul 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.04-3
+- use DESTDIR instead of PERL_INSTALL_ROOT (msuchy@redhat.com)
+- add several BRs (msuchy@redhat.com)
+
 * Fri Jul 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.04-2
 - exclude MsgHdr.so()(64bit) from provides (msuchy@redhat.com)
 
