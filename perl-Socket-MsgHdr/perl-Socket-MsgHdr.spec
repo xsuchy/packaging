@@ -1,3 +1,6 @@
+%{?perl_default_filter}
+%global __requires_exclude MsgHdr.so
+
 Name:           perl-Socket-MsgHdr
 Version:        0.04
 Release:        1%{?dist}
