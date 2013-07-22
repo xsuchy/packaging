@@ -19,7 +19,7 @@
 
 Name:           perl-BSSolv
 Version:        0.18.2
-Release:        2.git%{gitrev}%{?dist}
+Release:        3.git%{gitrev}%{?dist}
 Url:            https://github.com/openSUSE/open-build-service
 #Taken from https://github.com/openSUSE/open-build-service/tree/master/src/backend
 #from revision %{gitrev}
@@ -74,6 +74,10 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 %{perl_vendorarch}/auto/BSSolv
 
 %changelog
+* Mon Jul 22 2013 Miroslav Suchý <msuchy@redhat.com> 0.18.2-3.git9ef394f
+- use libsolv from distribution (msuchy@redhat.com)
+- do not BR perl-devel and gcc-c++ (msuchy@redhat.com)
+
 * Thu Jul 18 2013 Miroslav Suchý <msuchy@redhat.com> 0.18.2-2.git228d412
 - Take BSSolv.* from obs-server backend (msuchy@redhat.com)
 - Use libsolv 0.3.0 (msuchy@redhat.com)
