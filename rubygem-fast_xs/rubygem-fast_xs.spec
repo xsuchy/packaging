@@ -1,5 +1,5 @@
 %global gem_name fast_xs
-
+%
 Name: rubygem-%{gem_name}
 Version: 0.8.0
 Release: 1%{?dist}
@@ -63,8 +63,8 @@ cp -pa .%{gem_dir}/* \
 
 mkdir -p %{buildroot}%{gem_extdir_mri}/lib
 # TODO: move the extensions
-mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
-
+mv %{buildroot}%{gem_instdir}/lib/fast_xs_extra.so %{buildroot}%{gem_extdir_mri}/lib/
+mv %{buildroot}%{gem_instdir}/lib/fast_xs.so %{buildroot}%{gem_extdir_mri}/lib/
 
 
 %files
