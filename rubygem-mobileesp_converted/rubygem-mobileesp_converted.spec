@@ -13,6 +13,7 @@ Requires: ruby(rubygems)
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildRequires: ruby 
+BuildRequires: rubygem(rspec)
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
@@ -49,7 +50,12 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
+rm %{buildroot}%{gem_instdir}/.gitignore
 
+%check
+pushd .%{gem_instdir}
+rspec spec
+popd
 
 
 %files
@@ -57,9 +63,15 @@ cp -pa .%{gem_dir}/* \
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%doc %{gem_instdir}/README.md
 
 %files doc
 %doc %{gem_docdir}
+%{gem_instdir}/Gemfile
+%{gem_instdir}/Rakefile
+%{gem_instdir}/convert_to_ruby.vim
+%{gem_instdir}/java_source/
+%{gem_instdir}/spec/
 
 %changelog
 * Tue Jul 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.1-2
