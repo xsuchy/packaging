@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.8.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Provides C extensions for escaping text
 Group: Development/Languages
 License: MIT 
@@ -90,6 +90,11 @@ rm %{buildroot}%{gem_instdir}/.gitignore
 %{gem_instdir}/test
 
 %changelog
+* Tue Jul 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.0-2
+- move rubygem-filter macro after description (msuchy@redhat.com)
+- polish spec before review (msuchy@redhat.com)
+- filter so files from provides (msuchy@redhat.com)
+
 * Mon Jul 22 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.0-1
 - initial package (created by gem2rpm)
 
