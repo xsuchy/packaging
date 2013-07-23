@@ -1,5 +1,6 @@
 %global gem_name fast_xs
-%
+%rubygems_default_filter
+
 Name: rubygem-%{gem_name}
 Version: 0.8.0
 Release: 1%{?dist}
