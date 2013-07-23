@@ -4,7 +4,7 @@
 Name: rubygem-%{gem_name}
 Version: 0.8.0
 Release: 1%{?dist}
-Summary: fast_xs provides C extensions for escaping text
+Summary: Provides C extensions for escaping text
 Group: Development/Languages
 License: MIT 
 URL: http://fast-xs.rubyforge.org/
@@ -67,6 +67,8 @@ mkdir -p %{buildroot}%{gem_extdir_mri}/lib
 mv %{buildroot}%{gem_instdir}/lib/fast_xs_extra.so %{buildroot}%{gem_extdir_mri}/lib/
 mv %{buildroot}%{gem_instdir}/lib/fast_xs.so %{buildroot}%{gem_extdir_mri}/lib/
 
+rm %{buildroot}%{gem_instdir}/.gitignore
+
 
 %files
 %dir %{gem_instdir}
@@ -75,10 +77,16 @@ mv %{buildroot}%{gem_instdir}/lib/fast_xs.so %{buildroot}%{gem_extdir_mri}/lib/
 %{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
-
+%doc %{gem_instdir}/README.rdoc
+ 
 %files doc
 %doc %{gem_docdir}
 %doc %{gem_instdir}/Manifest.txt
+%doc %{gem_instdir}/History.rdoc
+%{gem_instdir}/GNUmakefile
+%{gem_instdir}/Rakefile
+%{gem_instdir}/setup.rb
+%{gem_instdir}/test
 
 %changelog
 * Mon Jul 22 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.0-1
