@@ -1,5 +1,4 @@
 %global gem_name fast_xs
-%rubygems_default_filter
 
 Name: rubygem-%{gem_name}
 Version: 0.8.0
@@ -41,6 +40,8 @@ BuildArch: noarch
 
 %description doc
 Documentation for %{name}
+
+%rubygems_default_filter
 
 %prep
 gem unpack %{SOURCE0}
