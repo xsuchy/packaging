@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.2.1
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Provides device type detection based on HTTP request headers
 Group: Development/Languages
 License: ASL 2.0 
@@ -62,3 +62,6 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_docdir}
 
 %changelog
+* Tue Jul 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.1-2
+- initial package
+
