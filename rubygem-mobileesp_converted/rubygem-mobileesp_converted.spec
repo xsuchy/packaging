@@ -13,7 +13,10 @@ Requires: ruby(rubygems)
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildRequires: ruby 
+#tests
 BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(minitest)
+
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
