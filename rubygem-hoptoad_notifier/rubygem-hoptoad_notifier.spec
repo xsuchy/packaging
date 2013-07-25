@@ -1,4 +1,3 @@
-# Generated from hoptoad_notifier-2.4.11.gem by gem2rpm -*- rpm-spec -*-
 %global gem_name hoptoad_notifier
 
 Name: rubygem-%{gem_name}
@@ -6,7 +5,7 @@ Version: 2.4.11
 Release: 1%{?dist}
 Summary: Send your application errors to our hosted service and reclaim your inbox
 Group: Development/Languages
-License: 
+License: MIT 
 URL: http://www.hoptoadapp.com
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: ruby(release)
@@ -43,8 +42,6 @@ gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
 # Create the gem as gem install only works on a gem file
 gem build %{gem_name}.gemspec
 
-# %%gem_install compiles any C extensions and installs the gem into ./%gem_dir
-# by default, so that we can move it into the buildroot in %%install
 %gem_install
 
 %install
@@ -63,13 +60,13 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/generators/
 %{gem_instdir}/script/
 %{gem_instdir}/rails/
+%doc %{gem_instdir}/INSTALL
+%doc %{gem_instdir}/README.md
 
 %files doc
 %doc %{gem_docdir}
-%doc %{gem_instdir}/INSTALL
 %doc %{gem_instdir}/CHANGELOG
 %doc %{gem_instdir}/MIT-LICENSE
-%doc %{gem_instdir}/README.md
 %doc %{gem_instdir}/README_FOR_HEROKU_ADDON.md
 %doc %{gem_instdir}/TESTING.rdoc
 %doc %{gem_instdir}/SUPPORTED_RAILS_VERSIONS
