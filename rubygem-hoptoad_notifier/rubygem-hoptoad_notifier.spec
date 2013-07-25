@@ -71,7 +71,6 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_instdir}/TESTING.rdoc
 %doc %{gem_instdir}/SUPPORTED_RAILS_VERSIONS
 %{gem_instdir}/test/
-%{gem_instdir}/spec/
 %{gem_instdir}/Rakefile
 
 %changelog
