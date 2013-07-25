@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.4.11
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Send your application errors to our hosted service and reclaim your inbox
 Group: Development/Languages
 License: MIT 
@@ -75,5 +75,8 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/Rakefile
 
 %changelog
+* Thu Jul 25 2013 Miroslav Suchý <msuchy@redhat.com> 2.4.11-2
+- initial package
+
 * Thu Jul 25 2013 msuchy@redhat.com - 2.4.11-1
 - Initial package
