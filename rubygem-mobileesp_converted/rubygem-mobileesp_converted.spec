@@ -54,6 +54,7 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 rm %{buildroot}%{gem_instdir}/.gitignore
+#cp %{gem_name}.gemspec %{buildroot}/%{gem_spec}
 
 %check
 pushd .%{gem_instdir}
@@ -66,6 +67,7 @@ popd
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%exclude %{gem_instdir}/%{gem_name}.gemspec
 %doc %{gem_instdir}/README.md
 
 %files doc
