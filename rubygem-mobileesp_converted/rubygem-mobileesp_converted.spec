@@ -16,6 +16,7 @@ BuildRequires: ruby
 #tests
 BuildRequires: rubygem(rake)
 BuildRequires: rubygem(minitest)
+BuildRequires: rubygem(bundler)
 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
