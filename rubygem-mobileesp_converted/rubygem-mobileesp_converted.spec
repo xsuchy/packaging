@@ -14,7 +14,7 @@ BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildRequires: ruby 
 #tests
-BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(rake)
 BuildRequires: rubygem(minitest)
 
 BuildArch: noarch
@@ -57,7 +57,7 @@ rm %{buildroot}%{gem_instdir}/.gitignore
 
 %check
 pushd .%{gem_instdir}
-rspec spec
+rake test
 popd
 
 
