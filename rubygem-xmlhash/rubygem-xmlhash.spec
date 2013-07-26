@@ -55,8 +55,8 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-mkdir -p %{buildroot}%{gem_extdir_mri}/lib
-mv %{buildroot}%{gem_instdir}/lib/xmlhash/xmlhash.so %{buildroot}%{gem_extdir_mri}/lib/
+mkdir -p %{buildroot}%{gem_extdir_mri}/lib/xmlhash
+mv %{buildroot}%{gem_instdir}/lib/xmlhash/xmlhash.so %{buildroot}%{gem_extdir_mri}/lib/xmlhash/
 
 # Remove the binary extension sources and build leftovers.
 rm -rf ext
