@@ -10,10 +10,12 @@ URL: https://github.com/coolo/xmlhash
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: ruby(release)
 Requires: ruby(rubygems) 
-Requires: rubygem(pkg-config) 
+Requires: rubygem(pkg-config)
+Requires: libxml2
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildRequires: ruby-devel 
+BuildRequires: libxml2 libxml2-devel
 Provides: rubygem(%{gem_name}) = %{version}
 
 %description
