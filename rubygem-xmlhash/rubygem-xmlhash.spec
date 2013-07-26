@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 1.3.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A small C module that wraps libxml2's xmlreader to parse a XML string into a ruby hash
 Group: Development/Languages
 License: MIT
@@ -71,3 +71,6 @@ mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}
 %doc %{gem_instdir}/README.txt
 
 %changelog
+* Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.5-2
+- initial package
+
