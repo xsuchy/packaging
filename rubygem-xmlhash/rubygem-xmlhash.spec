@@ -16,6 +16,7 @@ BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildRequires: ruby-devel 
 BuildRequires: libxml2 libxml2-devel
+BuildRequires: rubygem(pkg-config)
 Provides: rubygem(%{gem_name}) = %{version}
 
 %description
