@@ -20,10 +20,11 @@ BuildRequires: rubygem(pkg-config)
 Provides: rubygem(%{gem_name}) = %{version}
 #tests
 BuildRequires: rubygem(json)
+BuildRequires: rubygem(minitest)
 
 %description
 A small C module that wraps libxml2's xmlreader to parse a XML
-string into a ruby hash
+string into a ruby hash.
 
 
 %package doc
@@ -33,7 +34,7 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-Documentation for %{name}
+Documentation for %{name}.
 
 %prep
 gem unpack %{SOURCE0}
