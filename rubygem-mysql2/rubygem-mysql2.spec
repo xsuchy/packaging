@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.3.13
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: A simple, fast Mysql library for Ruby, binding to libmysql
 Group: Development/Languages
 License: MIT
@@ -94,3 +94,6 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %doc %{gem_instdir}/CHANGELOG.md
 
 %changelog
+* Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.3.13-2
+- initial package
+
