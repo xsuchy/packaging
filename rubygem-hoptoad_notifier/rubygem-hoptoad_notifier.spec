@@ -19,7 +19,10 @@ BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
 %description
+This is the notifier plugin for integrating apps with Hoptoad.
 
+When an uncaught exception occurs, HoptoadNotifier will POST the relevant data
+to the Hoptoad server specified in your environment.
 
 
 %package doc
