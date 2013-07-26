@@ -57,7 +57,8 @@ mkdir -p %{buildroot}%{gem_extdir_mri}/lib
 #mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
 
 # Remove the binary extension sources and build leftovers.
-rm -rf %{buildroot}%{geminstdir}/ext
+rm -rf %{buildroot}%{gem_instdir}/ext
+rm -f %{buildroot}%{gem_instdir}/{.gemtest,.autotest,.travis.yml}
 
 %files
 %dir %{gem_instdir}
@@ -72,6 +73,9 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %doc %{gem_instdir}/History.txt
 %doc %{gem_instdir}/Manifest.txt
 %doc %{gem_instdir}/README.txt
+%{gem_instdir}/Gemfile
+%{gem_instdir}/Rakefile
+%{gem_instdir}/test
 
 %changelog
 * Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.5-2
