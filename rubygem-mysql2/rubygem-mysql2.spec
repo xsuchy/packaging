@@ -62,9 +62,8 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-mkdir -p %{buildroot}%{gem_extdir_mri}/lib
-# TODO: move the extensions
-mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
+mkdir -p %{buildroot}%{gem_extdir_mri}/lib/mysql2
+mv %{buildroot}%{gem_instdir}/lib/mysql2/mysql2.so %{buildroot}%{gem_extdir_mri}/lib/mysql2/
 
 # Remove the binary extension sources and build leftovers.
 rm -rf %{buildroot}%{geminstdir}/ext
