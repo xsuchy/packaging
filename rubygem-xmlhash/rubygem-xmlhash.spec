@@ -18,6 +18,8 @@ BuildRequires: ruby-devel
 BuildRequires: libxml2 libxml2-devel
 BuildRequires: rubygem(pkg-config)
 Provides: rubygem(%{gem_name}) = %{version}
+#tests
+BuildRequires: rubygem(json)
 
 %description
 A small C module that wraps libxml2's xmlreader to parse a XML
@@ -54,11 +56,17 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 mkdir -p %{buildroot}%{gem_extdir_mri}/lib
-#mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
+mv %{buildroot}%{gem_instdir}/lib/xmlhash/xmlhash.so %{buildroot}%{gem_extdir_mri}/lib/
 
 # Remove the binary extension sources and build leftovers.
+rm -rf ext
 rm -rf %{buildroot}%{gem_instdir}/ext
 rm -f %{buildroot}%{gem_instdir}/{.gemtest,.autotest,.travis.yml}
+
+%check
+pushd .%{gem_instdir}
+testrb test/test_xmlhash.rb
+popd
 
 %files
 %dir %{gem_instdir}
