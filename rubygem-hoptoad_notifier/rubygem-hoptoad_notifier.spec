@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.4.11
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Send your application errors to our hosted service and reclaim your inbox
 Group: Development/Languages
 License: MIT 
@@ -77,6 +77,9 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/Rakefile
 
 %changelog
+* Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 2.4.11-4
+- set description
+
 * Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 2.4.11-3
 - remove spec from files
 
