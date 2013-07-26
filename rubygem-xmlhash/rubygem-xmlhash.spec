@@ -54,10 +54,10 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 mkdir -p %{buildroot}%{gem_extdir_mri}/lib
-# TODO: move the extensions
-mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
+#mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}/lib/
 
-
+# Remove the binary extension sources and build leftovers.
+rm -rf %{buildroot}%{geminstdir}/ext
 
 %files
 %dir %{gem_instdir}
