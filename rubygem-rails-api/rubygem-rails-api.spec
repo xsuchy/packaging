@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.1.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
@@ -83,6 +83,9 @@ popd
 %{gem_instdir}/test
 
 %changelog
+* Mon Jul 29 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-3
+- add tests
+
 * Mon Jul 29 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-2
 - initial package
 
