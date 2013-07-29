@@ -85,7 +85,6 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %doc %{gem_docdir}
 %{gem_instdir}/spec/
 %{gem_instdir}/examples/
-%doc %{gem_instdir}/CHANGELOG.md
 
 %changelog
 * Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.3.13-2
