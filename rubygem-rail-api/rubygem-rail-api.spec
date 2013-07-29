@@ -69,9 +69,11 @@ find %{buildroot}%{gem_instdir}/bin -type f | xargs chmod a+x
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%doc %{gem_instdir}/README.md
 
 %files doc
 %doc %{gem_docdir}
+%{gem_instdir}/test
 
 %changelog
 * Mon Jul 29 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-2
