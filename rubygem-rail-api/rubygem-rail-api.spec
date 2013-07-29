@@ -62,6 +62,13 @@ cp -pa .%{_bindir}/* \
 
 find %{buildroot}%{gem_instdir}/bin -type f | xargs chmod a+x
 
+%check
+pushd .%{gem_instdir}
+sed -i '/require.*bundler/d' test/test_helper.rb
+#generators are omited because it generate application which use bundler
+testrb -v -Ilib -Itest test/api_application/*_test.rb test/api_controller/*_test.rb
+popd
+
 %files
 %dir %{gem_instdir}
 %{_bindir}/rails-api
