@@ -1,4 +1,3 @@
-# Generated from yajl-ruby-1.1.0.gem by gem2rpm -*- rpm-spec -*-
 %global gem_name yajl-ruby
 
 Name: rubygem-%{gem_name}
@@ -6,7 +5,7 @@ Version: 1.1.0
 Release: 1%{?dist}
 Summary: Ruby C bindings to the excellent Yajl JSON stream-based parser library
 Group: Development/Languages
-License: 
+License: MIT
 URL: http://github.com/brianmario/yajl-ruby
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: ruby(release)
@@ -17,7 +16,8 @@ BuildRequires: ruby-devel >= 1.8.6
 Provides: rubygem(%{gem_name}) = %{version}
 
 %description
-
+This gem is a C binding to the excellent YAJL JSON parsing and generation
+library.
 
 
 %package doc
@@ -27,7 +27,7 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-Documentation for %{name}
+Documentation for %{name}.
 
 %prep
 gem unpack %{SOURCE0}
