@@ -62,9 +62,18 @@ mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}
 %{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
+%doc %{gem_instdir}/README.md
+%doc %{gem_instdir}/MIT-LICENSE
 
 %files doc
 %doc %{gem_docdir}
+%{gem_instdir}/examples
+%{gem_instdir}/benchmark
+%{gem_instdir}/spec
+%{gem_instdir}/tasks
+%{gem_instdir}/Gemfile
+%{gem_instdir}/Rakefile
+%{gem_instdir}/CHANGELOG.md
 
 %changelog
 * Mon Jul 29 2013 msuchy@redhat.com - 1.1.0-1
