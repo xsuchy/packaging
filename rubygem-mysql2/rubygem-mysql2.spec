@@ -76,18 +76,15 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
-%{gem_instdir}/examples/
+%{gem_instdir}/support/
 %doc %{gem_instdir}/README.md
 %doc %{gem_instdir}/MIT-LICENSE
 
 
 %files doc
 %doc %{gem_docdir}
-%{gem_instdir}/Rakefile
-%{gem_instdir}/Gemfile
 %{gem_instdir}/spec/
-%{gem_instdir}/test/
-%{gem_instdir}/tasks/
+%{gem_instdir}/examples/
 %doc %{gem_instdir}/CHANGELOG.md
 
 %changelog
