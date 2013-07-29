@@ -80,7 +80,6 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %{gem_instdir}/benchmark/
 %doc %{gem_instdir}/README.md
 %doc %{gem_instdir}/MIT-LICENSE
-%exclude %{gem_instdir}/mysql2.gemspec
 
 
 %files doc
