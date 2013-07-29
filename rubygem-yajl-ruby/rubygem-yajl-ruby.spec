@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 1.1.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Ruby C bindings to the excellent Yajl JSON stream-based parser library
 Group: Development/Languages
 License: MIT
@@ -76,5 +76,8 @@ mv %{buildroot}%{gem_instdir}/lib/shared_object.so %{buildroot}%{gem_extdir_mri}
 %{gem_instdir}/CHANGELOG.md
 
 %changelog
+* Mon Jul 29 2013 Miroslav Suchý <msuchy@redhat.com> 1.1.0-2
+- initial package
+
 * Mon Jul 29 2013 msuchy@redhat.com - 1.1.0-1
 - Initial package
