@@ -52,7 +52,7 @@ cp -pa .%{gem_dir}/* \
 mkdir -p %{buildroot}%{gem_extdir_mri}/lib/yajl
 mv %{buildroot}%{gem_instdir}/lib/yajl/yajl.so %{buildroot}%{gem_extdir_mri}/lib/yajl/
 
-
+rm -f %{buildroot}%{gem_instdir}/{.gitignore,.rspec,.travis.yml,yajl-ruby.gemspec}
 
 %files
 %dir %{gem_instdir}
