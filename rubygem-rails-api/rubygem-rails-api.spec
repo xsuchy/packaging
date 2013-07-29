@@ -21,6 +21,7 @@ BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 #test
 BuildRequires: rubygem(minitest)
+BuildRequires: rubygem(rails)
 
 %description
 Rails::API is a subset of a normal Rails application,
