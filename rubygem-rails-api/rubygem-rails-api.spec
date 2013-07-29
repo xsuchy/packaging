@@ -19,6 +19,8 @@ BuildRequires: rubygems-devel >= 1.3.6
 BuildRequires: ruby 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
+#test
+BuildRequires: rubygem(minitest)
 
 %description
 Rails::API is a subset of a normal Rails application,
