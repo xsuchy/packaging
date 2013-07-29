@@ -77,7 +77,6 @@ rm -rf %{buildroot}%{geminstdir}/ext
 %exclude %{gem_cache}
 %{gem_spec}
 %{gem_instdir}/examples/
-%{gem_instdir}/benchmark/
 %doc %{gem_instdir}/README.md
 %doc %{gem_instdir}/MIT-LICENSE
 
