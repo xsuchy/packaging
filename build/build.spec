@@ -99,6 +99,9 @@ Obsoletes:      build-initvm
 %if 0%{?suse_version} > 1200
 BuildRequires:  glibc-devel-static
 %endif
+%if 0%{?fedora} || 0%{?rhel}
+BuildRequires:  glibc-static
+%endif
 
 %description initvm-%{initvm_arch}
 This package provides a script for building RPMs for SUSE Linux in a
