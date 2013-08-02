@@ -108,7 +108,7 @@ chroot or a secure virtualized
 %setup -q -n obs-build-%version
 
 %build
-make CFLAGS="$RPM_BUILD_FLAGS" initvm-all
+make CFLAGS="%{optflags}" initvm-all
 
 %install
 # initvm
