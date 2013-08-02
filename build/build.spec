@@ -21,7 +21,7 @@ Summary:        A Script to Build SUSE Linux RPMs
 License:        GPL-2.0+ and GPL-2.0
 Group:          Development/Tools
 Version:        20130630
-Release:        18.1
+Release:        18.2
 #!BuildIgnore:  build-mkbaselibs
 Source:         obs-build-%{version}.tar.gz
 BuildArch:      noarch
@@ -162,6 +162,9 @@ test -e default.conf
 /usr/lib/build/initvm.*
 
 %changelog
+* Fri Aug 02 2013 Miroslav Suchý <msuchy@redhat.com> 20130630-18.2
+- initial package for Fedora
+
 * Sun Feb  3 2013 adrian@suse.com
 - add generic emulator stub
 * Fri Nov  9 2012 adrian@suse.de
