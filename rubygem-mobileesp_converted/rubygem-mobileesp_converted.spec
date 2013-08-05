@@ -69,7 +69,6 @@ popd
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
-%exclude %{gem_instdir}/%{gem_name}.gemspec
 %doc %{gem_instdir}/README.md
 
 %files doc
@@ -79,6 +78,7 @@ popd
 %{gem_instdir}/convert_to_ruby.vim
 %{gem_instdir}/java_source/
 %{gem_instdir}/spec/
+%{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
 * Thu Jul 25 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.1-4
