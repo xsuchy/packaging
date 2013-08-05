@@ -10,7 +10,7 @@
 Summary: Ruby library to parse PDF files
 Name: rubygem-%{gem_name}
 Version: 1.3.3
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/yob/pdf-reader
@@ -107,6 +107,9 @@ popd
 %{gem_instdir}/examples
 
 %changelog
+* Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.3-1
+- rebase to 1.3.3
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.1.1-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
