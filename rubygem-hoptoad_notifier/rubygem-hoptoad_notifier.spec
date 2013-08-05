@@ -65,11 +65,11 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/rails/
 %doc %{gem_instdir}/INSTALL
 %doc %{gem_instdir}/README.md
+%doc %{gem_instdir}/MIT-LICENSE
 
 %files doc
 %doc %{gem_docdir}
 %doc %{gem_instdir}/CHANGELOG
-%doc %{gem_instdir}/MIT-LICENSE
 %doc %{gem_instdir}/README_FOR_HEROKU_ADDON.md
 %doc %{gem_instdir}/TESTING.rdoc
 %doc %{gem_instdir}/SUPPORTED_RAILS_VERSIONS
