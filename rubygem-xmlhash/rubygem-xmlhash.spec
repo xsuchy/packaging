@@ -3,7 +3,7 @@
 Name: rubygem-%{gem_name}
 Version: 1.3.5
 Release: 4%{?dist}
-Summary: A small C module that wraps libxml2's xmlreader to parse a XML string into a ruby hash
+Summary: A small C module to parse a XML string into a ruby hash
 Group: Development/Languages
 License: MIT
 URL: https://github.com/coolo/xmlhash
