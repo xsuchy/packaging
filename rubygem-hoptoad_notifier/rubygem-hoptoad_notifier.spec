@@ -32,7 +32,7 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-Documentation for %{name}
+Documentation for %{name}.
 
 %prep
 gem unpack %{SOURCE0}
