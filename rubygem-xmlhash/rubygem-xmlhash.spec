@@ -66,7 +66,7 @@ rm -f %{buildroot}%{gem_instdir}/{.gemtest,.autotest,.travis.yml}
 
 %check
 pushd .%{gem_instdir}
-testrb test/test_xmlhash.rb
+testrb -Ilib test/test_xmlhash.rb
 popd
 
 %files
