@@ -54,12 +54,12 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 sed -i '1{/#\!\/usr\/bin\/env rake/d}' %{buildroot}%{gem_instdir}/Rakefile
-sed -i '/require "bundler\/gem_tasks"/d' %{gem_instdir}/Rakefile
 
 rm %{buildroot}%{gem_instdir}/.gitignore
 
 %check
 pushd .%{gem_instdir}
+sed -i '/require "bundler\/gem_tasks"/d' ./Rakefile
 rake test
 popd
 
