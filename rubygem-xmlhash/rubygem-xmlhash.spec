@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 1.3.5
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: A small C module to parse a XML string into a ruby hash
 Group: Development/Languages
 License: MIT
@@ -87,6 +87,12 @@ popd
 %{gem_instdir}/test
 
 %changelog
+* Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.5-5
+- 988818 - actually run the test suite
+- 988818 - move README.txt to main package
+- 988818 - summary-too-long
+- 988818 - escape macro in comment
+
 * Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.5-4
 - BR minitest
 
