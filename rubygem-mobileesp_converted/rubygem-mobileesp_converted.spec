@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.2.1
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Provides device type detection based on HTTP request headers
 Group: Development/Languages
 License: ASL 2.0 
@@ -81,6 +81,12 @@ popd
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.1-5
+- 988310 - keep original gemspec in -doc subpackage
+- 988310 - do not require bundler
+- 988310 - remove shebang from non-executable Rakefile
+- 988310 - remove not used code
+
 * Thu Jul 25 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.1-4
 - add BR rubygem(bundler)
 
