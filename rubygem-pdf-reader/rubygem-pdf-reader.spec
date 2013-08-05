@@ -9,14 +9,14 @@
 
 Summary: Ruby library to parse PDF files
 Name: rubygem-%{gem_name}
-Version: 1.1.1
-Release: 9%{?dist}
+Version: 1.3.3
+Release: 0%{?dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/yob/pdf-reader
 Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 # git clone git://github.com/yob/pdf-reader.git && cd pdf-reader/
-# git archive --format=tar --prefix=spec/ 3121f26db2:spec | gzip > pdf-reader-spec.tar-1.1.1.gz
+# git archive --format=tar --prefix=spec/ eee24b0:spec | gzip > pdf-reader-spec.tar-1.3.3.tar.gz
 Source1: pdf-reader-spec-%{version}.tar.gz
 %if 0%{?rhel} == 6
 Requires: ruby(abi) = 1.8
@@ -39,6 +39,10 @@ BuildRequires: rubygem(Ascii85) < 1.1.0
 Requires: rubygem(ruby-rc4)
 BuildRequires: rubygem(ruby-rc4)
 BuildRequires: rubygem(minitest)
+Requires: rubygem(afm) >= 0.2.0
+Requires: rubygem(afm) < 0.3.0
+Requires: rubygem(hashery) >= 2.0
+Requires: rubygem(hashery) < 3.0
 
 %description
 The PDF::Reader library implements a PDF parser conforming as much as possible
