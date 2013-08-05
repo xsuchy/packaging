@@ -76,12 +76,12 @@ popd
 %{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
+%doc %{gem_instdir}/README.txt
 
 %files doc
 %doc %{gem_docdir}
 %doc %{gem_instdir}/History.txt
 %doc %{gem_instdir}/Manifest.txt
-%doc %{gem_instdir}/README.txt
 %{gem_instdir}/Gemfile
 %{gem_instdir}/Rakefile
 %{gem_instdir}/test
