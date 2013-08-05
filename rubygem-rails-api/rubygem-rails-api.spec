@@ -6,7 +6,7 @@ Release: 5%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
-URL: https://github.com/spastorino/rails-api
+URL: https://github.com/rails-api/rails-api
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: ruby(release)
 Requires: ruby(rubygems) >= 1.3.6
