@@ -55,7 +55,6 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 rm %{buildroot}%{gem_instdir}/.gitignore
-#cp %{gem_name}.gemspec %{buildroot}/%{gem_spec}
 
 %check
 pushd .%{gem_instdir}
