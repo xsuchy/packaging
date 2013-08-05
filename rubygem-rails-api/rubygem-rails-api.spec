@@ -28,7 +28,7 @@ BuildRequires: rubygem(rails)
 %description
 Rails::API is a subset of a normal Rails application,
 created for applications that don't require all
-functionality that a complete Rails application provides
+functionality that a complete Rails application provides.
 
 
 %package doc
