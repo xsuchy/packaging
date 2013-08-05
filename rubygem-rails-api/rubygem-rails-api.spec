@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.1.0
-Release: 5%{?dist}
+Release: 6%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
@@ -90,6 +90,12 @@ popd
 %{gem_instdir}/test
 
 %changelog
+* Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-6
+- 990422 - fix macro in comment
+- 990422 - Description should end up with a dot.
+- 990422 - include LICENSE
+- 990422 - use new url
+
 * Mon Jul 29 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-5
 - BR rails
 
