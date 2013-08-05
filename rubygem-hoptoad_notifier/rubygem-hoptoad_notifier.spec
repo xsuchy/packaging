@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.4.11
-Release: 4%{?dist}
+Release: 5%{?dist}
 Summary: Send your application errors to our hosted service and reclaim your inbox
 Group: Development/Languages
 License: MIT 
@@ -77,6 +77,10 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/Rakefile
 
 %changelog
+* Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 2.4.11-5
+- 988789 - Description should end up with a dot.
+- 988789 - move LICENSE to main package
+
 * Fri Jul 26 2013 Miroslav Suchý <msuchy@redhat.com> 2.4.11-4
 - set description
 
