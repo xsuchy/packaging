@@ -8,6 +8,8 @@ Group: Development/Languages
 License: MIT
 URL: https://github.com/rails-api/rails-api
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
+# https://github.com/rails-api/rails-api/issues/99
+Source1: LICENSE
 Requires: ruby(release)
 Requires: ruby(rubygems) >= 1.3.6
 Requires: rubygem(actionpack) >= 3.2.11
@@ -43,6 +45,7 @@ gem unpack %{SOURCE0}
 
 %setup -q -D -T -n  %{gem_name}-%{version}
 
+cp -a %{SOURCE1} ./
 gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
 
 %build
@@ -80,6 +83,7 @@ popd
 %exclude %{gem_cache}
 %{gem_spec}
 %doc %{gem_instdir}/README.md
+%doc LICENSE
 
 %files doc
 %doc %{gem_docdir}
