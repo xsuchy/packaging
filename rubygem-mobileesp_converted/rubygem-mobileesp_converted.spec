@@ -16,7 +16,6 @@ BuildRequires: ruby
 #tests
 BuildRequires: rubygem(rake)
 BuildRequires: rubygem(minitest)
-BuildRequires: rubygem(bundler)
 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
@@ -55,6 +54,8 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 sed -i '1{/#\!\/usr\/bin\/env rake/d}' %{buildroot}%{gem_instdir}/Rakefile
+sed -i '/require "bundler\/gem_tasks"/d' %{gem_instdir}/Rakefile
+
 rm %{buildroot}%{gem_instdir}/.gitignore
 
 %check
