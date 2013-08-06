@@ -15,18 +15,24 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
+%global githash 0ec4e58
+%global date    20130806
+
 Name:           build
 Summary:        A Script to Build SUSE Linux RPMs
 License:        GPL-2.0+ and GPL-2.0
 Group:          Development/Tools
-Version:        20130630
-Release:        18.2
+Version:        %{date}
+Release:        0
 #!BuildIgnore:  build-mkbaselibs
 URL:            https://github.com/openSUSE/obs-build
+# git clone git://github.com/openSUSE/obs-build.git && cd obs-build/
+# git archive --format=tar %{githash} | gzip > obs-build-%{version}.tar.gz
 Source:         obs-build-%{version}.tar.gz
 #while this package is noarch, you could not have main package
 #noarch and subpackage arch.
 #BuildArch:      noarch
+
 # Manual requires to avoid hard require to bash-static
 AutoReqProv:    off
 # Keep the following dependencies in sync with obs-worker package
