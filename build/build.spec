@@ -139,6 +139,7 @@ test -e default.conf
 /usr/bin/buildvc
 /usr/bin/unrpm
 /usr/lib/build
+%exclude /usr/lib/build/emulator/emulator.sh
 %config(noreplace) /usr/lib/build/emulator/emulator.sh
 %{_mandir}/man1/build.1*
 %exclude /usr/lib/build/initvm.*
