@@ -129,7 +129,7 @@ make DESTDIR=%{buildroot} initvm-install
 #strip %{buildroot}%{_libdir}/build/initvm.*
 strip %{buildroot}/usr/lib/build/initvm.*
 export NO_BRP_STRIP_DEBUG="true"
-chmod 0644 %{buildroot}%{_libdir}/build/initvm.*
+chmod 0644 %{buildroot}/usr/lib/build/initvm.*
 
 # main
 make DESTDIR=%{buildroot} install
