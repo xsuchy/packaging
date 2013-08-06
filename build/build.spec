@@ -15,7 +15,6 @@
 # Please submit bugfixes or comments via http://bugs.opensuse.org/
 #
 
-
 Name:           build
 Summary:        A Script to Build SUSE Linux RPMs
 License:        GPL-2.0+ and GPL-2.0
@@ -24,7 +23,9 @@ Version:        20130630
 Release:        18.2
 #!BuildIgnore:  build-mkbaselibs
 Source:         obs-build-%{version}.tar.gz
-BuildArch:      noarch
+#while this package is noarch, you could not have main package
+#noarch and subpackage arch.
+#BuildArch:      noarch
 # Manual requires to avoid hard require to bash-static
 AutoReqProv:    off
 # Keep the following dependencies in sync with obs-worker package
@@ -65,6 +66,7 @@ chroot environment.
 %package mkbaselibs
 Summary:        Tools to generate base lib packages
 Group:          Development/Tools
+BuildArch:      noarch
 # NOTE: this package must not have dependencies which may break boot strapping (eg. perl modules)
 
 %description mkbaselibs
@@ -74,6 +76,7 @@ for generating base lib packages.
 %package mkdrpms
 Summary:        Tools to generate delta rpms
 Group:          Development/Tools
+BuildArch:      noarch
 Requires:       deltarpm
 # XXX: we wanted to avoid that but mkdrpms needs Build::Rpm::rpmq
 Requires:       build
