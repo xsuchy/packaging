@@ -27,7 +27,7 @@ Release:        1
 #!BuildIgnore:  build-mkbaselibs
 URL:            https://github.com/openSUSE/obs-build
 # git clone git://github.com/openSUSE/obs-build.git && cd obs-build/
-# git archive --format=tar %{githash} | gzip > obs-build-%{version}.tar.gz
+# git archive --format=tar %{githash} --prefix=%{name}-%{version} | gzip > obs-build-%{version}.tar.gz
 Source:         obs-build-%{version}.tar.gz
 #while this package is noarch, you could not have main package
 #noarch and subpackage arch.
@@ -102,7 +102,7 @@ Requires:       build
 BuildRequires:  gcc
 BuildRequires:  glibc-devel
 Provides:       build-initvm = %{version}
-Obsoletes:      build-initvm <= 20130402 
+Obsoletes:      build-initvm <= 20130402
 %if 0%{?suse_version} > 1200
 BuildRequires:  glibc-devel-static
 %endif
