@@ -22,6 +22,7 @@ Group:          Development/Tools
 Version:        20130630
 Release:        18.2
 #!BuildIgnore:  build-mkbaselibs
+URL:            https://github.com/openSUSE/obs-build
 Source:         obs-build-%{version}.tar.gz
 #while this package is noarch, you could not have main package
 #noarch and subpackage arch.
@@ -65,7 +66,6 @@ chroot environment.
 
 %package mkbaselibs
 Summary:        Tools to generate base lib packages
-Group:          Development/Tools
 BuildArch:      noarch
 # NOTE: this package must not have dependencies which may break boot strapping (eg. perl modules)
 
@@ -75,7 +75,6 @@ for generating base lib packages.
 
 %package mkdrpms
 Summary:        Tools to generate delta rpms
-Group:          Development/Tools
 BuildArch:      noarch
 Requires:       deltarpm
 # XXX: we wanted to avoid that but mkdrpms needs Build::Rpm::rpmq
@@ -93,7 +92,6 @@ for generating delta rpm packages.
 %endif
 %package initvm-%{initvm_arch}
 Summary:        Virtualization initializer for emulated cross architecture builds
-Group:          Development/Tools/Building
 Requires:       build
 BuildRequires:  gcc
 BuildRequires:  glibc-devel
