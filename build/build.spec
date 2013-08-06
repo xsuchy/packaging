@@ -95,8 +95,8 @@ Summary:        Virtualization initializer for emulated cross architecture build
 Requires:       build
 BuildRequires:  gcc
 BuildRequires:  glibc-devel
-Provides:       build-initvm
-Obsoletes:      build-initvm
+Provides:       build-initvm = %{version}
+Obsoletes:      build-initvm <= 20130402 
 %if 0%{?suse_version} > 1200
 BuildRequires:  glibc-devel-static
 %endif
