@@ -23,7 +23,7 @@ Summary:        A Script to Build SUSE Linux RPMs
 License:        GPL-2.0+ and GPL-2.0
 Group:          Development/Tools
 Version:        %{date}
-Release:        0
+Release:        1
 #!BuildIgnore:  build-mkbaselibs
 URL:            https://github.com/openSUSE/obs-build
 # git clone git://github.com/openSUSE/obs-build.git && cd obs-build/
@@ -176,6 +176,13 @@ test -e default.conf
 /usr/lib/build/initvm.*
 
 %changelog
+* Tue Aug 06 2013 Miroslav Suchý <msuchy@redhat.com> 20130806-1
+- specify from where the package is build
+- version provides and obsoletes
+- no need to specify group several times
+- because one subpackage is arch, main package must be arch as well
+- list emulator.sh only once
+
 * Fri Aug 02 2013 Miroslav Suchý <msuchy@redhat.com> 20130630-18.2
 - initial package for Fedora
 
