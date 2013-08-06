@@ -41,6 +41,7 @@ Requires:       binutils
 Requires:       perl
 Requires:       tar
 Conflicts:      bsdtar < 2.5.5
+BuildRequires:  glibc-static
 %if 0%{?suse_version} > 1000
 # None of them are actually required for core features.
 # Perl helper scripts use them.
