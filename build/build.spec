@@ -34,13 +34,12 @@ Source:         obs-build-%{version}.tar.gz
 #BuildArch:      noarch
 
 # Manual requires to avoid hard require to bash-static
-AutoReqProv:    off
+%global __requires_exclude ^/bin/bash-static$
 # Keep the following dependencies in sync with obs-worker package
 Requires:       bash
 Requires:       binutils
-Requires:       perl
+Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:       tar
-Conflicts:      bsdtar < 2.5.5
 BuildRequires:  glibc-static
 %if 0%{?suse_version} > 1000
 # None of them are actually required for core features.
@@ -154,6 +153,7 @@ test -e default.conf
 %config(noreplace) /usr/lib/build/emulator/emulator.sh
 %{_mandir}/man1/build.1*
 %exclude /usr/lib/build/initvm.*
+#%{perl_vendorlib}/Build
 
 %if 0%{?suse_version} > 1120 || ! 0%{?suse_version}
 %exclude /usr/lib/build/mkbaselibs
