@@ -23,7 +23,7 @@ Summary:        A Script to Build SUSE Linux RPMs
 License:        GPL-2.0+ and GPL-2.0
 Group:          Development/Tools
 Version:        %{date}
-Release:        1
+Release:        2
 #!BuildIgnore:  build-mkbaselibs
 URL:            https://github.com/openSUSE/obs-build
 # git clone git://github.com/openSUSE/obs-build.git && cd obs-build/
@@ -177,6 +177,10 @@ test -e default.conf
 /usr/lib/build/initvm.*
 
 %changelog
+* Tue Aug 06 2013 Miroslav Suchý <msuchy@redhat.com> 20130806-2
+- swich on autoreqprov and filter out bash-static
+- BR glibc-static
+
 * Tue Aug 06 2013 Miroslav Suchý <msuchy@redhat.com> 20130806-1
 - specify from where the package is build
 - version provides and obsoletes
