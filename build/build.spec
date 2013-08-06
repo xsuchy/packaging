@@ -122,7 +122,7 @@ chroot or a secure virtualized
 make CFLAGS="%{optflags}" initvm-all
 
 %install
-i#mkdir -p %{buildroot}%{_libdir}
+#mkdir -p %{buildroot}%{_libdir}
 # initvm
 make DESTDIR=%{buildroot} initvm-install
 #cp -a %{buildroot}/usr/lib/build %{buildroot}%{_libdir}
