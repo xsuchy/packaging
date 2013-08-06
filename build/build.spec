@@ -121,15 +121,18 @@ chroot or a secure virtualized
 make CFLAGS="%{optflags}" initvm-all
 
 %install
+i#mkdir -p %{buildroot}%{_libdir}
 # initvm
-make DESTDIR=$RPM_BUILD_ROOT initvm-install
-strip $RPM_BUILD_ROOT/usr/lib/build/initvm.*
+make DESTDIR=%{buildroot} initvm-install
+#cp -a %{buildroot}/usr/lib/build %{buildroot}%{_libdir}
+#strip %{buildroot}%{_libdir}/build/initvm.*
+strip %{buildroot}/usr/lib/build/initvm.*
 export NO_BRP_STRIP_DEBUG="true"
-chmod 0644 $RPM_BUILD_ROOT/usr/lib/build/initvm.*
+chmod 0644 %{buildroot}%{_libdir}/build/initvm.*
 
 # main
-make DESTDIR=$RPM_BUILD_ROOT install
-cd $RPM_BUILD_ROOT/usr/lib/build/configs/
+make DESTDIR=%{buildroot} install
+cd %{buildroot}/usr/lib/build/configs/
 %if 0%{?suse_version}
 %if 0%{?sles_version}
  ln -s sles%{sles_version}.conf default.conf
