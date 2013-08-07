@@ -31,7 +31,6 @@ optional, but all parsers are able ot handle it.  XML::Builder as
 packaged in Rails 2.0 will be automatically use String#fast_xs instead
 of String#to_xs available.
 
-
 %package doc
 Summary: Documentation for %{name}
 Group: Documentation
@@ -39,10 +38,9 @@ Requires: %{name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
-Documentation for %{name}
+Documentation for %{name}.
 
 %rubygems_default_filter
-
 %prep
 gem unpack %{SOURCE0}
 
