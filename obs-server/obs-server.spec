@@ -35,7 +35,7 @@ License:        GPL-2.0 and GPL-3.0
 %if 0%{?suse_version} < 1210 && 0%{?suse_version:1}
 Group:          Productivity/Networking/Web/Utilities
 %endif
-Version:        2.4.50_382_g5ef3c6a
+Version: 2.4.50_408_g18645ff
 Release:        0
 Url:            http://en.opensuse.org/Build_Service
 BuildRoot:      %{_tmppath}/%{name}-%{version}-build
@@ -171,56 +171,7 @@ BuildRequires:  xorg-x11-Xvnc
 BuildRequires:  xorg-x11-server
 BuildRequires:  xorg-x11-server-extra
 # OBS_SERVER_BEGIN
-Requires:       rubygem(2.0.0:actionmailer) = 4.0.0
-Requires:       rubygem(2.0.0:actionpack) = 4.0.0
-Requires:       rubygem(2.0.0:activemodel) = 4.0.0
-Requires:       rubygem(2.0.0:activerecord) = 4.0.0
-Requires:       rubygem(2.0.0:activerecord-deprecated_finders) = 1.0.3
-Requires:       rubygem(2.0.0:activesupport) = 4.0.0
-Requires:       rubygem(2.0.0:arel) = 4.0.0
-Requires:       rubygem(2.0.0:atomic) = 1.1.10
-Requires:       rubygem(2.0.0:builder) = 3.1.4
-Requires:       rubygem(2.0.0:bundler) = 1.3.4
-Requires:       rubygem(2.0.0:clockwork) = 0.5.4
-Requires:       rubygem(2.0.0:daemons) = 1.1.9
-Requires:       rubygem(2.0.0:dalli) = 2.6.4
-Requires:       rubygem(2.0.0:delayed_job) = 4.0.0.beta2
-Requires:       rubygem(2.0.0:delayed_job_active_record) = 4.0.0.beta3
-Requires:       rubygem(2.0.0:erubis) = 2.7.0
-Requires:       rubygem(2.0.0:hike) = 1.2.3
-Requires:       rubygem(2.0.0:hoptoad_notifier) = 2.4.11
-Requires:       rubygem(2.0.0:i18n) = 0.6.4
-Requires:       rubygem(2.0.0:jquery-rails) = 3.0.4
-Requires:       rubygem(2.0.0:jquery-ui-rails) = 4.0.3
-Requires:       rubygem(2.0.0:json) = 1.8.0
-Requires:       rubygem(2.0.0:mail) = 2.5.4
-Requires:       rubygem(2.0.0:mime-types) = 1.23
-Requires:       rubygem(2.0.0:mini_portile) = 0.5.1
-Requires:       rubygem(2.0.0:minitest) = 4.7.4
-Requires:       rubygem(2.0.0:mobileesp_converted) = 0.2.1
-Requires:       rubygem(2.0.0:multi_json) = 1.7.7
-Requires:       rubygem(2.0.0:mysql2) = 0.3.13
-Requires:       rubygem(2.0.0:newrelic_rpm) = 3.6.5.130
-Requires:       rubygem(2.0.0:nokogiri) = 1.6.0
-Requires:       rubygem(2.0.0:pkg-config) = 1.1.4
-Requires:       rubygem(2.0.0:polyglot) = 0.3.3
-Requires:       rubygem(2.0.0:rack) = 1.5.2
-Requires:       rubygem(2.0.0:rack-test) = 0.6.2
-Requires:       rubygem(2.0.0:rails) = 4.0.0
-Requires:       rubygem(2.0.0:rails-api) = 0.1.0
-Requires:       rubygem(2.0.0:railties) = 4.0.0
-Requires:       rubygem(2.0.0:rake) = 10.1.0
-Requires:       rubygem(2.0.0:rdoc) = 4.0.1
-Requires:       rubygem(2.0.0:ruby-ldap) = 0.9.13
-Requires:       rubygem(2.0.0:sprockets) = 2.10.0
-Requires:       rubygem(2.0.0:sprockets-rails) = 2.0.0
-Requires:       rubygem(2.0.0:thor) = 0.18.1
-Requires:       rubygem(2.0.0:thread_safe) = 0.1.0
-Requires:       rubygem(2.0.0:tilt) = 1.4.1
-Requires:       rubygem(2.0.0:treetop) = 1.4.14
-Requires:       rubygem(2.0.0:tzinfo) = 0.3.37
-Requires:       rubygem(2.0.0:xmlhash) = 1.3.5
-Requires:       rubygem(2.0.0:yajl-ruby) = 1.1.0
+Could not find rake-10.1.0 in any of the sources
 # OBS_SERVER_END
 # requires for webui:
 Requires:       ghostscript-fonts-std
