@@ -17,6 +17,7 @@
 
 %global githash 0ec4e58
 %global date    20130806
+%global basedir %{_prefix}/lib/build
 
 Name:           build
 Summary:        A Script to Build SUSE Linux RPMs
@@ -53,6 +54,16 @@ Recommends:     perl(URI)
 Recommends:     perl(XML::Parser)
 Recommends:     bsdtar
 Recommends:     qemu-linux-user
+%endif
+%if 0%{?fedora}
+Requires:     perl(Date::Language)
+Requires:     perl(Date::Parse)
+Requires:     perl(LWP::UserAgent)
+Requires:     perl(Pod::Usage)
+Requires:     perl(Time::Zone)
+Requires:     perl(URI)
+Requires:     perl(XML::Parser)
+Requires:     qemu-user
 %endif
 
 %if 0%{?suse_version} > 1120 || ! 0%{?suse_version}
@@ -124,15 +135,15 @@ make CFLAGS="%{optflags}" initvm-all
 #mkdir -p %{buildroot}%{_libdir}
 # initvm
 make DESTDIR=%{buildroot} initvm-install
-#cp -a %{buildroot}/usr/lib/build %{buildroot}%{_libdir}
+#cp -a %{buildroot}%{basedir} %{buildroot}%{_libdir}
 #strip %{buildroot}%{_libdir}/build/initvm.*
-strip %{buildroot}/usr/lib/build/initvm.*
+strip %{buildroot}%{basedir}/initvm.*
 export NO_BRP_STRIP_DEBUG="true"
-chmod 0644 %{buildroot}/usr/lib/build/initvm.*
+chmod 0644 %{buildroot}%{basedir}/initvm.*
 
 # main
 make DESTDIR=%{buildroot} install
-cd %{buildroot}/usr/lib/build/configs/
+cd %{buildroot}%{basedir}/configs/
 %if 0%{?suse_version}
 %if 0%{?sles_version}
  ln -s sles%{sles_version}.conf default.conf
@@ -145,36 +156,35 @@ test -e default.conf
 
 %files
 %doc README
-/usr/bin/build
-/usr/bin/buildvc
-/usr/bin/unrpm
-/usr/lib/build
-%exclude /usr/lib/build/emulator/emulator.sh
-%config(noreplace) /usr/lib/build/emulator/emulator.sh
+%{_bindir}/build
+%{_bindir}/buildvc
+%{_bindir}/unrpm
+%{basedir}
+%exclude %{basedir}/emulator/emulator.sh
+%config(noreplace) %{basedir}/emulator/emulator.sh
 %{_mandir}/man1/build.1*
-%exclude /usr/lib/build/initvm.*
+%exclude %{basedir}/initvm.*
 #%{perl_vendorlib}/Build
 
 %if 0%{?suse_version} > 1120 || ! 0%{?suse_version}
-%exclude /usr/lib/build/mkbaselibs
-%exclude /usr/lib/build/baselibs*
-%exclude /usr/lib/build/mkdrpms
+%exclude %{basedir}/mkbaselibs
+%exclude %{basedir}/baselibs*
+%exclude %{basedir}/mkdrpms
 
 %files mkbaselibs
 %defattr(-,root,root)
-%dir /usr/lib/build
-/usr/lib/build/mkbaselibs
-/usr/lib/build/baselibs*
+%dir %{basedir}
+%{basedir}/mkbaselibs
+%{basedir}/baselibs*
 
 %files mkdrpms
 %defattr(-,root,root)
-%dir /usr/lib/build
-/usr/lib/build/mkdrpms
+%{basedir}/mkdrpms
 %endif
 
 %files initvm-%{initvm_arch}
 %defattr(-,root,root)
-/usr/lib/build/initvm.*
+%{basedir}/initvm.*
 
 %changelog
 * Tue Aug 06 2013 Miroslav Suchý <msuchy@redhat.com> 20130806-2
