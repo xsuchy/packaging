@@ -10,7 +10,7 @@
 Summary: Ruby library to parse PDF files
 Name: rubygem-%{gem_name}
 Version: 1.3.3
-Release: 3%{?dist}
+Release: 4%{?dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/yob/pdf-reader
@@ -113,6 +113,9 @@ popd
 %{gem_instdir}/examples
 
 %changelog
+* Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.3-4
+- require (and BR) ttfunk
+
 * Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 1.3.3-3
 - add BR of afm and hashery for tests
 
