@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.0.0
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Organize ActiveRecord model into a tree structure
 Group: Development/Languages
 License: MIT
@@ -76,6 +76,9 @@ popd
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-3
+- run tests
+
 * Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-2
 - initial package
 
