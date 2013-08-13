@@ -3,7 +3,7 @@
 Name: rubygem-%{gem_name}
 Version: 2.0.0
 Release: 2%{?dist}
-Summary: Organise ActiveRecord model into a tree structure
+Summary: Organize ActiveRecord model into a tree structure
 Group: Development/Languages
 License: MIT
 URL: http://github.com/stefankroes/ancestry
@@ -18,7 +18,7 @@ BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
 %description
-Ancestry allows the records of a ActiveRecord model to be organised in a tree
+Ancestry allows the records of a ActiveRecord model to be organized in a tree
 structure, using a single, intuitively formatted database column. It exposes
 all the standard tree structure relations (ancestors, parent, root, children,
 siblings, descendants) and all of them can be fetched in a single sql query.
