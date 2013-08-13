@@ -60,9 +60,14 @@ cp -pa .%{gem_dir}/* \
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%{gem_instdir}/MIT-LICENSE
+%{gem_instdir}/README.rdoc
+%exclude %{gem_instdir}/init.rb
+%exclude %{gem_instdir}/install.rb
 
 %files doc
 %doc %{gem_docdir}
+%{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
 * Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-2
