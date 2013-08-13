@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 2.0.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Organize ActiveRecord model into a tree structure
 Group: Development/Languages
 License: MIT
@@ -55,12 +55,6 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-%check
-pushd .%{gem_instdir}
-sed -i '/require.*bundler/d' test/environment.rb
-testrb -Ilib -Itest has_ancestry_test.rb
-popd
-
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
@@ -76,11 +70,8 @@ popd
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
-* Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-3
-- run tests
-
-* Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-2
-- initial package
+* Tue Aug 13 2013 Miroslav Suchý <msuchy@redhat.com> 2.0.0-4
+- fix typos 
 
 * Tue Aug 13 2013 msuchy@redhat.com - 2.0.0-1
 - Initial package
