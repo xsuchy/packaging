@@ -55,6 +55,12 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
+%check
+pushd .%{gem_instdir}
+sed -i '/require.*bundler/d' test/environment.rb
+testrb -Ilib -Itest has_ancestry_test.rb
+popd
+
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
