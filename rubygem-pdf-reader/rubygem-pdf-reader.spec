@@ -47,6 +47,8 @@ Requires: rubygem(hashery) >= 2.0
 Requires: rubygem(hashery) < 3.0
 BuildRequires: rubygem(hashery) >= 2.0
 BuildRequires: rubygem(hashery) < 3.0
+Requires: rubygem(ttfunk)
+BuildRequires: rubygem(ttfunk)
 
 %description
 The PDF::Reader library implements a PDF parser conforming as much as possible
