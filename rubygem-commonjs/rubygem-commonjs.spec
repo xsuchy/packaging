@@ -30,7 +30,8 @@ BuildRequires: %{?scl_prefix}ruby
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
 #tests
-BuildRequires: rubygem(therubyracer)
+BuildRequires: %{?scl_prefix}rubygem(therubyracer)
+BuildRequires: %{?scl_prefix}rubygem(rspec-core)
 
 %description
 Host CommonJS JavaScript environments in Ruby
@@ -64,7 +65,9 @@ rm -rf %{buildroot}%{gem_instdir}/{.gitignore,.gitmodules}
 
 %check
 pushd .%{gem_instdir}
-testrb -Ilib -Ispec spec/spec_helper.rb
+%{?scl:scl enable %{scl} "}
+rspec spec
+%{?scl:"}
 popd
 
 %files
