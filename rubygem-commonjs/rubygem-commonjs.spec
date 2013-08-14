@@ -8,7 +8,7 @@
 Summary: Provide access to your Ruby and Operating System runtime via the commonjs API
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.2.6
-Release: 6%{?dist}
+Release: 7%{?dist}
 Group: Development/Languages
 License: GPLv2+ or Ruby
 URL: http://github.com/cowboyd/commonjs.rb
@@ -83,6 +83,9 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Wed Aug 14 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.6-7
+- enable tests
+
 * Wed Jul 03 2013 Dominic Cleal <dcleal@redhat.com> 0.2.6-6
 - change ruby(abi) to ruby(release) for F19+ (dcleal@redhat.com)
 - delete all zero sized tito.props (msuchy@redhat.com)
