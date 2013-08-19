@@ -8,7 +8,7 @@ Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.1
 Release: 6%{dist}
-Group: Development/Ruby
+Group: Development/Languages
 License: MIT
 URL: http://github.com/janlelis/unicode-display_width
 Source0: %{gem_name}-%{version}.gem
