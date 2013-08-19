@@ -15,6 +15,8 @@ BuildRequires: rubygems-devel
 BuildRequires: ruby >= 1.8.7
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
+#tests
+BuildRequires: rubygem-rspec
 
 %description
 Paint manages terminal colors and effects for you. It combines the strengths
@@ -51,6 +53,12 @@ gem build %{gem_name}.gemspec
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
+
+%check
+cp -pr spec/ ./%{gem_instdir}
+pushd ./%{gem_instdir}
+rspec spec
+popd
 
 %files
 %dir %{gem_instdir}
