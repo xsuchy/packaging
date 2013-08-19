@@ -70,6 +70,7 @@ popd
 %exclude %{gem_cache}
 %{gem_spec}
 %doc %{gem_instdir}/README.md
+%doc %{gem_instdir}/LICENSE
 
 %files doc
 %doc %{gem_docdir}
