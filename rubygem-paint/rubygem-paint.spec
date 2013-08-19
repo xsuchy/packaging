@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.8.6
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -64,3 +64,6 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_instdir}/LICENSE.txt
 
 %changelog
+* Mon Aug 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.6-1
+- initial package
+
