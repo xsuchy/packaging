@@ -3,7 +3,7 @@
 
 %global gem_name unicode-display_width
 
-Summary: Support for east_asian_width string widths.
+Summary: Support for east_asian_width string widths
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.1
