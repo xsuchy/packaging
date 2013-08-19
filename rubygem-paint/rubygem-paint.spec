@@ -57,11 +57,16 @@ cp -pa .%{gem_dir}/* \
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%exclude %{gem_instdir}/.gemtest
 
 %files doc
 %doc %{gem_docdir}
 %doc %{gem_instdir}/README.rdoc
 %doc %{gem_instdir}/LICENSE.txt
+%doc %{gem_instdir}/CHANGELOG.rdoc
+%{gem_instdir}/Rakefile
+%{gem_instdir}/%{gem_name}.gemspec
+%{gem_instdir}/spec
 
 %changelog
 * Mon Aug 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.6-1
