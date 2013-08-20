@@ -7,7 +7,7 @@ Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.0.1
 Release: 2%{dist}
-Group: Development/Ruby
+Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
 Source0: %{gem_name}-%{version}.gem
