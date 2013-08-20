@@ -22,6 +22,8 @@ Requires: %{?scl_prefix}rubygems
 Requires: %{?scl_prefix}rubygem(paint)
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(wirb) = %{version}
+#tests
+BuildRequires: rubygem-rspec
 
 %define gembuilddir %{buildroot}%{gem_dir}
 
@@ -67,6 +69,12 @@ rm -f %{buildroot}%{gem_instdir}/.gemtest
 %doc %{gem_instdir}/README.rdoc
 %{gem_instdir}/Rakefile
 %{gem_instdir}/%{gem_name}.gemspec
+
+%check
+pushd ./%{gem_instdir}
+#requires rubygem-zucker which is not in Fedora
+#rspec spec
+popd
 
 %changelog
 * Tue Aug 20 2013 Miroslav Suchý <msuchy@redhat.com> 1.0.1-1
