@@ -2,7 +2,7 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global gem_name wirb
-Summary: Wavy IRB: Colorizes irb results.
+Summary: Wavy IRB: Colorizes irb results
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.0.1
