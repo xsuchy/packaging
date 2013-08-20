@@ -6,7 +6,7 @@ Summary: Wavy IRB: Colorizes irb results
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.0.1
-Release: 3%{dist}
+Release: 4%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
@@ -94,6 +94,9 @@ pushd ./%{gem_instdir}
 popd
 
 %changelog
+* Tue Aug 20 2013 Miroslav Suchý <msuchy@redhat.com> 1.0.1-4
+- populate ./%%{gem_dir} so we can cd there for tests
+
 * Tue Aug 20 2013 Miroslav Suchý <msuchy@redhat.com> 1.0.1-3
 - use standard group
 - summary should not end with dot
