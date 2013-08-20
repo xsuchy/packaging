@@ -6,7 +6,7 @@ Summary: Wavy IRB: Colorizes irb results.
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.0.1
-Release: 0%{dist}
+Release: 1%{dist}
 Group: Development/Ruby
 License: MIT
 URL: https://github.com/janlelis/wirb
@@ -69,6 +69,9 @@ rm -f %{buildroot}%{gem_instdir}/.gemtest
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Tue Aug 20 2013 Miroslav Suchý <msuchy@redhat.com> 1.0.1-1
+- rebase to 1.0.1
+
 * Thu Jul 04 2013 Dominic Cleal <dcleal@redhat.com> 0.4.2-6
 - change ruby(abi) to ruby(release) for F19+ (dcleal@redhat.com)
 - delete all zero sized tito.props (msuchy@redhat.com)
