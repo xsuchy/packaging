@@ -25,8 +25,6 @@ Provides: %{?scl_prefix}rubygem(wirb) = %{version}
 #tests
 BuildRequires: rubygem-rspec
 
-%define gembuilddir %{buildroot}%{gem_dir}
-
 %description
 Wavy IRB: Colorizes irb results. It originated from Wirble, but only provides
 result highlighting. Just call Wirb.start and enjoy the colors in your IRB ;).
@@ -42,15 +40,34 @@ Summary:    Documentation for rubygem-%{gem_name}
 This package contains documentation for rubygem-%{gem_name}.
 
 %prep
-%setup -n %{pkg_name}-%{version} -T -c
+%{?scl:scl enable %{scl} "}
+gem unpack %{SOURCE0}
+%{?scl:"}
+%setup -q -D -T -n %{gem_name}-%{version}
+
+%{?scl:scl enable %{scl} "}
+gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
+%{?scl:"}
 
 %build
+%{?scl:scl enable %{scl} "}
+gem build %{gem_name}.gemspec
+%{?scl:"}
+
+%{?scl:scl enable %{scl} - << \EOF}
+%if 0%{?fedora} > 18
+%{gem_install}
+%else
+mkdir -p ./%{gem_dir}
+gem install --local --install-dir ./%{gem_dir} --force %{SOURCE0}
+%endif
+%{?scl:EOF}
 
 %install
-mkdir -p %{gembuilddir}
-%{?scl:scl enable %{scl} "}
-gem install --local --install-dir %{gembuilddir} --force %{SOURCE0}
-%{?scl:"}
+mkdir -p %{buildroot}%{gem_dir}
+cp -a ./%{gem_dir}/* \
+        %{buildroot}%{gem_dir}/
+
 rm -rf %{buildroot}%{gem_instdir}/.yardoc
 rm -f %{buildroot}%{gem_instdir}/.gemtest
 
