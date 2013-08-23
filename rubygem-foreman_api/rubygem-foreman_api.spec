@@ -17,7 +17,7 @@
 Summary: Ruby bindings for Forman's rest API
 Name: rubygem-%{gem_name}
 Version: 0.1.5
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/theforeman/foreman_api
@@ -98,6 +98,9 @@ sed -i '1d' %{buildroot}%{gem_instdir}/Rakefile
 
 
 %changelog
+* Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.5-2
+- really add rebased gem
+
 * Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.5-1
 - rebase to 0.1.5
 
