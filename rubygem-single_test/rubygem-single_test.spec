@@ -2,16 +2,16 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global gem_name single_test
+%global git_hash 64657b2
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.5.2
-Release: 3%{?dist}
+Version: 0.6.0
+Release: 0%{?dist}
 Summary: Rake tasks to invoke single tests/specs with rakish syntax
 Group: Development/Languages
 License: Public Domain
 URL: http://github.com/grosser/single_test
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
-
 %if 0%{?fedora} > 18
 Requires: %{?scl_prefix}ruby(release)
 %else
@@ -19,13 +19,12 @@ Requires: %{?scl_prefix}ruby(abi) = 1.9.1
 %endif
 Requires: %{?scl_prefix}ruby(rubygems) 
 Requires: %{?scl_prefix}rubygem(rake) > 0.9
-
 BuildRequires: %{?scl_prefix}rubygems-devel 
 BuildRequires: %{?scl_prefix}rubygems
-
 BuildArch: noarch
-
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
+#tests
+BuildRequires: rubygem-rspec
 
 %description
 Runs a single test/spec via rake.
@@ -59,19 +58,19 @@ mkdir -p .%{gem_dir}
 gem build %{gem_name}.gemspec
 %{?scl:"}
 
-# gem install installs into a directory.  We set that to be a local
-# directory so that we can move it into the buildroot in %%install
-%{?scl:scl enable %{scl} "}
-gem install --local --install-dir ./%{gem_dir} \
-            --force --rdoc %{gem_name}-%{version}.gem
-%{?scl:"}
-
+%{?scl:scl enable %{scl} - << \EOF}
+%if 0%{?fedora} > 18
+%{gem_install}
+%else
+mkdir -p ./%{gem_dir}
+gem install --local --install-dir ./%{gem_dir} --force %{gem_name}-%{version}.gem
+%endif
+%{?scl:EOF}
 
 %install
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
-
 
 %files
 %dir %{gem_instdir}
@@ -79,15 +78,8 @@ cp -pa .%{gem_dir}/* \
 %exclude %{gem_cache}
 %{gem_spec}
 
-%exclude %{gem_instdir}/spec
-
 %files doc
 %doc %{gem_docdir}
-%doc %{gem_instdir}/Readme.md
-%doc %{gem_instdir}/VERSION
-%exclude %{gem_instdir}/Gemfile*
-%exclude %{gem_instdir}/Rakefile
-%exclude %{gem_instdir}/*gemspec
 
 %changelog
 * Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.5.2-3
