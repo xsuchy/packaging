@@ -6,7 +6,7 @@
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.6.0
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Rake tasks to invoke single tests/specs with rakish syntax
 Group: Development/Languages
 License: Public Domain
@@ -82,6 +82,9 @@ cp -pa .%{gem_dir}/* \
 %doc %{gem_docdir}
 
 %changelog
+* Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.6.0-1
+- rebase to 0.6.0
+
 * Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.5.2-3
 - initial package
 
