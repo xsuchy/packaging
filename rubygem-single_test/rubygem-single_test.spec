@@ -12,7 +12,7 @@
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.6.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Rake tasks to invoke single tests/specs with rakish syntax
 Group: Development/Languages
 License: MIT
@@ -88,6 +88,14 @@ chmod a-x %{buildroot}%{gem_libdir}/%{gem_name}/tasks.rb
 %doc %{gem_docdir}
 
 %changelog
+* Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.6.0-2
+- remove executable flag from tasks.rb
+- remove BR rubygem-rspec
+- use gem_install macro even for F18
+- correct license (MIT)
+- remove unused macro githash
+- add comment about scl
+
 * Fri Aug 23 2013 Miroslav Suchý <msuchy@redhat.com> 0.6.0-1
 - rebase to 0.6.0
 
