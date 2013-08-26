@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    1%{?dist}
+Release:    2%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
@@ -64,6 +64,9 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
+* Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.9.6-2
+- tar file already contain name-version prefix
+
 * Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.9.6-1
 - rebase to 0.9.6
 
