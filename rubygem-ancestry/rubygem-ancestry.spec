@@ -60,8 +60,8 @@ cp -pa .%{gem_dir}/* \
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
-%{gem_instdir}/MIT-LICENSE
-%{gem_instdir}/README.rdoc
+%doc %{gem_instdir}/MIT-LICENSE
+%doc %{gem_instdir}/README.rdoc
 %exclude %{gem_instdir}/init.rb
 %exclude %{gem_instdir}/install.rb
 
