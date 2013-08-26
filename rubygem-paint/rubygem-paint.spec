@@ -12,7 +12,6 @@ Requires: ruby(release)
 Requires: ruby(rubygems) 
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
-BuildRequires: ruby >= 1.8.7
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 #tests
