@@ -76,6 +76,8 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
+chmod a-x %{buildroot}%{gem_libdir}/%{gem_name}/tasks.rb
+
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
