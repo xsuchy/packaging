@@ -9,7 +9,6 @@
 %{!?scl:%global pkg_name %{name}}
 
 %global gem_name single_test
-%global git_hash 64657b2
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.6.0
