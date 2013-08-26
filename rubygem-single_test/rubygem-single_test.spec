@@ -1,3 +1,10 @@
+# This package contains macros that provide functionality relating to
+# Software Collections. These macros are not used in default
+# Fedora builds, and should not be blindly copied or enabled.
+# Specifically, the "scl" macro must not be defined in official Fedora
+# builds. For more information, see:
+# http://docs.fedoraproject.org/en-US/Fedora_Contributor_Documentation
+# /1/html/Software_Collections_Guide/index.html
 %{?scl:%scl_package rubygem-%{gem_name}}
 %{!?scl:%global pkg_name %{name}}
 
