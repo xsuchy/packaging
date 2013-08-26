@@ -15,7 +15,7 @@ BuildRequires: rubygems-devel
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 #tests
-BuildRequires: rubygem-rspec
+BuildRequires: rubygem(rspec)
 
 %description
 Paint manages terminal colors and effects for you. It combines the strengths
