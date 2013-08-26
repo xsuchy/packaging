@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
-Version:    0.9.5
-Release:    4%{?dist}
+Version:    0.9.6
+Release:    0%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
