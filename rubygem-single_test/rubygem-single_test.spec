@@ -29,8 +29,6 @@ BuildRequires: %{?scl_prefix}rubygems-devel
 BuildRequires: %{?scl_prefix}rubygems
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
-#tests
-BuildRequires: rubygem-rspec
 
 %description
 Runs a single test/spec via rake.
