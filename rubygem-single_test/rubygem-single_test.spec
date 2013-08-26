@@ -15,7 +15,7 @@ Version: 0.6.0
 Release: 1%{?dist}
 Summary: Rake tasks to invoke single tests/specs with rakish syntax
 Group: Development/Languages
-License: Public Domain
+License: MIT
 URL: http://github.com/grosser/single_test
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
 %if 0%{?fedora} > 18
