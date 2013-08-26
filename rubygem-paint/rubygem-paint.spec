@@ -54,7 +54,6 @@ cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
 %check
-cp -pr spec/ ./%{gem_instdir}
 pushd ./%{gem_instdir}
 rspec spec
 popd
