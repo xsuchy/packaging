@@ -64,11 +64,11 @@ popd
 %exclude %{gem_cache}
 %{gem_spec}
 %exclude %{gem_instdir}/.gemtest
+%doc %{gem_instdir}/README.rdoc
+%doc %{gem_instdir}/LICENSE.txt
 
 %files doc
 %doc %{gem_docdir}
-%doc %{gem_instdir}/README.rdoc
-%doc %{gem_instdir}/LICENSE.txt
 %doc %{gem_instdir}/CHANGELOG.rdoc
 %{gem_instdir}/Rakefile
 %{gem_instdir}/%{gem_name}.gemspec
