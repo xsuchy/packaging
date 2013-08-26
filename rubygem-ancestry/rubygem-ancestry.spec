@@ -1,4 +1,5 @@
 %global gem_name ancestry
+%global githash e8a2536
 
 Name: rubygem-%{gem_name}
 Version: 2.0.0
@@ -17,6 +18,17 @@ BuildRequires: ruby
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
 
+#for tests, which are not present in gem file
+# git clone git@github.com:stefankroes/ancestry.git && cd ancestry
+# git archive --format=tar %{githash} test | gzip > %{name}-%{version}-test.tar.gz
+Source1: %{name}-%{version}-test.tar.gz
+BuildRequires: rubygem(activerecord)
+BuildRequires: rubygem(activesupport)
+BuildRequires: rubygem(test-unit)
+BuildRequires: rubygems
+BuildRequires: sqlite
+BuildRequires: rubygem(sqlite3)
+ 
 %description
 Ancestry allows the records of a ActiveRecord model to be organized in a tree
 structure, using a single, intuitively formatted database column. It exposes
@@ -54,6 +66,20 @@ gem build %{gem_name}.gemspec
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
+
+%check
+pushd ./%{gem_instdir}
+tar zxf %{SOURCE1}
+sed -i '/require.*bundler/d' test/environment.rb
+mkdir log
+touch log/test.log
+cat <<EOF > test/database.yml
+sqlite3:
+  adapter: sqlite3
+  database: ":memory:"
+EOF
+testrb -v -Ilib -Itest test/*_test.rb
+popd
 
 %files
 %dir %{gem_instdir}
