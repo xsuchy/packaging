@@ -32,7 +32,7 @@ The following containers are detected:
     * LXC
 
 %prep
-%setup -q -c %{name}-%{version}
+%setup -q
 
 %build
 %configure --prefix=%{_prefix} --libexec=%{_libexecdir}/imvirt
