@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.8.6
-Release: 2%{?dist}
+Release: 3%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -75,6 +75,12 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.6-3
+- 998459 - move README and LICENSE to main package
+- 998459 - remove excessive cp
+- 998459 - use virtual requires
+- 998459 - remove ruby mri requires
+
 * Mon Aug 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.6-2
 - enable tests
 - fix files section
