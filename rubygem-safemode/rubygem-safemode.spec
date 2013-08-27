@@ -33,6 +33,8 @@ BuildRequires: %{?scl_prefix}rubygems-devel
 BuildRequires: %{?scl_prefix}rubygem(rake)
 BuildRequires: %{?scl_prefix}rubygem(rdoc)
 BuildRequires: %{?scl_prefix}rubygems
+#tests
+BuildRequires: %{?scl_prefix}rubygem(test-unit)
 
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(safemode) = %{version}
@@ -85,6 +87,12 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -a ./%{gem_dir}/* %{buildroot}%{gem_dir}/
 mv %{buildroot}%{gem_instdir}/{LICENCSE,README.markdown} ./
 rm %{buildroot}%{gem_instdir}/VERSION
+
+%check
+pushd ./%{gem_instdir}
+rm Gemfile*
+testrb -v -Ilib -Itest test/test_*.rb
+popd
 
 %files
 %doc LICENCSE README.markdown
