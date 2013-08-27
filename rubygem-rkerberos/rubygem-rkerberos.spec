@@ -87,7 +87,7 @@ sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_spec}
 pushd ./%{gem_instdir}
 # test do not work and many of them need functional keytab
 # this need some work in upstream first
-testrb -v -Ilib -Itest test/test_config.rb
+#testrb -v -Ilib -Itest test/test_*.rb
 popd
 
 %files
