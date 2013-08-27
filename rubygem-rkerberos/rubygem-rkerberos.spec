@@ -32,6 +32,9 @@ BuildRequires: %{?scl_prefix}rubygem-rake-compiler
 
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
 
+#test
+BuildRequires: %{?scl_prefix}rubygem(test-unit)
+
 %description
 The rkerberos library is an interface for the Kerberos 5 network
 authentication protocol. It wraps the Kerberos C API.
@@ -80,9 +83,16 @@ rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/Gemfile*
 # rake-compiler isn't needed on the system itself
 sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_spec}
 
+%check
+pushd ./%{gem_instdir}
+# test do not work and many of them need functional keytab
+# this need some work in upstream first
+testrb -v -Ilib -Itest test/test_config.rb
+popd
+
 %files
 %doc %{gem_instdir}/README.md
-%{gem_extdir_mri}/lib/rkerberos.so
+%{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
 
