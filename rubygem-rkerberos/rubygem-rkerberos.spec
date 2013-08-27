@@ -10,13 +10,6 @@
 
 %global gem_name rkerberos
 
-%if !("%{?scl}" == "ruby193" || 0%{?rhel} > 6 || 0%{?fedora} > 16)
-%define gem_dir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%define gem_instdir %{gem_dir}/gems/%{gem_name}-%{version}
-%define gem_cache %{gem_dir}/cache/%{gem_name}-%{version}.gem
-%define gem_docdir %{gem_dir}/doc/%{gem_name}-%{version}
-%endif
-
 %define version 0.1.2
 %define release 1
 
@@ -36,9 +29,7 @@ Requires: %{?scl_prefix}rubygems
 
 BuildRequires: %{?scl_prefix}ruby
 BuildRequires: %{?scl_prefix}rubygems
-%if "%{?scl}" == "ruby193" || 0%{?rhel} > 6 || 0%{?fedora} > 16
 BuildRequires: %{?scl_prefix}rubygems-devel
-%endif
 BuildRequires: %{?scl_prefix}ruby-devel
 BuildRequires: krb5-devel
 BuildRequires: %{?scl_prefix}rubygem-rake-compiler
