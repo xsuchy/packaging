@@ -18,6 +18,8 @@ Group: Development/Languages
 License: MIT
 URL: http://github.com/grosser/single_test
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
+Source1: https://raw.github.com/grosser/single_test/master/MIT-LICENSE
+Source2: https://raw.github.com/grosser/single_test/master/Readme.md 
 %if 0%{?fedora} > 18
 Requires: %{?scl_prefix}ruby(release)
 %else
@@ -54,6 +56,8 @@ gem unpack %{SOURCE0}
 gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
 %{?scl:"}
 
+cp -a %{SOURCE1} %{SOURCE2} ./
+
 %build
 mkdir -p .%{gem_dir}
 
@@ -83,6 +87,7 @@ chmod a-x %{buildroot}%{gem_libdir}/%{gem_name}/tasks.rb
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
+%doc MIT-LICENSE Readme.md
 
 %files doc
 %doc %{gem_docdir}
