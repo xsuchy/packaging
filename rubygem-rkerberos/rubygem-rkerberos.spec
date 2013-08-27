@@ -10,19 +10,15 @@
 
 %global gem_name rkerberos
 
-%define version 0.1.2
-%define release 1
-
 Summary: A Ruby interface for the the Kerberos library
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: %{version}
-Release: %{release}%{dist}
-Group: Development/Ruby
+Version: 0.1.2
+Release: 1%{dist}
+Group: Development/Languages
 License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
 Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
-BuildRoot: %{_tmppath}/%{pkg_name}-%{version}-root
 
 Requires: %{?scl_prefix}ruby
 Requires: %{?scl_prefix}rubygems
@@ -52,42 +48,49 @@ This package contains documentation for rubygem-%{gem_name}.
 
 
 %prep
-%setup -n %{pkg_name}-%{version} -q -T -c
+%{?scl:scl enable %{scl} "}
+gem unpack %{SOURCE0}
+%{?scl:"}
+
+%setup -q -D -T -n  %{gem_name}-%{version}
+
+%{?scl:scl enable %{scl} "}
+gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
+%{?scl:"}
 
 %build
-
-%{__rm} -rf %{buildroot}
-mkdir -p ./%{gem_dir}
-export CONFIGURE_ARGS="--with-cflags='%{optflags}'"
+# Create the gem as gem install only works on a gem file
 %{?scl:scl enable %{scl} "}
-gem install --local --install-dir ./%{gem_dir} -V --force %{SOURCE0}
+gem build %{gem_name}.gemspec
 %{?scl:"}
+
+%gem_install
 
 %install
 mkdir -p %{buildroot}%{gem_dir}
-cp -a ./%{gem_dir}/* %{buildroot}/%{gem_dir}
-# .so is copied into lib/
+cp -pa .%{gem_dir}/* \
+        %{buildroot}%{gem_dir}/
+
+mkdir -p %{buildroot}%{gem_extdir_mri}/lib
+mv %{buildroot}%{gem_instdir}/lib/rkerberos.so %{buildroot}%{gem_extdir_mri}/lib/
+
 rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/{ext,tmp}
 rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/.yardoc
 rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/Gemfile*
 # rake-compiler isn't needed on the system itself
-sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
-
-%clean
-%{__rm} -rf %{buildroot}
+sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_spec}
 
 %files
-%defattr(-, root, root)
 %doc %{gem_instdir}/README.md
-%doc %{gem_instdir}/CHANGES
-%doc %{gem_instdir}/MANIFEST
-%{gem_instdir}/lib/rkerberos.so
-%{gem_instdir}/rkerberos.gemspec
-%{gem_cache}
-%{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
+%{gem_extdir_mri}/lib/rkerberos.so
+exclude %{gem_cache}
+%{gem_spec}
 
 %files doc
+%doc %{gem_instdir}/CHANGES
+%doc %{gem_instdir}/MANIFEST
 %doc %{gem_docdir}
+%{gem_instdir}/rkerberos.gemspec
 %{gem_instdir}/test
 %{gem_instdir}/Rakefile
 
