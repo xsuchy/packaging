@@ -92,7 +92,6 @@ rm %{buildroot}%{gem_instdir}/VERSION
 %{gem_instdir}/lib
 %{gem_instdir}/demo.rb
 %{gem_instdir}/init.rb
-%{gem_instdir}/safemode.gemspec
 %{gem_cache}
 %{gem_spec}
 
@@ -101,6 +100,7 @@ rm %{buildroot}%{gem_instdir}/VERSION
 %{gem_instdir}/Gemfile*
 %{gem_instdir}/Rakefile
 %{gem_docdir}
+%{gem_instdir}/safemode.gemspec
 
 %changelog
 * Tue Aug 27 2013 Miroslav Suchý <msuchy@redhat.com> 1.2.0-6
