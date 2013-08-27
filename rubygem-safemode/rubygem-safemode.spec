@@ -14,7 +14,7 @@ Summary: A library for safe evaluation of Ruby code
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.2.0
-Release: 5%{dist}
+Release: 6%{dist}
 Group: Development/Ruby
 License: MIT
 URL: http://github.com/svenfuchs/safemode
@@ -103,6 +103,9 @@ rm %{buildroot}%{gem_instdir}/VERSION
 %{gem_docdir}
 
 %changelog
+* Tue Aug 27 2013 Miroslav Suchý <msuchy@redhat.com> 1.2.0-6
+- initial package
+
 * Thu Jul 04 2013 Dominic Cleal <dcleal@redhat.com> 1.2.0-5
 - change ruby(abi) to ruby(release) for F19+ (dcleal@redhat.com)
 - remove unused BRs (dcleal@redhat.com)
