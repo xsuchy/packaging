@@ -14,7 +14,7 @@ Summary: A Ruby interface for the the Kerberos library
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.2
-Release: 1%{dist}
+Release: 2%{dist}
 Group: Development/Languages
 License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
@@ -96,6 +96,9 @@ exclude %{gem_cache}
 
 
 %changelog
+* Tue Aug 27 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.2-2
+- initial package
+
 * Tue Jun 25 2013 Dominic Cleal <dcleal@redhat.com> 0.1.2-1
 - Rebase to rkerberos 0.1.2 (dcleal@redhat.com)
 
