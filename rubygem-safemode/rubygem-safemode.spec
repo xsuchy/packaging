@@ -87,7 +87,7 @@ mv %{buildroot}%{gem_instdir}/{LICENCSE,README.markdown} ./
 rm %{buildroot}%{gem_instdir}/VERSION
 
 %files
-%doc LICENCSE
+%doc LICENCSE README.markdown
 %dir %{gem_instdir}
 %{gem_instdir}/lib
 %{gem_instdir}/demo.rb
