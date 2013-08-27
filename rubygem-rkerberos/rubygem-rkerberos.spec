@@ -83,7 +83,7 @@ sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_spec}
 %files
 %doc %{gem_instdir}/README.md
 %{gem_extdir_mri}/lib/rkerberos.so
-exclude %{gem_cache}
+%exclude %{gem_cache}
 %{gem_spec}
 
 %files doc
