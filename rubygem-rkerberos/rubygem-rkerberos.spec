@@ -33,7 +33,9 @@ BuildRequires: %{?scl_prefix}rubygem-rake-compiler
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
 
 #test
-BuildRequires: %{?scl_prefix}rubygem(test-unit)
+#BuildRequires: %{?scl_prefix}rubygem(test-unit)
+#not yet in Fedora
+#BuildRequires: %{?scl_prefix}rubygem(dbi-dbrc)
 
 %description
 The rkerberos library is an interface for the Kerberos 5 network
