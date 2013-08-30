@@ -78,12 +78,12 @@ rm -f %{buildroot}%{gem_instdir}/.gemtest
 %doc %{gem_instdir}/COPYING.txt
 %exclude %{gem_cache}
 %{gem_spec}
+%doc %{gem_instdir}/README.rdoc
 
 %files doc
 %{gem_instdir}/spec
 %doc %{gem_docdir}
 %doc %{gem_instdir}/CHANGELOG.rdoc
-%doc %{gem_instdir}/README.rdoc
 %{gem_instdir}/Rakefile
 %{gem_instdir}/%{gem_name}.gemspec
 
