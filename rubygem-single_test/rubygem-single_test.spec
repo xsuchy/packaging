@@ -92,7 +92,7 @@ done
 %exclude %{gem_cache}
 %{gem_spec}
 %doc MIT-LICENSE Readme.md
-%doc %{gem_instdir}/README.md
+%doc %{gem_instdir}/Readme.md
 %doc %{gem_instdir}/MIT-LICENSE
 
 %files doc
