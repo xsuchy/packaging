@@ -55,7 +55,7 @@ gem build %{gem_name}.gemspec
 %{?scl:"}
 
 %{?scl:scl enable %{scl} - << \EOF}
-%if 0%{?fedora} > 18
+%if 0%{?fedora} >= 18
 %{gem_install}
 %else
 mkdir -p ./%{gem_dir}
