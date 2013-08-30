@@ -82,12 +82,18 @@ cp -pa .%{gem_dir}/* \
 
 chmod a-x %{buildroot}%{gem_libdir}/%{gem_name}/tasks.rb
 
+for docfile in MIT-LICENSE Readme.md; do
+  ln -s %{_pkgdocdir}/$docfile %{buildroot}%{gem_instdir}/
+done
+
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
 %exclude %{gem_cache}
 %{gem_spec}
 %doc MIT-LICENSE Readme.md
+%doc %{gem_instdir}/README.md
+%doc %{gem_instdir}/MIT-LICENSE
 
 %files doc
 %doc %{gem_docdir}
