@@ -10,7 +10,7 @@ Release: 4%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
-Source0: %{gem_name}-%{version}.gem
+Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
 %if 0%{?fedora} > 18
 Requires: %{?scl_prefix}ruby(release)
 %else
