@@ -23,7 +23,7 @@ Requires: %{?scl_prefix}rubygem(paint)
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(wirb) = %{version}
 #tests
-BuildRequires: rubygem-rspec
+BuildRequires: rubygem(rspec)
 
 %description
 Wavy IRB: Colorizes irb results. It originated from Wirble, but only provides
