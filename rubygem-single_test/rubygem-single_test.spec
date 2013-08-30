@@ -12,7 +12,7 @@
 
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.6.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 Summary: Rake tasks to invoke single tests/specs with rakish syntax
 Group: Development/Languages
 License: MIT
@@ -99,6 +99,9 @@ done
 %doc %{gem_docdir}
 
 %changelog
+* Fri Aug 30 2013 Miroslav Suchý <msuchy@redhat.com> 0.6.0-4
+- 1000334 - make symlink to README and LICENSE to pkgdocdir
+
 * Tue Aug 27 2013 Miroslav Suchý <msuchy@redhat.com> 0.6.0-3
 - add Readme and License
 
