@@ -16,8 +16,8 @@
 
 Summary: Ruby bindings for Forman's rest API
 Name: rubygem-%{gem_name}
-Version: 0.1.5
-Release: 2%{?dist}
+Version: 0.1.6
+Release: 0%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/theforeman/foreman_api
