@@ -13,8 +13,8 @@
 Summary: A Ruby interface for the the Kerberos library
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: 0.1.2
-Release: 3%{?dist}
+Version: 0.1.3
+Release: 0%{?dist}
 Group: Development/Languages
 License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
@@ -85,6 +85,12 @@ rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/Gemfile*
 # rake-compiler isn't needed on the system itself
 sed -i '/rake-compiler/ s/runtime/development/' %{buildroot}/%{gem_spec}
 
+mkdir -p %{buildroot}%{_pkgdocdir}
+for docfile in LICENSE README.md CHANGES MANIFEST; do
+     mv %{buildroot}%{gem_instdir}/$docfile %{buildroot}%{_pkgdocdir}
+     ln -s %{_pkgdocdir}/$docfile %{buildroot}%{gem_instdir}
+done
+
 %check
 pushd ./%{gem_instdir}
 # test do not work and many of them need functional keytab
@@ -93,13 +99,18 @@ pushd ./%{gem_instdir}
 popd
 
 %files
+%doc %{_pkgdocdir}/README.md
 %doc %{gem_instdir}/README.md
+%doc %{_pkgdocdir}/LICENSE
+%doc %{gem_instdir}/LICENSE
 %{gem_extdir_mri}
 %exclude %{gem_cache}
 %{gem_spec}
 
 %files doc
+%doc %{_pkgdocdir}/CHANGES
 %doc %{gem_instdir}/CHANGES
+%doc %{_pkgdocdir}/MANIFEST
 %doc %{gem_instdir}/MANIFEST
 %doc %{gem_docdir}
 %{gem_instdir}/rkerberos.gemspec
