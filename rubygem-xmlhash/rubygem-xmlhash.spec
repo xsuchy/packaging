@@ -1,8 +1,8 @@
 %global gem_name xmlhash
 
 Name: rubygem-%{gem_name}
-Version: 1.3.5
-Release: 5%{?dist}
+Version: 1.3.6
+Release: 0%{?dist}
 Summary: A small C module to parse a XML string into a ruby hash
 Group: Development/Languages
 License: MIT
