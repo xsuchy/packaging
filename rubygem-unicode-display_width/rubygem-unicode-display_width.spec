@@ -7,7 +7,7 @@ Summary: Support for east_asian_width string widths
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.1
-Release: 7%{dist}
+Release: 8%{dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/janlelis/unicode-display_width
@@ -76,6 +76,9 @@ rm -rf %{buildroot}%{gem_instdir}/.yardoc
 %{gem_instdir}/.gemspec
 
 %changelog
+* Fri Sep 13 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.1-8
+- generate gem again during buildtime
+
 * Mon Aug 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.1-7
 - change group
 - summary should not end with dot
