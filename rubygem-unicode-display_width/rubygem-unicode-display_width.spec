@@ -20,7 +20,7 @@ Requires: %{?scl_prefix}ruby(abi) = 1.9.1
 BuildRequires: %{?scl_prefix}rubygems-devel
 BuildRequires: %{?scl_prefix}rubygems
 BuildArch: noarch
-Provides: %{?scl_prefix}rubygem(unicode-display_width) = %{version}
+Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
 
 %global gembuilddir %{buildroot}%{gem_dir}
 
@@ -37,21 +37,35 @@ Summary:    Documentation for rubygem-%{gem_name}
 This package contains documentation for rubygem-%{gem_name}.
 
 %prep
-%setup -n %{pkg_name}-%{version} -T -c
+%{?scl:scl enable %{scl} "}
+gem unpack %{SOURCE0}
+%{?scl:"}
+%setup -n %{gem_name}-%{version} -T -D -q
+%{?scl:scl enable %{scl} "}
+gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
+%{?scl:"}
 
 %build
+# Create the gem as gem install only works on a gem file
+%{?scl:scl enable %{scl} "}
+gem build %{gem_name}.gemspec
+%{?scl:"}
+
+%{?scl:scl enable %{scl} "}
+%gem_install
+%{?scl:"}
 
 %install
-mkdir -p %{gembuilddir}
-%{?scl:scl enable %{scl} "}
-gem install --local --install-dir %{gembuilddir} --force %{SOURCE0}
-%{?scl:"}
+mkdir -p %{buildroot}%{gem_dir}
+cp -pa .%{gem_dir}/* \
+        %{buildroot}%{gem_dir}/
 rm -rf %{buildroot}%{gem_instdir}/.yardoc
 
 %files
 %dir %{gem_instdir}
-%{gem_instdir}/lib
+%{gem_libdir}
 %doc %{gem_instdir}/LICENSE.txt
+%doc %{gem_instdir}/README.rdoc
 %{gem_instdir}/data
 %exclude %{gem_cache}
 %{gem_spec}
@@ -59,7 +73,6 @@ rm -rf %{buildroot}%{gem_instdir}/.yardoc
 %files doc
 %doc %{gem_docdir}
 %{gem_instdir}/Rakefile
-%doc %{gem_instdir}/README.rdoc
 %{gem_instdir}/.gemspec
 
 %changelog
