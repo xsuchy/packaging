@@ -54,11 +54,11 @@ popd
 %endif
 
 %check
-%{__python} setup.py test
+%{__python} tests.py
 
 %if 0%{with_python3}
 pushd %{py3dir}
-%{__python3} setup.py test
+%{__python3} tests.py
 popd
 %endif
 
