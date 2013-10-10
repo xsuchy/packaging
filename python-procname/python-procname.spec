@@ -28,10 +28,10 @@ This python module allows you to set the process title of a process under at
 least Linux and Mac OS X.
 
 %if 0%{?with_python3}
-%package -n python3-whoosh
-Summary:    Fast, Python3 full text indexing, search, and spell checking library
+%package -n python3-procname
+Summary:    Set process titles in Python programs
 
-%description -n python3-whoosh
+%description -n python3-procname
 This python module allows you to set the process title of a process under at
 least Linux and Mac OS X.
 %endif
@@ -54,11 +54,14 @@ popd
 %endif
 
 %check
-%{__python} tests.py
+chmod a+x tests.py
+export PYTHONPATH=%{buildroot}%{python_sitearch}
+python ./tests.py
 
 %if 0%{with_python3}
 pushd %{py3dir}
-%{__python3} tests.py
+export PYTHONPATH=%{buildroot}%{python3_sitearch}
+python3 tests.py
 popd
 %endif
 
@@ -72,15 +75,15 @@ popd
 %endif
 
 %files
-%doc docs/html/ README.txt LICENSE.txt
-%{python_sitelib}/*.egg-info/
-%{python_sitelib}/whoosh
+#%doc README.rst
+%{python_sitearch}/*.egg-info
+%{python_sitearch}/procname.so
 
 %if 0%{?with_python3}
-%files -n python3-whoosh
-%doc README.txt LICENSE.txt docs/html/
-%{python3_sitelib}/whoosh
-%{python3_sitelib}/*.egg-info/
+%files -n python3-procname
+#%doc README.rst
+%{python3_sitearch}/procname.so
+%{python3_sitearch}/*.egg-info
 %endif
 
 %changelog
