@@ -4,7 +4,7 @@ Version:    0.9.6
 Release:    2%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
-License:    GPLv2+
+License:    GPLv3+
 Group:      Applications/System
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:   dmidecode
