@@ -44,7 +44,6 @@ authentication protocol. It wraps the Kerberos C API.
 %package doc
 Summary: Documentation for rubygem-%{gem_name}
 Group: Documentation
-Requires: %{?scl_prefix}rubygem-%{gem_name} = %{version}-%{release}
 BuildArch: noarch
 
 %description doc
@@ -108,6 +107,11 @@ popd
 %{gem_spec}
 
 %files doc
+%doc %{_pkgdocdir}/README.md
+%doc %{gem_instdir}/README.md
+%doc %{_pkgdocdir}/LICENSE
+%doc %{gem_instdir}/LICENSE
+
 %doc %{_pkgdocdir}/CHANGES
 %doc %{gem_instdir}/CHANGES
 %doc %{_pkgdocdir}/MANIFEST
