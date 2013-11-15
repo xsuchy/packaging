@@ -2,7 +2,7 @@
 
 Name:		glacier-cli
 Version:	0
-Release:	1.20131113git%{githash}%{?dist}
+Release:	2.20131113git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
 Group:		Applications/Internet
@@ -48,4 +48,7 @@ nosetests
 
 
 %changelog
+* Fri Nov 15 2013 Miroslav Suchý <miroslav@suchy.cz> 0-2.20131113gite8a2536
+- initial package
+
 
