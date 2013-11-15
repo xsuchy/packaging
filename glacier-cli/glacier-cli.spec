@@ -27,7 +27,7 @@ polling for job completion and retrieving the results of jobs). It provides
 integration with git-annex, making Glacier even more useful.
 
 %prep
-%setup -q
+%setup -q -c
 
 
 %build
