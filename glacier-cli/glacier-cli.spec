@@ -11,6 +11,7 @@ URL:		https://github.com/basak/glacier-cli
 # git clone git@github.com:basak/glacier-cli.git && cd glacier-cli
 # git archive --format=tar %{githash} | gzip > %{name}-%{githash}.tar.gz
 Source0:	glacier-cli-%{githash}.tar.gz
+BuildArch:  noarch
 
 Requires:	python-boto
 Requires:   python-sqlalchemy
@@ -37,6 +38,7 @@ integration with git-annex, making Glacier even more useful.
 mkdir -p %{buildroot}%{_bindir}
 cp -a glacier-list-duplicates.sh %{buildroot}%{_bindir}/glacier-list-duplicates
 cp -a glacier.py %{buildroot}%{_bindir}/glacier-cli
+chmod a+x %{buildroot}%{_bindir}/*
 
 %check
 nosetests
