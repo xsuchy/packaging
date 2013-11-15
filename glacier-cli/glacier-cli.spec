@@ -2,7 +2,7 @@
 
 Name:		glacier-cli
 Version:	0
-Release:	3.20131113git%{githash}%{?dist}
+Release:	4.20131113git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
 Group:		Applications/Internet
@@ -52,6 +52,9 @@ nosetests
 
 
 %changelog
+* Fri Nov 15 2013 Miroslav Suchý <miroslav@suchy.cz> 0-4.20131113gite8a2536
+- add requires to BR for test
+
 * Fri Nov 15 2013 Miroslav Suchý <miroslav@suchy.cz> 0-3.20131113gite8a2536
 - add executable attr to scripts
 - rename glacier binary to glacier
