@@ -19,6 +19,8 @@ Requires:   python-sqlalchemy
 BuildRequires: python-iso8601
 BuildRequires: python-mock
 BuildRequires: python-nose
+BuildRequires: python-boto
+BuildRequires: python-sqlalchemy
 
 %description
 This tool provides a sysadmin-friendly command line interface to Amazon
