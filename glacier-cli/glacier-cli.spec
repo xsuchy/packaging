@@ -36,7 +36,7 @@ integration with git-annex, making Glacier even more useful.
 %install
 mkdir -p %{buildroot}%{_bindir}
 cp -a glacier-list-duplicates.sh %{buildroot}%{_bindir}/glacier-list-duplicates
-cp -a glacier.sh %{buildroot}%{_bindir}/glacier
+cp -a glacier.py %{buildroot}%{_bindir}/glacier
 
 %check
 nosetests
