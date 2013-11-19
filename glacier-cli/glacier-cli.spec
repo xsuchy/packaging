@@ -47,7 +47,7 @@ cp -a glacier.py %{buildroot}%{_bindir}/glacier-cli
 chmod a+x %{buildroot}%{_bindir}/*
 
 %check
-%if 0%{?fedora} < 20
+%if 0%{?fedora} > 19
 #due old python-mock on older fedoras
 nosetests
 %endif
