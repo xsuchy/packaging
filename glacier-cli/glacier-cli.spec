@@ -34,7 +34,7 @@ integration with git-annex, making Glacier even more useful.
 
 
 %build
-# nothing to do here
+sed -i '1s|#!/usr/bin/env python|#!%{__python}|' glacier.py
 
 %install
 mkdir -p %{buildroot}%{_bindir}
