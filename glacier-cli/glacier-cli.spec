@@ -15,6 +15,10 @@ BuildArch:  noarch
 
 Requires:	python-boto
 Requires:   python-sqlalchemy
+%if 0%{?rhel} < 7
+Requires:   python-argparse
+BuildRequires: python-argparse
+%endif
 # tests
 BuildRequires: python-iso8601
 BuildRequires: python-mock
@@ -43,7 +47,10 @@ cp -a glacier.py %{buildroot}%{_bindir}/glacier-cli
 chmod a+x %{buildroot}%{_bindir}/*
 
 %check
+%if 0%{?fedora} < 20
+#due old python-mock on older fedoras
 nosetests
+%endif
 
 %files
 %doc COPYING README.md
