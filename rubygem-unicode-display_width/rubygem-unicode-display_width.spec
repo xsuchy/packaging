@@ -60,7 +60,6 @@ gem build %{gem_name}.gemspec
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
-rm -rf %{buildroot}%{gem_instdir}/.yardoc
 
 %files
 %dir %{gem_instdir}
@@ -69,6 +68,7 @@ rm -rf %{buildroot}%{gem_instdir}/.yardoc
 %doc %{gem_instdir}/README.rdoc
 %{gem_instdir}/data
 %exclude %{gem_cache}
+%exclude %{gem_instdir}/.yardoc
 %{gem_spec}
 
 %files doc
