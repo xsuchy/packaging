@@ -7,7 +7,7 @@ Summary: Support for east_asian_width string widths
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.1
-Release: 8%{dist}
+Release: 9%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/unicode-display_width
@@ -77,6 +77,12 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/.gemspec
 
 %changelog
+* Mon Nov 25 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.1-9
+- 998469 - replace rm with exclude
+- 998469 - require rubygems in main package
+- 998469 - use full URL in SOURCE0
+- 998469 - use https for URL
+
 * Fri Sep 13 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.1-8
 - generate gem again during buildtime
 
