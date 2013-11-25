@@ -10,7 +10,7 @@ Version: 0.1.1
 Release: 8%{dist}
 Group: Development/Languages
 License: MIT
-URL: http://github.com/janlelis/unicode-display_width
+URL: https://github.com/janlelis/unicode-display_width
 Source0: %{gem_name}-%{version}.gem
 %if 0%{?fedora} > 18
 Requires: %{?scl_prefix}ruby(release)
