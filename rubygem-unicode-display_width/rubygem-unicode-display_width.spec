@@ -17,6 +17,7 @@ Requires: %{?scl_prefix}ruby(release)
 %else
 Requires: %{?scl_prefix}ruby(abi) = 1.9.1
 %endif
+Requires: %{?scl_prefix}ruby(rubygems)
 BuildRequires: %{?scl_prefix}rubygems-devel
 BuildRequires: %{?scl_prefix}rubygems
 BuildArch: noarch
