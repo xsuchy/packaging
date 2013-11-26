@@ -2,7 +2,7 @@
 
 Name:		glacier-cli
 Version:	0
-Release:	7.20131113git%{githash}%{?dist}
+Release:	8.20131113git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
 Group:		Applications/Internet
@@ -60,6 +60,9 @@ nosetests
 
 
 %changelog
+* Tue Nov 26 2013 Miroslav Suchý <msuchy@redhat.com> 0-8.20131113gite8a2536
+- add requires of python-iso8601
+
 * Tue Nov 19 2013 Miroslav Suchý <msuchy@redhat.com> 0-7.20131113gite8a2536
 - correct conditon
 
