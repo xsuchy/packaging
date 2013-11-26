@@ -14,6 +14,7 @@ Source0:	glacier-cli-%{githash}.tar.gz
 BuildArch:  noarch
 
 Requires:	python-boto
+Requires:   python-iso8601
 Requires:   python-sqlalchemy
 %if 0%{?rhel} < 7
 Requires:   python-argparse
