@@ -32,7 +32,7 @@ related files. Currently handled are:
 
 
 %prep
-%setup -q
+%setup -q -n 'python-debian-0.1.21+nmu2'
 %patch1
 
 %build
