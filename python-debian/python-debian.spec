@@ -15,7 +15,9 @@ BuildArch:      noarch
 Requires:       python >= 2.4
 Requires:		python-chardet
 Requires:       xz
+Requires:       python-six
 BuildRequires:  python-devel, python-setuptools, python-chardet
+BuildRequires:  python-six
 Patch1:         xz-member.patch
 
 %description
