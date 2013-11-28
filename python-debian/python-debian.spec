@@ -33,7 +33,7 @@ related files. Currently handled are:
 
 %prep
 %setup -q -n 'python-debian-0.1.21+nmu2'
-%patch1
+%patch1 -p1
 
 %build
 sed -e 's/__CHANGELOG_VERSION__/$(VERSION)/' < setup.py.in > setup.py
