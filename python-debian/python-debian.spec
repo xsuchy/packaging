@@ -2,7 +2,7 @@
 
 Name:           python-debian
 Version:        0.1.21
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -73,6 +73,9 @@ cd tests;
 %doc README README.changelog README.deb822 HISTORY.deb822 ACKNOWLEDGEMENTS
 
 %changelog
+* Thu Nov 28 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.21-10
+- add dependency on python-six
+
 * Thu Nov 28 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.21-9
 - specify patch level
 - specify prefix of tar
