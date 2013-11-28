@@ -8,7 +8,7 @@ Summary:        Modules for Debian-related data formats
 # everything else is GPLv2+
 License:        GPLv2+ and GPLv3+
 Group:          Development/Libraries
-Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.gz
+Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}+nmu2.tar.gz
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:      noarch
