@@ -1,8 +1,8 @@
 %global gem_name mobileesp_converted
 
 Name: rubygem-%{gem_name}
-Version: 0.2.2
-Release: 1%{?dist}
+Version: 0.2.3
+Release: 0%{?dist}
 Summary: Provides device type detection based on HTTP request headers
 Group: Development/Languages
 License: ASL 2.0 
