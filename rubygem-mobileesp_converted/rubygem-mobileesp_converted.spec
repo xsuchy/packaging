@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.2.3
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Provides device type detection based on HTTP request headers
 Group: Development/Languages
 License: ASL 2.0 
@@ -82,6 +82,9 @@ popd
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Mon Dec 16 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.3-1
+- rebase to mobileesp_converted-0.2.3
+
 * Mon Aug 19 2013 Miroslav Suchý <msuchy@redhat.com> 0.2.2-1
 - add license
 - rebase to 0.2.2
