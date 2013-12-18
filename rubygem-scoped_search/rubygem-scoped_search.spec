@@ -1,17 +1,10 @@
 %global gem_name scoped_search
-%if 0%{?rhel} == 6
-%global gem_dir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%global gem_docdir %{gem_dir}/doc/%{gem_name}-%{version}
-%global gem_cache %{gem_dir}/cache/%{gem_name}-%{version}.gem
-%global gem_spec %{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
-%global gem_instdir %{gem_dir}/gems/%{gem_name}-%{version}
-%endif
 
 Summary: Easily search your ActiveRecord models
 Name: rubygem-%{gem_name}
 
-Version: 2.6.0
-Release: 2%{?dist}
+Version: 2.6.1
+Release: 0%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/wvanbergen/scoped_search/wiki
@@ -20,14 +13,12 @@ Requires: rubygems
 Requires: rubygem-activerecord >= 2.1.0
 BuildRequires: ruby 
 BuildRequires: rubygems
-%if 0%{?rhel} == 6 || 0%{?fedora} < 17
-Requires: ruby(release)
+%if 0%{?rhel} == 6
+Requires: ruby(abi) = %{rubyabi}
 %else
 Requires: ruby(release)
 %endif
-%if 0%{?fedora}
 BuildRequires: rubygems-devel
-%endif
 BuildArch: noarch
 Provides: rubygem(scoped_search) = %{version}
 
