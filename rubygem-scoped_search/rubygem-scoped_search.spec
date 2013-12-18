@@ -4,7 +4,7 @@ Summary: Easily search your ActiveRecord models
 Name: rubygem-%{gem_name}
 
 Version: 2.6.1
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/wvanbergen/scoped_search/wiki
@@ -108,6 +108,9 @@ popd
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Wed Dec 18 2013 Miroslav Suchý <msuchy@redhat.com> 2.6.1-1
+- rebase to scoped_search-2.6.1
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.6.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
