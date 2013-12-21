@@ -2,16 +2,6 @@
 
 %if 0%{?rhel} == 6 || 0%{?fedora} < 17
 %define rubyabi 1.8
-%else
-%define rubyabi 1.9.1
-%endif
-
-%if 0%{?rhel} == 6
-%global gem_dir %(ruby -rubygems -e 'puts Gem::dir' 2>/dev/null)
-%global gem_docdir %{gem_dir}/doc/%{gem_name}-%{version}
-%global gem_cache %{gem_dir}/cache/%{gem_name}-%{version}.gem
-%global gem_spec %{gem_dir}/specifications/%{gem_name}-%{version}.gemspec
-%global gem_instdir %{gem_dir}/gems/%{gem_name}-%{version}
 %endif
 
 Summary: Ruby bindings for Forman's rest API
@@ -37,9 +27,7 @@ BuildRequires: ruby(release)
 BuildRequires: ruby(abi) = %{rubyabi}
 %endif
 BuildRequires: ruby(rubygems) 
-%if 0%{?fedora}
 BuildRequires: rubygems-devel
-%endif
 
 BuildArch: noarch
 Provides: rubygem(%{gem_name}) = %{version}
@@ -81,7 +69,6 @@ mv %{buildroot}%{gem_instdir}/doc %{buildroot}%{gem_docdir}
 rm -f %{buildroot}%{gem_instdir}/%{gem_name}.gemspec
 rm -f %{buildroot}%{gem_instdir}/.yardopts
 rm -f %{buildroot}%{gem_instdir}/.gitignore
-sed -i '1d' %{buildroot}%{gem_instdir}/Rakefile
 
 %files
 %dir %{gem_instdir}
@@ -93,8 +80,6 @@ sed -i '1d' %{buildroot}%{gem_instdir}/Rakefile
 
 %files doc
 %doc %{gem_docdir}
-%{gem_instdir}/Gemfile
-%{gem_instdir}/Rakefile
 
 
 %changelog
