@@ -10,7 +10,7 @@
 Summary: Ruby bindings for Forman's rest API
 Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.1.9
-Release: 1%{?dist}
+Release: 2%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/theforeman/foreman_api
@@ -93,6 +93,10 @@ rm -f %{buildroot}%{gem_instdir}/.gitignore
 %doc %{gem_docdir}
 
 %changelog
+* Sat Dec 21 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.9-2
+- add scl macros
+- clean up old unused code
+
 * Sat Dec 21 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.9-1
 - rebase to foreman_api-0.1.9
 
