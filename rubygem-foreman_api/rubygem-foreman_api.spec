@@ -1,3 +1,6 @@
+%{?scl:%scl_package rubygem-%{gem_name}}
+%{!?scl:%global pkg_name %{name}}
+
 %global gem_name foreman_api
 
 %if 0%{?rhel} == 6 || 0%{?fedora} < 17
@@ -5,7 +8,7 @@
 %endif
 
 Summary: Ruby bindings for Forman's rest API
-Name: rubygem-%{gem_name}
+Name: %{?scl_prefix}rubygem-%{gem_name}
 Version: 0.1.9
 Release: 1%{?dist}
 Group: Development/Languages
@@ -13,50 +16,58 @@ License: MIT
 URL: http://github.com/theforeman/foreman_api
 Source0:  http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 %if 0%{?fedora} > 18
-Requires: ruby(release)
+Requires: %{?scl_prefix}ruby(release)
 %else
-Requires: ruby(abi) = %{rubyabi}
+Requires: %{?scl_prefix}ruby(abi) = %{rubyabi}
 %endif
-Requires: ruby(rubygems) 
-Requires: rubygem(json) 
-Requires: rubygem(rest-client) >= 1.6.1
-Requires: rubygem(oauth) 
+Requires: %{?scl_prefix}ruby(rubygems)
+Requires: %{?scl_prefix}rubygem(json)
+Requires: %{?scl_prefix}rubygem(rest-client) >= 1.6.1
+Requires: %{?scl_prefix}rubygem(oauth)
 %if 0%{?fedora} > 18
-BuildRequires: ruby(release)
+BuildRequires: %{?scl_prefix}ruby(release)
 %else
-BuildRequires: ruby(abi) = %{rubyabi}
+BuildRequires: %{?scl_prefix}ruby(abi) = %{rubyabi}
 %endif
-BuildRequires: ruby(rubygems) 
-BuildRequires: rubygems-devel
+BuildRequires: %{?scl_prefix}ruby(rubygems)
+BuildRequires: %{?scl_prefix}rubygems-devel
 
 BuildArch: noarch
-Provides: rubygem(%{gem_name}) = %{version}
+Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
 
 %description
 Helps you to use Foreman's API calls from your app.
 
 %package doc
 BuildArch:  noarch
-Requires:   %{name} = %{version}-%{release}
+Requires:   %{?scl_prefix}%{pkg_name} = %{version}-%{release}
 Summary:    Documentation for rubygem-%{gem_name}
 
 %description doc
 This package contains documentation for rubygem-%{gem_name}.
 
 %prep
+%{?scl:scl enable %{scl} "}
 gem unpack %{SOURCE0}
+%{?scl:"}
 %setup -q -D -T -n  %{gem_name}-%{version}
 
+%{?scl:scl enable %{scl} "}
 gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
+%{?scl:"}
+%{?scl:scl enable %{scl} "}
 gem build %{gem_name}.gemspec
+%{?scl:"}
 
 %build
 %if 0%{?fedora} > 18
 %gem_install
 %else
 mkdir -p .%{gem_dir}
+%{?scl:scl enable %{scl} "}
 gem install --local --install-dir .%{gem_dir} \
             --force --no-rdoc --no-ri %{gem_name}-%{version}.gem
+%{?scl:"}
 %endif
 
 %install
@@ -80,7 +91,6 @@ rm -f %{buildroot}%{gem_instdir}/.gitignore
 
 %files doc
 %doc %{gem_docdir}
-
 
 %changelog
 * Sat Dec 21 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.9-1
