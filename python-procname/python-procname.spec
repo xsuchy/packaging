@@ -16,6 +16,7 @@ Source0:        https://pypi.python.org/packages/source/p/%{mod_name}/%{mod_name
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 BuildRequires:  pytest 
+BuildRequires:  gcc
 
 %if 0%{?with_python3}
 BuildRequires: python3-devel
