@@ -1,21 +1,17 @@
 %global gem_name rails-api
 
 Name: rubygem-%{gem_name}
-Version: 0.1.0
-Release: 6%{?dist}
+Version: 0.2.0
+Release: 0%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
 URL: https://github.com/rails-api/rails-api
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
-# https://github.com/rails-api/rails-api/issues/99
-Source1: LICENSE
 Requires: ruby(release)
 Requires: ruby(rubygems) >= 1.3.6
 Requires: rubygem(actionpack) >= 3.2.11
 Requires: rubygem(railties) >= 3.2.11
-Requires: rubygem(tzinfo) => 0.3.31
-Requires: rubygem(tzinfo) < 0.4
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel >= 1.3.6
 BuildRequires: ruby 
@@ -45,7 +41,6 @@ gem unpack %{SOURCE0}
 
 %setup -q -D -T -n  %{gem_name}-%{version}
 
-cp -a %{SOURCE1} ./
 gem spec %{SOURCE0} -l --ruby > %{gem_name}.gemspec
 
 %build
