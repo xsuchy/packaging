@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.2.0
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
@@ -78,13 +78,16 @@ popd
 %exclude %{gem_cache}
 %{gem_spec}
 %doc %{gem_instdir}/README.md
-%doc LICENSE
+%doc %{gem_instdir}/LICENSE
 
 %files doc
 %doc %{gem_docdir}
 %{gem_instdir}/test
 
 %changelog
+* Mon Jan 13 2014 Miroslav Suchý <miroslav@suchy.cz> 0.2.0-1
+- rebase to rails-api-0.2.0
+
 * Mon Aug 05 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.0-6
 - 990422 - fix macro in comment
 - 990422 - Description should end up with a dot.
