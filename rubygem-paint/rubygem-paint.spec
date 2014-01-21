@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.8.7
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -75,6 +75,9 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Tue Jan 21 2014 Miroslav Suchý <miroslav@suchy.cz> 0.8.7-1
+- rebase paint-0.8.7.gem
+
 * Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.8.6-3
 - 998459 - move README and LICENSE to main package
 - 998459 - remove excessive cp
