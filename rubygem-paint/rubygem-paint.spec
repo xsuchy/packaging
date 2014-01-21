@@ -1,8 +1,8 @@
 %global gem_name paint
 
 Name: rubygem-%{gem_name}
-Version: 0.8.6
-Release: 3%{?dist}
+Version: 0.8.7
+Release: 0%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
