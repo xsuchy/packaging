@@ -1,8 +1,8 @@
 %global gem_name mysql2
 
 Name: rubygem-%{gem_name}
-Version: 0.3.13
-Release: 3%{?dist}
+Version: 0.3.15
+Release: 0%{?dist}
 Summary: A simple, fast Mysql library for Ruby, binding to libmysql
 Group: Development/Languages
 License: MIT
