@@ -6,7 +6,7 @@ Summary: Wavy IRB: Colorizes irb results
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 1.0.3
-Release: 0%{dist}
+Release: 1%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
@@ -95,6 +95,9 @@ pushd ./%{gem_instdir}
 popd
 
 %changelog
+* Tue Feb 11 2014 Miroslav Suchý <msuchy@redhat.com> 1.0.3-1
+- rebase to wirb-1.0.3
+
 * Fri Aug 30 2013 Miroslav Suchý <msuchy@redhat.com> 1.0.1-5
 - 998915 - move README to main package
 - macro gem_install is available even in F18
