@@ -3,19 +3,19 @@
 
 %global gem_name foreman_api
 
-%if 0%{?rhel} == 6 || 0%{?fedora} < 17
+%if 0%{?rhel} == 6
 %define rubyabi 1.8
 %endif
 
 Summary: Ruby bindings for Forman's rest API
 Name: %{?scl_prefix}rubygem-%{gem_name}
-Version: 0.1.9
-Release: 2%{?dist}
+Version: 0.1.11
+Release: 0%{?dist}
 Group: Development/Languages
 License: MIT
 URL: http://github.com/theforeman/foreman_api
 Source0:  http://rubygems.org/downloads/%{gem_name}-%{version}.gem
-%if 0%{?fedora} > 18
+%if 0%{?fedora}
 Requires: %{?scl_prefix}ruby(release)
 %else
 Requires: %{?scl_prefix}ruby(abi) = %{rubyabi}
@@ -24,7 +24,7 @@ Requires: %{?scl_prefix}ruby(rubygems)
 Requires: %{?scl_prefix}rubygem(json)
 Requires: %{?scl_prefix}rubygem(rest-client) >= 1.6.1
 Requires: %{?scl_prefix}rubygem(oauth)
-%if 0%{?fedora} > 18
+%if 0%{?fedora}
 BuildRequires: %{?scl_prefix}ruby(release)
 %else
 BuildRequires: %{?scl_prefix}ruby(abi) = %{rubyabi}
