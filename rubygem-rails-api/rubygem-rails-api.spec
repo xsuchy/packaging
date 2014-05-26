@@ -1,8 +1,8 @@
 %global gem_name rails-api
 
 Name: rubygem-%{gem_name}
-Version: 0.2.0
-Release: 1%{?dist}
+Version: 0.2.1
+Release: 0%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
