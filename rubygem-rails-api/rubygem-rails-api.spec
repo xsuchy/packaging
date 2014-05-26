@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.2.1
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Rails for API only Applications
 Group: Development/Languages
 License: MIT
@@ -85,6 +85,9 @@ popd
 %{gem_instdir}/test
 
 %changelog
+* Mon May 26 2014 Miroslav Suchý <msuchy@redhat.com> 0.2.1-1
+- rebase to rails-api-0.2.1
+
 * Mon Jan 13 2014 Miroslav Suchý <miroslav@suchy.cz> 0.2.0-1
 - rebase to rails-api-0.2.0
 
