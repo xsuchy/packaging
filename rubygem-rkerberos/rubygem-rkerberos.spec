@@ -20,8 +20,10 @@ License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
 Source0: http://rubygems.org/downloads/%{gem_name}-%{version}.gem
 
+%if 0%{?scl} || 0%{?fedora} > 20
 Requires: %{?scl_prefix}ruby
 Requires: %{?scl_prefix}rubygems
+%endif
 
 BuildRequires: %{?scl_prefix}ruby
 BuildRequires: %{?scl_prefix}rubygems
@@ -30,7 +32,9 @@ BuildRequires: %{?scl_prefix}ruby-devel
 BuildRequires: krb5-devel
 BuildRequires: %{?scl_prefix}rubygem-rake-compiler
 
+%if 0%{?scl} || 0%{?fedora} > 20
 Provides: %{?scl_prefix}rubygem(%{gem_name}) = %{version}
+%endif
 
 #test
 #BuildRequires: %{?scl_prefix}rubygem(test-unit)
@@ -75,8 +79,11 @@ mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
 
-mkdir -p %{buildroot}%{gem_extdir_mri}/lib
-mv %{buildroot}%{gem_instdir}/lib/rkerberos.so %{buildroot}%{gem_extdir_mri}/lib/
+mkdir -p %{buildroot}%{gem_extdir_mri}
+cp -a .%{gem_extdir_mri}/{gem.build_complete,*.so} %{buildroot}%{gem_extdir_mri}/
+
+# Prevent dangling symlink in -debuginfo.
+rm -rf %{buildroot}%{gem_instdir}/ext
 
 rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/{ext,tmp}
 rm -rf %{buildroot}%{gem_dir}/gems/%{gem_name}-%{version}/.yardoc
