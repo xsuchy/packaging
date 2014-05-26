@@ -1,9 +1,9 @@
 %global gem_name ancestry
-%global githash e8a2536
+%global githash bfcbb57
 
 Name: rubygem-%{gem_name}
-Version: 2.0.0
-Release: 5%{?dist}
+Version: 2.1.0
+Release: 0%{?dist}
 Summary: Organize ActiveRecord model into a tree structure
 Group: Development/Languages
 License: MIT
