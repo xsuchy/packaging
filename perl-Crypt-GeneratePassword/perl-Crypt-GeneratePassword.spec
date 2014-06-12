@@ -1,6 +1,6 @@
 Name:           perl-Crypt-GeneratePassword
 Version:        0.04
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Generate secure random pronounceable passwords
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -39,6 +39,9 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Thu Jun 12 2014 Miroslav Suchý <msuchy@redhat.com> 0.04-1
+- rebase to 0.04
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.03-28
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
