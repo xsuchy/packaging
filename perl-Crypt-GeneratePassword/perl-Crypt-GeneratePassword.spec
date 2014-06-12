@@ -9,6 +9,8 @@ Source0:        http://www.cpan.org/modules/by-module/Crypt/Crypt-GeneratePasswo
 BuildArch:      noarch
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Test::More)
+
 %description
 Crypt::GeneratePassword generates random passwords that are (more or less)
 pronounceable. Unlike Crypt::RandPasswd, it doesn't use the FIPS-181 NIST
