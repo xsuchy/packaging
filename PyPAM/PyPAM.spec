@@ -3,10 +3,14 @@
 %{!?python_sitearch: %global python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))")}
 %endif
 
+%if 0%{?fedora}
+%global with_python3 1
+%endif
+
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
-Release:        19%{?dist}
+Release:        20%{?dist}
 # Note that the upstream site is dead.
 Source0:        http://www.pangalactic.org/PyPAM/%{name}-%{version}.tar.gz
 Url:            http://www.pangalactic.org/PyPAM
@@ -15,16 +19,27 @@ Patch1:         PyPAM-0.5.0-dealloc.patch
 Patch2:         PyPAM-0.5.0-nofree.patch
 Patch3:         PyPAM-0.5.0-memory-errors.patch
 Patch4:         PyPAM-0.5.0-return-value.patch
+Patch5:         PyPAM-python3-support.patch
 License:        LGPLv2
 Group:          Development/Libraries
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python2-devel pam-devel
 Requires:       python
-%filter_provides_in %{python_sitearch}/PAMmodule.so$
+%filter_provides_in %{python_sitearch}/PAM.so$
+%filter_provides_in %{python3_sitearch}/PAM*.so$
 %filter_setup
 
 %description
 PAM (Pluggable Authentication Module) bindings for Python.
+
+%if 0%{?with_python3}
+%package -n python3-PyPAM
+Summary:        PAM bindings for Python 3
+BuildRequires:  python3-devel
+
+%description -n python3-PyPAM
+PAM (Pluggable Authentication Module) bindings for Python 3.
+%endif
 
 %prep
 %setup -q
@@ -33,15 +48,34 @@ PAM (Pluggable Authentication Module) bindings for Python.
 %patch2 -p1 -b .nofree
 %patch3 -p1 -b .memory
 %patch4 -p1 -b .retval
+%patch5 -p0 -b .python3
 # remove prebuild rpm and others binaries
 rm -rf build dist
+
+%if 0%{with_python3}
+rm -rf %{py3dir}
+cp -a . %{py3dir}
+%endif
 
 %build
 CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing" %{__python} setup.py build
 
+%if 0%{with_python3}
+pushd %{py3dir}
+CFLAGS="$RPM_OPT_FLAGS -fno-strict-aliasing" %{__python3} setup.py build
+popd
+%endif
+
 %install
 rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install --root=$RPM_BUILD_ROOT
+
+%if 0%{?with_python3}
+pushd %{py3dir}
+%{__python3} setup.py install --root=$RPM_BUILD_ROOT
+popd
+%endif
+
 # Make sure we don't include binary files in the docs
 chmod 644 examples/pamtest.py
 rm -f examples/pamexample
@@ -49,14 +83,34 @@ rm -f examples/pamexample
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%check
+PYTHONPATH=build/lib.linux-`uname -m`-%{python_version}/ %{__python} tests/PamTest.py
+
+%if 0%{with_python3}
+pushd %{py3dir}
+PYTHONPATH=build/lib.linux-`uname -m`-%{python3_version}/ %{__python3} tests/PamTest.py
+popd
+%endif
+
 %files
 %defattr(-, root, root, -)
-%{python_sitearch}/PAMmodule.so
+%{python_sitearch}/PAM.so
 %{python_sitearch}/*.egg-info
 %doc AUTHORS NEWS README ChangeLog COPYING INSTALL 
-%doc examples 
+%doc examples
+
+%if 0%{?with_python3}
+%files -n python3-PyPAM
+%{python3_sitearch}/PAM*.so
+%{python3_sitearch}/*.egg-info
+%doc AUTHORS NEWS README ChangeLog COPYING INSTALL
+%doc examples
+%endif
 
 %changelog
+* Tue Jun 24 2014 Bohuslav Kabrda <bkabrda@redhat.com> - 0.5.0-20
+- Add Python 3 support.
+
 * Fri Jun 06 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.0-19
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
