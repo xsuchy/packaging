@@ -1,6 +1,6 @@
 Name: nanoblogger
 Version: 3.4.2
-Release: 4%{?dist}
+Release: 5%{?dist}
 
 Summary: Small weblog engine for the UNIX command line
 License: GPLv2+
@@ -83,6 +83,9 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/nb.1
 %doc ChangeLog README copyright docs/nanoblogger.html TODO
 
 %changelog
+* Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-5
+- fix sed expression
+
 * Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-4
 - modify hardcoded paths
 
