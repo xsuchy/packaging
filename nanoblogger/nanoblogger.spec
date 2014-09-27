@@ -3,7 +3,7 @@ Version: 3.4.2
 Release: 1%{?dist}
 
 Summary: Small weblog engine for the UNIX command line
-License: GPL
+License: GPLv2+
 Group: Applications/Internet
 
 Url: http://nanoblogger.sourceforge.net/
@@ -15,8 +15,9 @@ Source1: nb.1
 Requires: url_handler
 
 %description
-NanoBlogger is a small weblog engine written in Bash for the command line. It uses
-common UNIX tools such as cat, grep, and sed to create static HTML content.
+NanoBlogger is a small weblog engine written in Bash for the command line. It
+uses common UNIX tools such as cat, grep, and sed to create static HTML
+content.
 
 pros:
 
@@ -69,14 +70,15 @@ cp nb.conf %{buildroot}/%{_sysconfdir}/%{name}
 mkdir -p %{buildroot}/%{_datadir}/%{name}
 cp -a default/ lang/ lib/ moods/ plugins/ welcome-to-nb.txt %{buildroot}/%{_datadir}/%{name}
 
-mkdir -p %{buildroot}/%{_mandir}
-cp %SOURCE1 %{buildroot}/%{_mandir}
+
+install -D -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/nb.1
 
 %files
 %{_bindir}/nb
-%{_sysconfdir}/%{name}
+%config(noreplace) %{_sysconfdir}/%{name}
 %{_datadir}/%{name}
-%{_mandir}/*
+%{_mandir}/man1/nb.1*
+
 %doc ChangeLog README copyright docs/nanoblogger.html TODO
 
 %changelog
