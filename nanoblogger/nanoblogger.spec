@@ -12,8 +12,6 @@ BuildArch: noarch
 Source: http://nanoblogger.sourceforge.net/downloads/%name-%version.tar.gz
 Source1: nb.1
 
-Requires: url_handler
-
 %description
 NanoBlogger is a small weblog engine written in Bash for the command line. It
 uses common UNIX tools such as cat, grep, and sed to create static HTML
