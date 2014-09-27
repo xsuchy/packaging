@@ -21,7 +21,7 @@ This package contains additional plugins and translations for this weblog
 engine.
 
 %prep
-%setup -q
+%setup -q -n nanoblogger-%{version}
 
 %build
 
