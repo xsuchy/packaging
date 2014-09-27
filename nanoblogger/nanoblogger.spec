@@ -57,6 +57,9 @@ cons:
 
 %build
 sed -i 's/%%version/%{version}/g' nb
+sed -i 's/^NB_BASE_DIR=/NB_BASE_DIR="/usr/share/nanoblogger"/g' nb
+sed -i 's/^NB_DOC_DIR=/NB_DOC_DIR="/usr/share/doc/nanoblogger"/g' nb
+sed -i 's/^NB_CFG_DIR/NB_CFG_DIR="/etc/nanoblogger"/g' nb
 
 %install
 mkdir -p %{buildroot}/%{_bindir}
