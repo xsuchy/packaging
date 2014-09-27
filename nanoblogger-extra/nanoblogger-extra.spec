@@ -1,6 +1,6 @@
 Name: nanoblogger-extra
 Version: 3.4.2
-Release: 0%{?dist}
+Release: 1%{?dist}
 
 Summary: Nanoblogger plugins
 License: GPLv2+
@@ -39,3 +39,6 @@ cp -a default/ lang/ plugins/ %{buildroot}/%{_datadir}/%{name}
 %{_datadir}/%{name}
 
 %changelog
+* Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-1
+- initial package
+
