@@ -1,0 +1,223 @@
+.\" with GNOME Manpages Editor Wizard
+.\" 
+.\" Rua <srua@gpul.org>
+.\" 
+.\" 
+.TH NANOBLOGGER "1" "September 2006" "NanoBlogger 3.3" "User Commands"
+.SH "NAME"
+NanoBlogger \- small weblog engine for the UNIX command line
+
+.SH "SYPNOSIS"
+.B nb
+.RI "[\-b blog_dir]" 
+.RI [options]
+.br 
+.SH "DESCRIPTION"
+\fBNanoBlogger\fB User's manual.
+.PP 
+\fBNanoBlogger\fP is a small weblog engine written in Bash for the command line. It uses common unix tools, such as cat, grep and sed. It's free to use and modify under the GNU General Public License.
+
+.SH OPTIONS
+.TP
+\fB\-a\fR, \fB\-\-add\fR
+create new entry, category, or weblog
+(directory).
+.TP
+\fB\-b\fR, \fB\-\-blogdir\fR <directory>
+specify weblog directory.
+.TP
+\fB\-B\fR, \fB\-\-body\fR <text>
+deprecated, please use '\-T' or '\-\-text'
+instead.
+.TP
+\fB\-c\fR, \fB\-\-category\fR <ID,cat>
+specify category (for '\-\-add',
+\&'\-\-delete', '\-\-edit', '\-\-list',
+\&'\-\-update', and '\-\-update\-cache').
+.TP
+\fB\-\-cfgfile\fR <file>
+specify an alternate configuration file.
+.TP
+\fB\-\-configure\fR
+configure weblog (for '\-\-update').
+.TP
+\fB\-\-datadir\fR <directory>
+specify weblog's data directory.
+.TP
+\fB\-d\fR, \fB\-\-delete\fR <ID,cat>
+delete an entry or category.
+.TP
+\fB\-D\fR, \fB\-\-desc\fR <text>
+set text of description (for '\-\-add',
+\&'\-\-draft', '\-\-makefile' and
+\&'\-\-makepage').
+.TP
+\fB\-e\fR, \fB\-\-edit\fR <ID,cat>
+edit an entry or category.
+.TP
+\fB\-E\fR, \fB\-\-draft\fR <file>
+edit or create metafile.
+.TP
+\fB\-f\fR, \fB\-\-file\fR <file>
+specify metafile to import as entry
+(for '\-\-add').
+.TP
+\fB\-h\fR, \fB\-\-help\fR
+show this help message.
+.TP
+\fB\-i\fR, \fB\-\-interactive\fR <1=on/0=off>
+toggle interactive mode (for '\-\-add',
+\&'\-\-delete', '\-\-preview', '\-\-publish',
+and '\-\-update').
+.TP
+\fB\-l\fR, \fB\-\-list\fR <all,cat,DATE,max>
+list entries or categories (defaults to
+max).
+.TP
+\fB\-\-manual\fR
+view the manual.
+.TP
+\fB\-m\fR, \fB\-\-move\fR <ID>
+move an entry to a specified
+category (for '\-\-category').
+.TP
+\fB\-M\fR, \fB\-\-makepage\fR <file1> <file2>
+create new weblog page (file2) from
+metafile (file1).
+.TP
+\fB\-\-makefile\fR <file>
+create new metafile.
+.TP
+\fB\-n\fR, \fB\-\-author\fR <text>
+set text of author (for '\-\-add',
+\&'\-\-draft', '\-\-makefile' and
+\&'\-\-makepage').
+.TP
+\fB\-\-plugindir\fR <directory>
+specify weblog's plugin directory.                                      
+.TP
+\fB\-p\fR, \fB\-\-preview\fR
+run command to preview weblog.
+.TP
+\fB\-P\fR, \fB\-\-publish\fR
+run command to publish weblog.
+.TP
+\fB\-\-template\fR <file>
+specify file to load as template (for
+\&'\-\-draft', '\-\-makepage' and
+\&'\-\-makefile').
+.TP
+\fB\-\-template\-dir\fR <directory>
+specify weblog's template directory.
+.TP
+\fB\-t\fR, \fB\-\-title\fR <text>
+set text of title (for '\-\-add',
+\&'\-\-category', '\-\-draft',
+\&'\-\-makefile' and '\-\-makepage').
+.TP
+\fB\-\-tag\fR <TAG>
+specify tag (for '\-\-add', '\-\-draft',
+\&'\-\-edit', '\-\-makefile' and
+.IP
+\&'\-\-makepage').
+.TP
+\fB\-\-tag\-text\fR <text>
+set text of tag (for '\-\-tag').
+.TP
+\fB\-T\fR, \fB\-\-text\fR <text>
+set text of body (for '\-\-add',
+\&'\-\-draft', '\-\-makefile' and
+\&'\-\-makepage').
+.TP
+\fB\-U\fR, \fB\-\-update\-cache\fR <all,DATE,max,expired>
+force update of weblog's cache removing
+specified cached data (defaults to
+\&'expired').
+.TP
+\fB\-u\fR, \fB\-\-update\fR <all,DATE,main,max>
+force update of weblog's files updating
+specified weblog data (defaults to
+\&'max').
+.TP
+\fB\-v\fR, \fB\-\-verbose\fR <1=on/0=off>
+toggle level of verbosity.
+.TP
+\fB\-V\fR, \fB\-\-version\fR
+display version information.
+.HP
+\fB\-c\fR,\-d,\-e,\-m accepts multiple ID numbers seperated by commas (e.g. 1,2,3).
+.HP
+\fB\-\-list\fR and \fB\-\-update\fR can match entries by date (irrelevant of entry id(s)).
+.IP
+date = YYYY\-MM\-DD, YYYY\-MM, YYYY
+
+.SH "EXAMPLES"
+.IP "\fB\-\-blogdir [myblog_dir] \--add\fP" 10
+Where myblog_dir is a nonexistent directory. This will create a new directory, copy the default files over, and then let you edit the weblog's configuration. Multiple weblogs can be created this way. Running the same command again on an existing weblog directory will add a new entry.
+.IP "\fB\-\-blogdir [myblog_dir] \-\-configure \-u all\fP" 10
+This opens blog.conf from the weblog directory for editing and updates the entire weblog.
+.IP "\fB[\-b blog_dir] \-a\fP" 10
+Add a new entry
+.IP "\fB[\-b blog_dir] \-c 1 \-a\fP" 10
+Add a new entry to a category
+.IP "\fB [\-b blog_dir] \-t \*(lqNew Entry\*(rq \-n [entry_author] \-a\fP"
+Set title and author for new entry
+.IP "\fB[\-b blog_dir] \-t \*(lqNew Entry\*(rq \-n [entry_author] \-M \*(lqMy message.\*(rq \-a\fP" 10
+Set title, author, and body for new entry
+.IP "\fB[\-b blog_dir] \-l\fP" 10
+List current entries
+.IP "\fB[\-b blog_dir] \-l all\fP" 10
+List all entries
+.IP "\fB[\-b blog_dir] \-c 1 \-l\fP" 10
+List entries for a category
+.IP "\fB[\-b blog_dir] \-e 1\fP" 10
+Edit the last entry created
+.IP "\fB[\-b blog_dir] \-c 1 \-e 1\fP" 10
+Edit an entry from a category
+.IP "\fB[\-b blog_dir] \-e 1,2,3\fP" 10
+Edit multiple entries
+.IP "\fB[\-b blog_dir] \-c 1 \-m 1\fP" 10
+Move an entry to a category
+.IP "\fB[\-b blog_dir] \-c 1,2,3 \-m 1\fP" 10
+Move an entry to multiple categories
+.IP "\fB[\-b blog_dir] \-c 1 \-m 1,2,3\fP" 10
+Move multiple entries to a category
+.IP "\fB[\-b blog_dir] \-d 1\fP" 10
+Permanently delete an entry
+.IP "\fB[\-b blog_dir] \-d 1,2,3\fP" 10
+Permanently delete multiple entries
+.IP "\fB[\-b blog_dir] \-c 1 \-d 1\fP" 10
+Delete an entry from a category
+.IP "\fB[\-b blog_dir] \-c new \-a\fP" 10
+Create a new category
+.IP "\fB[\-b blog_dir] \-t \*(lqNew Category\*(rq \-c new \-a\fP" 10
+Set the title for a new category
+.IP "\fB[\-b blog_dir] \-l cat\fP" 10
+List available categories
+.IP "\fB[\-b blog_dir] \-c 1 \-t \*(lqNews\*(rq \-e cat\fP" 10
+Edit a category's title
+.IP "\fB[\-b blog_dir] \-c 1 \-d cat\fP" 10
+Delete a category
+.IP "\fB[\-b blog_dir] \-u all\fP" 10
+Update the Weblog's Data Directory
+.SH "NOTES"
+.PP
+The articles plugin provides a simple way for NanoBlogger to automatically generate and update articles for your weblog. Creating a new article is easy, create a new file in the \fBarticles\fP directory and save it with the suffix, "txt". To remove an article simply rename it's suffix to something other than "txt" or remove it from the articles directory.
+.PP
+Edit \fBtemplates/main_links.htm\fP to add new links.
+.SH "FILES"
+.IR /etc/nanoblogger/nb.conf
+.SH "AUTHOR"
+.PP 
+NanoBlogger written by Kevin Wood (n1xt3r) <un1xt3r@fastmail.fm>
+.br
+This manual page was originally written by William Vera <billy@billy.com.mx> 
+and then updated by Michal Cihar <michal@cihar.com> for
+the \fBDebian\fP system (but may be used by others).
+.br
+Permission is granted to copy, distribute and/or modify this document under
+the terms of the GNU Free Documentation
+.SH "SEE ALSO"
+.IR /usr/share/doc/nanoblogger/nanoblogger.html
+.IR http://nanoblogger.sourceforge.net/
+
