@@ -1,6 +1,6 @@
 Name: nanoblogger
 Version: 3.4.2
-Release: 0%{?dist}
+Release: 1%{?dist}
 
 Summary: Small weblog engine for the UNIX command line
 License: GPL
@@ -80,6 +80,9 @@ cp %SOURCE1 %{buildroot}/%{_mandir}
 %doc ChangeLog README copyright docs/nanoblogger.html TODO
 
 %changelog
+* Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-1
+- repackage for 3.4.2
+
 * Sat Jun 06 2009 Kirill Maslinsky <kirill@altlinux.org> 3.4-alt1.rc2
 - Initial build for Sisyphus
 
