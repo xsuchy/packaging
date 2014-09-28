@@ -29,7 +29,7 @@ HTML and CSS template files.
 %patch1 -p1 -b .fhs~
 
 %install
-%makeinstall_std
+%make_install
 rm -f %{buildroot}%{_datadir}/%{name}/{README,ChangeLog,COPYING}
 install -m 755 utilities/igal2-recursive.sh %{buildroot}%{_bindir}
 
