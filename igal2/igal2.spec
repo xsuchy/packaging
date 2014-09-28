@@ -2,7 +2,7 @@
 
 Name:		igal2
 Version:	2.1
-Release:	1
+Release:	2
 License:	GPLv2+
 Group:		Applications/Publishing
 URL:		http://igal.trexler.at/
@@ -45,6 +45,9 @@ install -m 755 utilities/igal2-recursive.sh %{buildroot}%{_bindir}
 
 
 %changelog
+* Sun Sep 28 2014 Miroslav Suchý <miroslav@suchy.cz> 2.1-2
+- new package for Fedora
+
 * Sun Jul 01 2012 Johnny A. Solbu <solbu@mandriva.org> 2.1-1
 + Revision: 807659
 - New version
