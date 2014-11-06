@@ -2,7 +2,7 @@
 Summary:	PostgreSQL Config Tuner
 Name:		pgtune
 Version:	0.9.3
-Release:	9.%{githash}%{?dist}
+Release:	10.%{githash}%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/pgtune
@@ -49,6 +49,9 @@ install -m 644 pgtune.8 %{buildroot}/%{_mandir}/man8
 %attr(755,root,root) %{_bindir}/pgtune
 
 %changelog
+* Thu Nov 06 2014 Miroslav Suchý <msuchy@redhat.com> 0.9.3-10.da57e00
+- rebase pgtune-settingsdir.patch
+
 * Thu Nov 06 2014 Miroslav Suchý <msuchy@redhat.com> 0.9.3-9.da57e00
 - add missing source
 
