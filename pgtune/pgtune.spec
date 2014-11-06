@@ -42,7 +42,7 @@ install -m 644 pgtune.8 %{buildroot}/%{_mandir}/man8
 %clean
 
 %files
-%doc TODO COPYRIGHT
+%doc TODO.rst COPYRIGHT README.rst HISTORY
 %doc %{_mandir}/man8/pgtune.8*
 %dir %{_datadir}/%{name}
 %{_datadir}/%{name}/*
