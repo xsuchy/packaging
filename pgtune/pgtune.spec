@@ -1,11 +1,15 @@
+%global githash da57e00
 Summary:	PostgreSQL Config Tuner
 Name:		pgtune
 Version:	0.9.3
-Release:	7%{?dist}
+Release:	7.%{githash}%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/pgtune
-Source0:	http://pgfoundry.org/frs/download.php/2449/%{name}-%{version}.tar.gz
+#Source0:	http://pgfoundry.org/frs/download.php/2449/%{name}-%{version}.tar.gz
+# Created using:
+# git archive --format=tar --prefix=pgtune-0.9.3/ -o pgtune-0.9.3.tar.gz %{githash}:./
+Source:		%{name}-%{version}.tar.gz
 Source1:    pgtune.8.asciidoc
 Patch0:		pgtune-settingsdir.patch
 Requires:	postgresql-server
