@@ -2,7 +2,7 @@
 Summary:	PostgreSQL Config Tuner
 Name:		pgtune
 Version:	0.9.3
-Release:	7.%{githash}%{?dist}
+Release:	8.%{githash}%{?dist}
 License:	BSD
 Group:		Applications/Databases
 URL:		http://pgfoundry.org/projects/pgtune
@@ -49,6 +49,9 @@ install -m 644 pgtune.8 %{buildroot}/%{_mandir}/man8
 %attr(755,root,root) %{_bindir}/pgtune
 
 %changelog
+* Thu Nov 06 2014 Miroslav Suchý <msuchy@redhat.com> 0.9.3-8.da57e00
+- include pg 9.x configs
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.3-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
