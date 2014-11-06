@@ -1,0 +1,57 @@
+pgtune(8)
+========
+
+NAME
+----
+pgtune - PostgreSQL Config Tuner
+
+SYNOPSIS
+--------
+
+ pgtune -i $PGDATA/postgresql.conf -o $PGDATA/postgresql.conf.pgtune
+
+DESCRIPTION
+-----------
+
+Pgtune takes the wimpy default postgresql.conf and expands the database 
+server to be as powerful as the hardware it's being deployed on.
+
+pgtune works by taking an existing postgresql.conf file as an input,
+making changes to it based on the amount of RAM in your server and
+suggested workload, and output a new file.
+
+OPTIONS
+-------
+-i, --input-config::
+Specifies the current postgresql.conf file.
+
+-o, --input-config::
+Specifies the file name for the new postgresql.conf file.
+
+-M, --memory::
+Use this parameter to specify total system memory. If
+not specified, pgtune will attempt to detect memory size.
+
+-T, --type::
+Specifies database type. Valid options are: DW, OLTP, Web, Mixed, Desktop
+
+-c, --connections::
+Specifies number of maximum connections expected.
+If not specified, it depends on database type.
+
+-D, --debug::
+Enables debugging mode.
+
+-S, --settings::
+Directory where settings data files are located at.
+Defaults to the directory where the script is being run from.  The
+RPM package includes a patch to use the correct location these
+files were installed into.
+
+SEE ALSO
+--------
+postgres(1)
+
+AUTHORS
+-------
+This man page is written by Miroslav Suchy for Fedora.
