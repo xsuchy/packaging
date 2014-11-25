@@ -1,19 +1,16 @@
 %global gem_name paint
 
 Name: rubygem-%{gem_name}
-Version: 0.8.7
+Version: 0.9.0
 Release: 1%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/paint
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
-Requires: ruby(release)
-Requires: ruby(rubygems) 
 BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildArch: noarch
-Provides: rubygem(%{gem_name}) = %{version}
 #tests
 BuildRequires: rubygem(rspec)
 
@@ -65,7 +62,7 @@ popd
 %{gem_spec}
 %exclude %{gem_instdir}/.gemtest
 %doc %{gem_instdir}/README.rdoc
-%doc %{gem_instdir}/LICENSE.txt
+%license %{gem_instdir}/MIT-LICENSE.txt
 
 %files doc
 %doc %{gem_docdir}
