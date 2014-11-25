@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 0.9.0
-Release: 1%{?dist}
+Release: 2%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -72,6 +72,9 @@ popd
 %{gem_instdir}/spec
 
 %changelog
+* Tue Nov 25 2014 Miroslav Suchý <miroslav@suchy.cz> 0.9.0-2
+- rebase to 0.9.0
+
 * Tue Jan 21 2014 Miroslav Suchý <miroslav@suchy.cz> 0.8.7-1
 - rebase paint-0.8.7.gem
 
