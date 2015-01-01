@@ -5,7 +5,7 @@
 
 Name:               nodejs-hogan-js
 Version:            3.0.2
-Release:            0%{?dist}
+Release:            1%{?dist}
 Summary:            Compiler for the Mustache templating language
 
 Group:              Development/Libraries
@@ -58,3 +58,6 @@ cp -pr package.json inheritance.js test.js lib \
 %{nodejs_sitelib}/hogan.js/
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 3.0.2-1
+- initial packaging
+
