@@ -1,7 +1,7 @@
 # This macro is needed at the start for building on EL6
 %{?nodejs_find_provides_and_requires}
 
-%global enable_tests 1
+%global enable_tests 0
 
 %global barename node-pre-gyp
 
