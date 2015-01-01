@@ -7,7 +7,7 @@
 
 Name:               nodejs-when
 Version:            3.6.4
-Release:            0%{?dist}
+Release:            1%{?dist}
 Summary:            A lightweight Promises/A+ and when() implementation, plus other async goodies
 
 Group:              Development/Libraries
@@ -82,3 +82,6 @@ jshint . && buster-test -e node && promises-aplus-tests test/promises-aplus-adap
 %{nodejs_sitelib}/when/
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 3.6.4-1
+- initial packaging
+
