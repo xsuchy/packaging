@@ -59,6 +59,7 @@ your package info.
 %prep
 %setup -q -n package
 %nodejs_fixdep --caret
+%nodejs_fixdep debug
 
 %build
 %nodejs_symlink_deps --build
