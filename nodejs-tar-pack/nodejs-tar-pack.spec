@@ -7,7 +7,7 @@
 
 Name:               nodejs-tar-pack
 Version:            2.0.0
-Release:            2%{?dist}
+Release:            3%{?dist}
 Summary:            Package and un-package modules of some sort (in tar/gz bundles)
 
 Group:              Development/Libraries
@@ -84,6 +84,9 @@ mocha -R list
 %{nodejs_sitelib}/tar-pack/
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-3
+- remove version require of npm(debug)
+
 * Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-2
 - initial packaging
 

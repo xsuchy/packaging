@@ -61,6 +61,13 @@ node-pre-gyp stands between npm and node-gyp and offers a cross-platform method 
 rm -rf node_modules/
 
 %nodejs_fixdep --caret
+%nodejs_fixdep mkdirp
+%nodejs_fixdep nopt 
+%nodejs_fixdep npmlog
+%nodejs_fixdep rimraf
+%nodejs_fixdep semver
+%nodejs_fixdep tar
+
 
 %build
 %nodejs_symlink_deps --build
@@ -86,5 +93,3 @@ mocha -R spec --timeout 100000
 %{nodejs_sitelib}/node-pre-gyp/
 
 %changelog
-* Thu Jan 01 2015 Miroslav Suchy <msuchy@redhat.com> - 0.6.1-1
-- Initial packaging for Fedora.
