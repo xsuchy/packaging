@@ -48,14 +48,17 @@ the Spark Cloud.
 %prep
 %setup -q -n package
 
-%nodejs_fixdep --caret
+%nodejs_fixdep serialport
+%nodejs_fixdep request
+%nodejs_fixdep hogan.js
+%nodejs_fixdep glob
 
 %build
 %nodejs_symlink_deps --build
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/spark-cli
-cp -pr package.json settings.js app.js lib commands bin \
+cp -pr package.json settings.js app.js lib commands bin mappings.json \
     %{buildroot}%{nodejs_sitelib}/spark-cli
 
 mkdir -p %{buildroot}%{_bindir}
