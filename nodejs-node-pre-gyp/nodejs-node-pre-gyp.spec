@@ -7,7 +7,7 @@
 
 Name:               nodejs-node-pre-gyp
 Version:            0.6.1
-Release:            0%{?dist}
+Release:            1%{?dist}
 Summary:            Node.js native addon binary install tool
 
 Group:              Development/Libraries
@@ -93,3 +93,6 @@ mocha -R spec --timeout 100000
 %{nodejs_sitelib}/node-pre-gyp/
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 0.6.1-1
+- initial packaging
+
