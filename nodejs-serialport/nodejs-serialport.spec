@@ -7,7 +7,7 @@
 
 Name:               nodejs-serialport
 Version:            1.4.9
-Release:            0%{?dist}
+Release:            1%{?dist}
 Summary:            Simple interface to the low level serial port
 
 Group:              Development/Libraries
@@ -91,3 +91,6 @@ grunt --verbose
 %{nodejs_sitelib}/serialport/
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 1.4.9-1
+- initial packaging
+
