@@ -3,7 +3,7 @@
 
 Name:           nodejs-%{npmname}
 Version:        0.1.7
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        String formatting library for node.js
 
 Group:          Development/Libraries
@@ -44,5 +44,8 @@ cp -a package.json sf.js %{buildroot}%{nodejs_sitelib}/%{npmname}
 
 
 %changelog
+* Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 0.1.7-2
+- initial package
+
 * Wed Dec 31 2014 Miroslav Suchý <msuchy@redhat.com> - 0.1.7-1
 - Initial packaging
