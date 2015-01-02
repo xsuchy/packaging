@@ -74,7 +74,7 @@ rm -rf node_modules/
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/node-pre-gyp
-cp -pr package.json lib \
+cp -pr package.json lib bin \
     %{buildroot}%{nodejs_sitelib}/node-pre-gyp
 
 mkdir -p %{buildroot}%{_bindir}
