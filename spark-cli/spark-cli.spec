@@ -7,7 +7,7 @@
 
 Name:               spark-cli
 Version:            0.4.92
-Release:            0%{?dist}
+Release:            1%{?dist}
 Summary:            Simple commandline application for working with your Spark Cores and using the Spark Cloud
 
 Group:              Development/Libraries
@@ -72,3 +72,6 @@ ln -s %{nodejs_sitelib}/%{barename}/bin/spark.js %{buildroot}%{_bindir}/spark
 %{nodejs_sitelib}/spark-cli/
 
 %changelog
+* Fri Jan 02 2015 Miroslav Suchý <miroslav@suchy.cz> 0.4.92-1
+- initial packiging
+
