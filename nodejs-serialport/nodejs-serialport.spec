@@ -69,7 +69,7 @@ rm -rf node_modules/
 
 %build
 %nodejs_symlink_deps --build
-node-pre-gyp install --fallback-to-build
+node-pre-gyp build
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/serialport
