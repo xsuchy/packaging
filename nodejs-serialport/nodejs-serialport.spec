@@ -63,7 +63,6 @@ rm -rf node_modules/
 %nodejs_fixdep --caret
 %nodejs_fixdep async
 %nodejs_fixdep bindings
-%nodejs_fixdep nan
 %nodejs_fixdep node-pre-gyp
 %nodejs_fixdep optimist
 
