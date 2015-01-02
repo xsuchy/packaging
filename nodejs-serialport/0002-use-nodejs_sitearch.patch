@@ -1,0 +1,25 @@
+From c54d704a1e49170a2ede1cef8d5d70741ed34491 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Miroslav=20Such=C3=BD?= <miroslav@suchy.cz>
+Date: Fri, 2 Jan 2015 23:10:41 +0100
+Subject: [PATCH] use nodejs_sitearch
+
+---
+ package.json | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package.json b/package.json
+index 4eab989..0619193 100644
+--- a/package.json
++++ b/package.json
+@@ -9,7 +9,7 @@
+   },
+   "binary": {
+     "module_name" : "serialport",
+-    "module_path" : "./build/{module_name}/v{version}/{configuration}/{node_abi}-{platform}-{arch}/",
++    "module_path" : "./",
+     "remote_path" : "./{module_name}/v{version}/{configuration}/",
+     "package_name": "{node_abi}-{platform}-{arch}.tar.gz",
+     "host"        : "https://node-serialport.s3.amazonaws.com"
+-- 
+2.1.0
+

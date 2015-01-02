@@ -15,6 +15,7 @@ License:            MIT
 URL:                https://github.com/voodootikigod/node-serialport
 Source0:            http://registry.npmjs.org/%{barename}/-/%{barename}-%{version}.tgz
 Patch1:             0001-use-static-path.patch
+Patch2:             0002-use-nodejs_sitearch.patch
 %if 0%{?fedora} >= 19
 ExclusiveArch:      %{nodejs_arches} noarch
 %else
@@ -77,7 +78,7 @@ cp -pr package.json Gruntfile.js serialport.js parsers.js bin \
     %{buildroot}%{nodejs_sitelib}/serialport
 
 mkdir -p %{buildroot}%{nodejs_sitelib}/%{barename}/build/serialport/v1.4.9/Release/node-v11-linux-x64/
-cp build/Release/serialport.node %{buildroot}%{nodejs_sitelib}/%{barename}/build/serialport/v1.4.9/Release/node-v11-linux-x64/serialport.node
+cp build/Release/serialport.node %{buildroot}%{nodejs_sitearch}/%{barename}/
 
 mkdir -p %{buildroot}%{_bindir}
 ln -s %{nodejs_sitelib}/%{barename}/bin/serialportList.js %{buildroot}%{_bindir}/serialportlist
@@ -98,6 +99,7 @@ grunt --verbose
 %license LICENSE
 %{_bindir}/*
 %{nodejs_sitelib}/%{barename}/
+%{nodejs_sitearch}/%{barename}/serialport.node
 
 %changelog
 * Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 1.4.9-1
