@@ -1,0 +1,25 @@
+From 90add4d6f4943a3b6a3ed0cdcca90223f870a507 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Miroslav=20Such=C3=BD?= <miroslav@suchy.cz>
+Date: Fri, 2 Jan 2015 22:28:26 +0100
+Subject: [PATCH] use static path
+
+---
+ binding.gyp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/binding.gyp b/binding.gyp
+index 06ceef2..d168774 100644
+--- a/binding.gyp
++++ b/binding.gyp
+@@ -6,7 +6,7 @@
+         'src/serialport.cpp',
+       ],
+       'include_dirs': [
+-        '<!(node -e "require(\'nan\')")'
++        '/usr/lib/node_modules/nan@1/'
+       ],
+       'conditions': [
+         ['OS=="win"',
+-- 
+2.1.0
+

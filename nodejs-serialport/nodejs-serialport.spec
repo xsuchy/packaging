@@ -14,6 +14,7 @@ Group:              Development/Libraries
 License:            MIT
 URL:                https://github.com/voodootikigod/node-serialport
 Source0:            http://registry.npmjs.org/%{barename}/-/%{barename}-%{version}.tgz
+Patch1:             0001-use-static-path.patch
 BuildArch:          noarch
 %if 0%{?fedora} >= 19
 ExclusiveArch:      %{nodejs_arches} noarch
@@ -57,6 +58,7 @@ Zigbee standards.
 
 %prep
 %setup -q -n package
+%patch1 -p1
 # Remove bundled node_modules
 rm -rf node_modules/
 
