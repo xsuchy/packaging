@@ -74,8 +74,15 @@ node-pre-gyp build
 
 %install
 mkdir -p %{buildroot}%{nodejs_sitelib}/serialport
-cp -pr package.json Gruntfile.js serialport.js parsers.js \
+cp -pr package.json Gruntfile.js serialport.js parsers.js bin \
     %{buildroot}%{nodejs_sitelib}/serialport
+
+mkdir -p %{buildroot}%{nodejs_sitelib}/%{barename}/build/serialport/v1.4.9/Release/node-v11-linux-x64/
+cp build/Release/serialport.node %{buildroot}%{nodejs_sitelib}/%{barename}/build/serialport/v1.4.9/Release/node-v11-linux-x64/serialport.node
+
+mkdir -p %{buildroot}%{_bindir}
+ln -s %{nodejs_sitelib}/%{barename}/bin/serialportList.js %{buildroot}%{_bindir}/serialportlist
+ln -s %{nodejs_sitelib}/%{barename}/bin/serialportTerminal.js %{buildroot}%{_bindir}/serialportterm
 
 %nodejs_symlink_deps
 
@@ -90,7 +97,8 @@ grunt --verbose
 %files
 %doc README.md
 %license LICENSE
-%{nodejs_sitelib}/serialport/
+%{_bindir}/*
+%{nodejs_sitelib}/%{barename}/
 
 %changelog
 * Thu Jan 01 2015 Miroslav Suchý <miroslav@suchy.cz> 1.4.9-1
