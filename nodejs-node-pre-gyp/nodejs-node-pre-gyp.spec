@@ -77,6 +77,9 @@ mkdir -p %{buildroot}%{nodejs_sitelib}/node-pre-gyp
 cp -pr package.json lib \
     %{buildroot}%{nodejs_sitelib}/node-pre-gyp
 
+mkdir -p %{buildroot}%{_bindir}
+ln -s %{nodejs_sitelib}/%{barename}/bin/node-pre-gyp %{buildroot}%{_bindir}/node-pre-gyp
+
 %nodejs_symlink_deps
 
 
@@ -90,6 +93,7 @@ mocha -R spec --timeout 100000
 %files
 %doc CHANGELOG.md README.md
 %license LICENSE
+%{_bindir}/node-pre-gyp
 %{nodejs_sitelib}/node-pre-gyp/
 
 %changelog
