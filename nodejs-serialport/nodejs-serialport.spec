@@ -11,8 +11,8 @@ Release:            1%{?dist}
 Summary:            Simple interface to the low level serial port
 
 Group:              Development/Libraries
-License:            NO LICENSE
-URL:                https://www.npmjs.org/package/serialport
+License:            MIT
+URL:                https://github.com/voodootikigod/node-serialport
 Source0:            http://registry.npmjs.org/%{barename}/-/%{barename}-%{version}.tgz
 BuildArch:          noarch
 %if 0%{?fedora} >= 19
