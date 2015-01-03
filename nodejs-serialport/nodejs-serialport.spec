@@ -7,7 +7,7 @@
 
 Name:               nodejs-serialport
 Version:            1.4.9
-Release:            2%{?dist}
+Release:            3%{?dist}
 Summary:            Simple interface to the low level serial port
 
 Group:              Development/Libraries
@@ -103,6 +103,9 @@ grunt --verbose
 %{nodejs_sitearch}/%{barename}/serialport.node
 
 %changelog
+* Sat Jan 03 2015 Miroslav Suchý <miroslav@suchy.cz> 1.4.9-3
+- add BR node-gyp
+
 * Fri Jan 02 2015 Miroslav Suchý <miroslav@suchy.cz> 1.4.9-2
 - put compiled binary on correct place
 - this is binary package
