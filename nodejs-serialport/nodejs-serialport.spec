@@ -24,6 +24,7 @@ ExclusiveArch:      %{ix86} x86_64 %{arm} noarch
 
 BuildRequires:      nodejs-packaging >= 6
 
+BuildRequires:      node-gyp
 BuildRequires:      npm(node-pre-gyp)
 BuildRequires:      npm(optimist)
 BuildRequires:      npm(async)
