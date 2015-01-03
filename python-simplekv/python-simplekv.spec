@@ -1,6 +1,6 @@
-# Created by pyp2rpm-1.1.1
 %global pypi_name simplekv
-%global with_python3 1
+# python3 does not work in this version yet 
+%global with_python3 0
 
 Name:           python-%{pypi_name}
 Version:        0.9.2
@@ -44,6 +44,7 @@ This package include python3 library.
 
 %prep
 %setup -q -n %{pypi_name}-%{version}
+
 # Remove bundled egg-info
 rm -rf %{pypi_name}.egg-info
 
