@@ -1,14 +1,14 @@
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           python-debian
-Version:        0.1.21
-Release:        10%{?dist}
+Version:        0.1.26
+Release:        0%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
 License:        GPLv2+ and GPLv3+
 Group:          Development/Libraries
-Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}+nmu2.tar.gz
+Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.xz
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:      noarch
@@ -16,9 +16,11 @@ Requires:       python >= 2.4
 Requires:		python-chardet
 Requires:       xz
 Requires:       python-six
+#not available now
+#Recommends:    python-apt
+Suggests:       gnupg
 BuildRequires:  python-devel, python-setuptools, python-chardet
 BuildRequires:  python-six
-Patch1:         xz-member.patch
 
 %description
 This package provides Python modules that abstract many formats of Debian 
@@ -34,8 +36,7 @@ related files. Currently handled are:
 
 
 %prep
-%setup -q -n 'python-debian-0.1.21+nmu2'
-%patch1 -p1
+%setup -q
 
 %build
 sed -e 's/__CHANGELOG_VERSION__/$(VERSION)/' < setup.py.in > setup.py
