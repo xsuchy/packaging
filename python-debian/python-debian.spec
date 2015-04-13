@@ -1,8 +1,9 @@
+
 %{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
 
 Name:           python-debian
 Version:        0.1.26
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -74,6 +75,9 @@ cd tests;
 %doc README README.changelog README.deb822 HISTORY.deb822 ACKNOWLEDGEMENTS
 
 %changelog
+* Mon Apr 13 2015 Miroslav Suchý <msuchy@redhat.com> 0.1.26-2
+- rebase to 0.1.26
+
 * Mon Apr 13 2015 Miroslav Suchý <msuchy@redhat.com> 0.1.26-1
 - rebase to 0.1.26
 
