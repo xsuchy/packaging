@@ -6,8 +6,8 @@
 Summary: Support for east_asian_width string widths
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: 0.1.1
-Release: 9%{dist}
+Version: 0.2.0
+Release: 1%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/unicode-display_width
@@ -60,12 +60,16 @@ gem build %{gem_name}.gemspec
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
+if [ -e %{buildroot}%{gem_instdir}/.yardoc ]; then
+	rm -f %{buildroot}%{gem_instdir}/.yardoc
+fi
 
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
 %doc %{gem_instdir}/LICENSE.txt
 %doc %{gem_instdir}/README.rdoc
+%doc %{gem_instdir}/CHANGELOG.txt
 %{gem_instdir}/data
 %exclude %{gem_cache}
 %exclude %{gem_instdir}/.yardoc
@@ -77,6 +81,9 @@ cp -pa .%{gem_dir}/* \
 %{gem_instdir}/.gemspec
 
 %changelog
+* Fri Feb 13 2015 Miroslav Suchý <msuchy@redhat.com> 0.2.0-1
+- rebase to upstream 0.2.0
+
 * Mon Nov 25 2013 Miroslav Suchý <msuchy@redhat.com> 0.1.1-9
 - 998469 - replace rm with exclude
 - 998469 - require rubygems in main package
