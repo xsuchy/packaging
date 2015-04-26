@@ -15,9 +15,9 @@ BuildArch:      noarch
 BuildRequires:  python-devel
 BuildRequires:  python-nose
 BuildRequires:  python-mock
-BuildRequires:  python-Flask-SQLAlchemy
-BuildRequires:  python-Flask-MongoEngine
-BuildRequires:  python-Flask-Peewee
+BuildRequires:  python-flask-sqlalchemy
+BuildRequires:  python-flask-mongoengine
+BuildRequires:  python-flask-Peewee
  
 %if %{?with_python3}
 BuildRequires:  python3-devel

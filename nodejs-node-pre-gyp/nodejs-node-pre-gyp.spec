@@ -6,8 +6,8 @@
 %global barename node-pre-gyp
 
 Name:               nodejs-node-pre-gyp
-Version:            0.6.1
-Release:            3%{?dist}
+Version:            0.6.4
+Release:            0%{?dist}
 Summary:            Node.js native addon binary install tool
 
 Group:              Development/Libraries
@@ -97,6 +97,9 @@ mocha -R spec --timeout 100000
 %{nodejs_sitelib}/node-pre-gyp/
 
 %changelog
+* Sun Apr 26 2015 Miroslav Suchý <miroslav@suchy.cz> 0.6.4-1
+- rebase to upstream 0.6.4
+
 * Fri Jan 02 2015 Miroslav Suchý <miroslav@suchy.cz> 0.6.1-3
 - really include /bin
 
