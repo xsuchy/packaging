@@ -2,18 +2,14 @@
 
 Summary: Font Metrics Parser for Prawn
 Name: rubygem-%{gem_name}
-Version: 1.1.0
-Release: 1%{?dist}
+Version: 1.4.0
+Release: 0%{?dist}
 Group: Development/Languages
 License: GPLv2 or GPLv3 or Ruby
 URL: https://github.com/prawnpdf/ttfunk
 Source0: http://rubygems.org/gems/%{gem_name}-%{version}.gem
 Requires: rubygems
-%if 0%{?rhel} == 6
-Requires: ruby(abi) = 1.8
-%else
 Requires: ruby(release)
-%endif
 BuildRequires: rubygems-devel
 BuildRequires: rubygems
 BuildArch: noarch
@@ -50,7 +46,7 @@ cp -a ./%{gem_dir}/* %{buildroot}%{gem_dir}/
 mv %{buildroot}%{gem_instdir}/{CHANGELOG,COPYING,GPLv2,GPLv3,LICENSE,README.rdoc} ./
 
 %files
-%doc COPYING GPLv2 GPLv3 LICENSE
+%license COPYING GPLv2 GPLv3 LICENSE
 %dir %{gem_instdir}
 %{gem_instdir}/lib
 %exclude %{gem_cache}
