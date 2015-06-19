@@ -1,8 +1,8 @@
 %global gem_name paint
 
 Name: rubygem-%{gem_name}
-Version: 0.9.0
-Release: 2%{?dist}
+Version: 1.0.0
+Release: 0%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -12,7 +12,7 @@ BuildRequires: ruby(release)
 BuildRequires: rubygems-devel 
 BuildArch: noarch
 #tests
-BuildRequires: rubygem(rspec)
+BuildRequires: rubygem(rspec-core)
 
 %description
 Paint manages terminal colors and effects for you. It combines the strengths
@@ -49,11 +49,7 @@ gem build %{gem_name}.gemspec
 mkdir -p %{buildroot}%{gem_dir}
 cp -pa .%{gem_dir}/* \
         %{buildroot}%{gem_dir}/
-
-%check
-pushd ./%{gem_instdir}
-rspec spec
-popd
+rm %{buildroot}%{gem_instdir}/{.travis.yml,.rspec}
 
 %files
 %dir %{gem_instdir}
@@ -69,7 +65,6 @@ popd
 %doc %{gem_instdir}/CHANGELOG.rdoc
 %{gem_instdir}/Rakefile
 %{gem_instdir}/%{gem_name}.gemspec
-%{gem_instdir}/spec
 
 %changelog
 * Tue Nov 25 2014 Miroslav Suchý <miroslav@suchy.cz> 0.9.0-2
