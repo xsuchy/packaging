@@ -5,24 +5,15 @@
 Summary: Wavy IRB: Colorizes irb results
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: 1.0.3
-Release: 4%{dist}
+Version: 2.0.0
+Release: 0%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
 Source0: https://rubygems.org/gems/%{gem_name}-%{version}.gem
-%if 0%{?fedora} > 18
 Requires: %{?scl_prefix}ruby(release)
-%else
-Requires: %{?scl_prefix}ruby(abi) = 1.9.1
-%endif
 BuildRequires: %{?scl_prefix}rubygems-devel
 BuildRequires: %{?scl_prefix}rubygems
-%if 0%{?fedora} < 21
-Requires: %{?scl_prefix}rubygems
-Requires: %{?scl_prefix}rubygem(paint) >= 0.8
-Requires: %{?scl_prefix}rubygem(paint) < 1
-%endif
 BuildArch: noarch
 Provides: %{?scl_prefix}rubygem(wirb) = %{version}
 #tests
@@ -31,7 +22,7 @@ BuildRequires: rubygem(rspec)
 %description
 Wavy IRB: Colorizes irb results. It originated from Wirble, but only provides
 result highlighting. Just call Wirb.start and enjoy the colors in your IRB ;).
-You can use it with your favorite colorizer engine. See README.rdoc for more
+You can use it with your favorite colorizer engine. See README.md for more
 details.
 
 %package doc
@@ -78,15 +69,15 @@ rm -f %{buildroot}%{gem_instdir}/.gemtest
 %dir %{gem_instdir}
 %{gem_libdir}
 %{gem_instdir}/data
-%doc %{gem_instdir}/COPYING.txt
+%license %{gem_instdir}/COPYING.txt
 %exclude %{gem_cache}
 %{gem_spec}
-%doc %{gem_instdir}/README.rdoc
+%doc %{gem_instdir}/README.md
 
 %files doc
 %{gem_instdir}/spec
 %doc %{gem_docdir}
-%doc %{gem_instdir}/CHANGELOG.rdoc
+%doc %{gem_instdir}/CHANGELOG.md
 %{gem_instdir}/Rakefile
 %{gem_instdir}/%{gem_name}.gemspec
 
