@@ -6,7 +6,7 @@ Summary: Wavy IRB: Colorizes irb results
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 2.0.0
-Release: 0%{dist}
+Release: 1%{dist}
 Group: Development/Languages
 License: MIT
 URL: https://github.com/janlelis/wirb
@@ -88,6 +88,10 @@ pushd ./%{gem_instdir}
 popd
 
 %changelog
+* Fri Jun 19 2015 Miroslav Suchý <msuchy@redhat.com> 2.0.0-1
+- rebase to wirb-2.0.0
+- Fix spurious Requires and also kill explicit Requires on F-21+
+
 * Tue Feb 11 2014 Miroslav Suchý <msuchy@redhat.com> 1.0.3-1
 - rebase to wirb-1.0.3
 
