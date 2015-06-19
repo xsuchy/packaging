@@ -2,7 +2,7 @@
 
 Name: rubygem-%{gem_name}
 Version: 1.0.0
-Release: 0%{?dist}
+Release: 1%{?dist}
 Summary: Terminal painter
 Group: Development/Languages
 License: MIT
@@ -67,6 +67,9 @@ rm %{buildroot}%{gem_instdir}/{.travis.yml,.rspec}
 %{gem_instdir}/%{gem_name}.gemspec
 
 %changelog
+* Fri Jun 19 2015 Miroslav Suchý <msuchy@redhat.com> 1.0.0-1
+- rebase to paint-1.0.0
+
 * Tue Nov 25 2014 Miroslav Suchý <miroslav@suchy.cz> 0.9.0-2
 - rebase to 0.9.0
 
