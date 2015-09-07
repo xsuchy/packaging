@@ -8,7 +8,7 @@
 
 Name:           python-%{short_name}
 Version:        1.3.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Custom MutableSet that remembers its order
 
 License:        MIT
@@ -94,6 +94,9 @@ popd
 
 
 %changelog
+* Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 1.3.1-2
+- exclude __pycache__/ from filelist
+
 * Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 1.3.1-1
 - new package
 
