@@ -85,9 +85,11 @@ popd
 pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
 popd
+rm -f %{buildroot}%{python3_sitelib}/%{upstream_name}/ordereddict.py*
 %endif
 
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
+rm -f %{buildroot}%{python_sitelib}/%{upstream_name}/ordereddict.py*
 
 %check
 PYTHONPATH=%{buildroot}%{python_sitelib} %{__python} setup.py test
