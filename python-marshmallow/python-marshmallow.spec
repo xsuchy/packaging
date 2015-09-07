@@ -115,7 +115,7 @@ popd
 
 %files
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-#%doc %{_docdir}/python-%{upstream_name}
+%doc %{_docdir}/python-%{upstream_name}
 %exclude %{_docdir}/python-%{upstream_name}/*.pyc
 %exclude %{_docdir}/python-%{upstream_name}/*.pyo
 %exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
@@ -127,7 +127,7 @@ popd
 %if %{with python3}
 %files -n python3-%{upstream_name}
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-#%doc %{_docdir}/python3-%{upstream_name}
+%doc %{_docdir}/python3-%{upstream_name}
 %exclude %{_docdir}/python3-%{upstream_name}/*.pyc
 %exclude %{_docdir}/python3-%{upstream_name}/*.pyo
 %exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
