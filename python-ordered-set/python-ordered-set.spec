@@ -8,7 +8,7 @@
 
 Name:           python-%{short_name}
 Version:        1.3.1
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        A Custom MutableSet that remembers its order
 
 License:        MIT
@@ -93,3 +93,6 @@ popd
 
 
 %changelog
+* Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 1.3.1-1
+- new package
+
