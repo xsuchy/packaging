@@ -10,7 +10,7 @@
 
 Name:           python-%{upstream_name}
 Version:        2.0.0b5
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -138,6 +138,10 @@ popd
 %endif
 
 %changelog
+* Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 2.0.0b5-2
+- unbundle ordereddict and ordered set
+- add documentation
+
 * Mon Aug 24 2015 Valentin Gologuzov <vgologuz@redhat.com> - 2.0.0b5-1
 - Rebuild with the newest upstream version
 
