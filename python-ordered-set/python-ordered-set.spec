@@ -88,7 +88,7 @@ popd
 %if %{with python3}
 %files -n python3-%{short_name} 
 %doc python3/README
-%{python3_sitelib}/%{short_name}.py
+%{python3_sitelib}/%{dir_name}.py
 %{python3_sitelib}/__pycache__/*
 %endif # with python3
 
