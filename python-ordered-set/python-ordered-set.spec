@@ -89,6 +89,7 @@ popd
 %files -n python3-%{short_name} 
 %doc python3/README
 %{python3_sitelib}/%{dir_name}.py
+%{python3_sitelib}/*egg-info/
 %{python3_sitelib}/__pycache__/*
 %endif # with python3
 
