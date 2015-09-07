@@ -18,14 +18,18 @@ URL:            http://marshmallow.readthedocs.org/
 # docs, or examples, and upstream does not want to change that.
 # https://github.com/marshmallow-code/marshmallow/issues/201
 Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{commit}/%{upstream_name}-%{commit}.tar.gz
+# remove dependency on bundled ordered_set
+Patch0:         ordered_set.patch
 BuildArch:      noarch
 BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 Requires:       python-dateutil
+Requires:       python-ordered-set
 # for tests
 BuildRequires:  pytest
 BuildRequires:  pytz
 BuildRequires:  python-dateutil
+BuildRequires:  python-ordered-set
 %if %{with python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
@@ -33,6 +37,7 @@ BuildRequires:  python3-setuptools
 BuildRequires:  python3-pytest
 BuildRequires:  python3-pytz
 BuildRequires:  python3-dateutil
+BuildRequires:  python-ordered-set
 %endif
 
 %description
@@ -50,6 +55,7 @@ Marshmallow schemas can be used to:
 Summary:        Python 3 library for converting complex datatypes to and from primitive types
 %if %{with python3}
 Requires:       python3-dateutil
+Requires:       python3-ordered-set
 %endif
 
 %description -n python3-%{upstream_name}
@@ -65,6 +71,7 @@ Marshmallow schemas can be used to:
 
 %prep
 %setup -q -n %{upstream_name}-%{commit}
+%patch0
 
 %if %{with python3}
 rm -rf %{py3dir}
@@ -84,12 +91,18 @@ popd
 %if %{with python3}
 pushd %{py3dir}
 %{__python3} setup.py install --skip-build --root %{buildroot}
+mkdir -p %{buildroot}%{_docdir}/python3-%{upstream_name}
+cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 popd
 rm -f %{buildroot}%{python3_sitelib}/%{upstream_name}/ordereddict.py*
+rm -f %{buildroot}%{python3_sitelib}/%{upstream_name}/orderedset.py*
 %endif
 
 %{__python} setup.py install -O1 --skip-build --root %{buildroot}
+mkdir -p %{buildroot}%{_docdir}/python-%{upstream_name}
+cp -a docs/* examples %{buildroot}%{_docdir}/python-%{upstream_name}/
 rm -f %{buildroot}%{python_sitelib}/%{upstream_name}/ordereddict.py*
+rm -f %{buildroot}%{python_sitelib}/%{upstream_name}/orderedset.py*
 
 %check
 PYTHONPATH=%{buildroot}%{python_sitelib} %{__python} setup.py test
@@ -102,6 +115,11 @@ popd
 
 %files
 %doc CHANGELOG.rst AUTHORS.rst README.rst
+#%doc %{_docdir}/python-%{upstream_name}
+%exclude %{_docdir}/python-%{upstream_name}/*.pyc
+%exclude %{_docdir}/python-%{upstream_name}/*.pyo
+%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
+%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyo
 %license LICENSE
 %{python_sitelib}/%{upstream_name}
 %{python_sitelib}/%{upstream_name}*.egg-info
@@ -109,6 +127,11 @@ popd
 %if %{with python3}
 %files -n python3-%{upstream_name}
 %doc CHANGELOG.rst AUTHORS.rst README.rst
+#%doc %{_docdir}/python3-%{upstream_name}
+%exclude %{_docdir}/python3-%{upstream_name}/*.pyc
+%exclude %{_docdir}/python3-%{upstream_name}/*.pyo
+%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
+%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyo
 %license LICENSE
 %{python3_sitelib}/%{upstream_name}
 %{python3_sitelib}/%{upstream_name}*.egg-info
