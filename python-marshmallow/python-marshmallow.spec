@@ -10,7 +10,7 @@
 
 Name:           python-%{upstream_name}
 Version:        2.0.0b5
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -155,6 +155,10 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %endif
 
 %changelog
+* Fri Sep 11 2015 Miroslav Suchý <msuchy@redhat.com> 2.0.0b5-4
+- create -doc subpackages
+- 1219288 - reorganize spec file
+
 * Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 2.0.0b5-3
 - explicitely list docdir
 
