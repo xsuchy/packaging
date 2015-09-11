@@ -11,7 +11,7 @@
 
 Name:           python-%{upstream_name}
 Version:        2.0.0
-Release:        0.5.git%{shortcommit}%{?dist}
+Release:        0.6.git%{shortcommit}%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -156,6 +156,9 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %endif
 
 %changelog
+* Fri Sep 11 2015 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-0.6.gita8b3385
+- 1219288 - fix ownership of docdir and use correct release number
+
 * Fri Sep 11 2015 Miroslav Suchý <msuchy@redhat.com> 2.0.0-0.5.a8b3385
 - add short git hash to release number
 
