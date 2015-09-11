@@ -37,7 +37,7 @@ BuildRequires:  python3-setuptools
 BuildRequires:  python3-pytest
 BuildRequires:  python3-pytz
 BuildRequires:  python3-dateutil
-BuildRequires:  python-ordered-set
+BuildRequires:  python3-ordered-set
 %endif
 
 %description
@@ -53,10 +53,8 @@ Marshmallow schemas can be used to:
 %if %{with python3}
 %package -n python3-%{upstream_name}
 Summary:        Python 3 library for converting complex datatypes to and from primitive types
-%if %{with python3}
 Requires:       python3-dateutil
 Requires:       python3-ordered-set
-%endif
 
 %description -n python3-%{upstream_name}
 Marshmallow is a framework-agnostic library for converting complex datatypes, 
@@ -73,44 +71,34 @@ Marshmallow schemas can be used to:
 %setup -q -n %{upstream_name}-%{commit}
 %patch0
 
-%if %{with python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-%endif
+# remove bundled library
+# instead of orderedsett we patch code to usu python-ordered-set
+# ordereddict.py is used only for compatibility with python2.6,
+# which we do not need
+rm -f ./marshmallow/ordereddict.py ./marshmallow/orderedset.py
+
 
 %build
-%{__python} setup.py build
-
+%py2_build
 %if %{with python3}
-pushd %{py3dir}
-%{__python3} setup.py build
-popd
+%py3_build
 %endif
 
 %install
-%if %{with python3}
-pushd %{py3dir}
-%{__python3} setup.py install --skip-build --root %{buildroot}
-mkdir -p %{buildroot}%{_docdir}/python3-%{upstream_name}
-cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
-popd
-rm -f %{buildroot}%{python3_sitelib}/%{upstream_name}/ordereddict.py*
-rm -f %{buildroot}%{python3_sitelib}/%{upstream_name}/orderedset.py*
-%endif
-
-%{__python} setup.py install -O1 --skip-build --root %{buildroot}
+%py2_install
 mkdir -p %{buildroot}%{_docdir}/python-%{upstream_name}
 cp -a docs/* examples %{buildroot}%{_docdir}/python-%{upstream_name}/
-rm -f %{buildroot}%{python_sitelib}/%{upstream_name}/ordereddict.py*
-rm -f %{buildroot}%{python_sitelib}/%{upstream_name}/orderedset.py*
-
-%check
-PYTHONPATH=%{buildroot}%{python_sitelib} %{__python} setup.py test
 
 %if %{with python3}
-pushd %{py3dir}
-PYTHONPATH=%{buildroot}%{python3_sitelib} %{__python3} setup.py test
-popd
+%py3_install
+mkdir -p %{buildroot}%{_docdir}/python3-%{upstream_name}
+cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
+%endif
+
+%check
+%{__python2} setup.py test
+%if %{with python3}
+%{__python3} setup.py test
 %endif
 
 %files
