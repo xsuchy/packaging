@@ -50,6 +50,13 @@ Marshmallow schemas can be used to:
 * Serialize app-level objects to primitive Python types. The serialized objects 
   can then be rendered to standard formats such as JSON for use in an HTTP API.
 
+%package doc
+Summary: Documentation for %{name}
+BuildArch: noarch
+
+%description doc
+Documentation for %{name}.
+
 %if %{with python3}
 %package -n python3-%{upstream_name}
 Summary:        Python 3 library for converting complex datatypes to and from primitive types
@@ -65,7 +72,15 @@ Marshmallow schemas can be used to:
 * Deserialize input data to app-level objects.
 * Serialize app-level objects to primitive Python types. The serialized objects 
   can then be rendered to standard formats such as JSON for use in an HTTP API.
-%endif
+
+%package -n python3-%{upstream_name}-doc
+Summary: Documentation for python3-%{upstream_name}
+BuildArch: noarch
+
+%description -n python3-%{upstream_name}-doc
+Documentation for %{name}.
+
+%endif # with python3
 
 %prep
 %setup -q -n %{upstream_name}-%{commit}
@@ -103,7 +118,7 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 
 %files
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-%doc %{_docdir}/python-%{upstream_name}
+%exclude %{_docdir}/python-%{upstream_name}
 %exclude %{_docdir}/python-%{upstream_name}/*.pyc
 %exclude %{_docdir}/python-%{upstream_name}/*.pyo
 %exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
@@ -112,10 +127,17 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %{python_sitelib}/%{upstream_name}
 %{python_sitelib}/%{upstream_name}*.egg-info
 
+%files doc
+%license LICENSE
+%doc %{_docdir}/python-%{upstream_name}
+%exclude %{_docdir}/python-%{upstream_name}/CHANGELOG.rst
+%exclude %{_docdir}/python-%{upstream_name}/AUTHORS.rst
+%exclude %{_docdir}/python-%{upstream_name}/README.rst
+
 %if %{with python3}
 %files -n python3-%{upstream_name}
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-%doc %{_docdir}/python3-%{upstream_name}
+%exclude %{_docdir}/python3-%{upstream_name}
 %exclude %{_docdir}/python3-%{upstream_name}/*.pyc
 %exclude %{_docdir}/python3-%{upstream_name}/*.pyo
 %exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
@@ -123,6 +145,13 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %license LICENSE
 %{python3_sitelib}/%{upstream_name}
 %{python3_sitelib}/%{upstream_name}*.egg-info
+
+%files -n python3-%{upstream_name}-doc
+%license LICENSE
+%doc %{_docdir}/python3-%{upstream_name}
+%exclude %{_docdir}/python3-%{upstream_name}/CHANGELOG.rst
+%exclude %{_docdir}/python3-%{upstream_name}/AUTHORS.rst
+%exclude %{_docdir}/python3-%{upstream_name}/README.rst
 %endif
 
 %changelog
