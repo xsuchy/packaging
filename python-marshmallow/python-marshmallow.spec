@@ -1,6 +1,7 @@
 %global upstream_name marshmallow
 %global commit a8b33850c74975250fa81308ce3aa4868128d3ba
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global _docdir  %{_datadir}/doc
 
 %if 0%{?fedora}
 %bcond_without python3
@@ -10,7 +11,7 @@
 
 Name:           python-%{upstream_name}
 Version:        2.0.0
-Release:        0.5.%{shortcommit}%{?dist}
+Release:        0.5.git%{shortcommit}%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -118,11 +119,7 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 
 %files
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-%exclude %{_docdir}/python-%{upstream_name}
-%exclude %{_docdir}/python-%{upstream_name}/*.pyc
-%exclude %{_docdir}/python-%{upstream_name}/*.pyo
-%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
-%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyo
+%exclude %{_docdir}/python-%{upstream_name}/*
 %license LICENSE
 %{python_sitelib}/%{upstream_name}
 %{python_sitelib}/%{upstream_name}*.egg-info
@@ -133,15 +130,15 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %exclude %{_docdir}/python-%{upstream_name}/CHANGELOG.rst
 %exclude %{_docdir}/python-%{upstream_name}/AUTHORS.rst
 %exclude %{_docdir}/python-%{upstream_name}/README.rst
+%exclude %{_docdir}/python-%{upstream_name}/*.pyc
+%exclude %{_docdir}/python-%{upstream_name}/*.pyo
+%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
+%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyo
 
 %if %{with python3}
 %files -n python3-%{upstream_name}
 %doc CHANGELOG.rst AUTHORS.rst README.rst
-%exclude %{_docdir}/python3-%{upstream_name}
-%exclude %{_docdir}/python3-%{upstream_name}/*.pyc
-%exclude %{_docdir}/python3-%{upstream_name}/*.pyo
-%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
-%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyo
+%exclude %{_docdir}/python3-%{upstream_name}/*
 %license LICENSE
 %{python3_sitelib}/%{upstream_name}
 %{python3_sitelib}/%{upstream_name}*.egg-info
@@ -152,6 +149,10 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %exclude %{_docdir}/python3-%{upstream_name}/CHANGELOG.rst
 %exclude %{_docdir}/python3-%{upstream_name}/AUTHORS.rst
 %exclude %{_docdir}/python3-%{upstream_name}/README.rst
+%exclude %{_docdir}/python3-%{upstream_name}/*.pyc
+%exclude %{_docdir}/python3-%{upstream_name}/*.pyo
+%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
+%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyo
 %endif
 
 %changelog
