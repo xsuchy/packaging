@@ -2,6 +2,7 @@
 %bcond_without python3
 %else
 %bcond_with python3
+%global __python2 python2
 %endif
 %global short_name ordered-set
 %global dir_name ordered_set
