@@ -18,6 +18,9 @@ Source0:        https://pypi.python.org/packages/source/o/%{short_name}/%{short_
 
 BuildArch:      noarch
 BuildRequires:  python2-devel
+%if 0%{?rhel}
+BuildRequires:  python-setuptools
+%endif # rhel
 %if %{with python3}
 BuildRequires:  python3-devel
 %endif # with python3
