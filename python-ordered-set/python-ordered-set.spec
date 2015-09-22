@@ -9,7 +9,7 @@
 
 Name:           python-%{short_name}
 Version:        1.3.1
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        A Custom MutableSet that remembers its order
 
 License:        MIT
@@ -99,6 +99,10 @@ popd
 
 
 %changelog
+* Tue Sep 22 2015 Miroslav Suchý <msuchy@redhat.com> 1.3.1-4
+- add missing BR on el6
+- add missing macro on el6
+
 * Mon Sep 07 2015 Miroslav Suchý <msuchy@redhat.com> 1.3.1-3
 - include egg-info again
 - fix typo
