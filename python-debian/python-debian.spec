@@ -9,7 +9,7 @@
 
 Name:           python-debian
 Version:        0.1.27
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -141,6 +141,10 @@ popd
 %endif
 
 %changelog
+* Thu Oct 08 2015 Miroslav Suchý <msuchy@redhat.com> 0.1.27-1
+- rebase to python-debian_0.1.27
+- add python3 subpackage
+
 * Mon Apr 13 2015 Miroslav Suchý <msuchy@redhat.com> 0.1.26-2
 - rebase to 0.1.26
 
