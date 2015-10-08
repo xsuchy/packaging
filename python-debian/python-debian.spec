@@ -5,6 +5,8 @@
 
 %if 0%{?fedora}
 %global with_python3 1
+%else
+%global with_python3 0
 %endif
 
 Name:           python-debian
