@@ -8,7 +8,7 @@
 %endif
 
 Name:           python-debian
-Version:        0.1.26
+Version:        0.1.27
 Release:        2%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
