@@ -3,7 +3,7 @@
 
 Name:		slimmerjs
 Version:	0.9.6
-Release:	2.%{githash}%{?dist}
+Release:	3.%{githash}%{?dist}
 Summary:	A scriptable browser like PhantomJS, based on Firefox
 
 License:	MPLv2.0
@@ -73,6 +73,9 @@ xvfb-run src/slimerjs  test/launch-main-tests.js | grep ' 3 failures'
 
 
 %changelog
+* Thu Oct 22 2015 Miroslav Suchý <msuchy@redhat.com> 0.9.6-3.0ebeb69
+- accept that fedora 21 produces two more errors in tests
+
 * Thu Oct 22 2015 Miroslav Suchý <msuchy@redhat.com> 0.9.6-2.0ebeb69
 - add githash to name 
 
