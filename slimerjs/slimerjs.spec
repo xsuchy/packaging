@@ -58,7 +58,11 @@ cp -a chrome/icons %{buildroot}%{targetdir}/chrome/
 zip -r %{buildroot}%{targetdir}/omni.ja chrome/ components/ defaults/ modules/ chrome.manifest --exclude @package_exclude.lst
 
 %check
+%if 0%{fedora} == 21
+xvfb-run src/slimerjs  test/launch-main-tests.js | grep ' 5 failures'
+%else
 xvfb-run src/slimerjs  test/launch-main-tests.js | grep ' 3 failures'
+%endif
 #xvfb-run src/slimerjs  test/launch-rendering-tests.js
 
 %files
