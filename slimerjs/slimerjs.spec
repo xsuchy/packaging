@@ -3,7 +3,7 @@
 
 Name:		slimmerjs
 Version:	0.9.6
-Release:	0%{?dist}
+Release:	1%{?dist}
 Summary:	A scriptable browser like PhantomJS, based on Firefox
 
 License:	MPLv2.0
@@ -69,4 +69,7 @@ xvfb-run src/slimerjs  test/launch-main-tests.js | grep ' 3 failures'
 
 
 %changelog
+* Thu Oct 22 2015 Miroslav Suchý <msuchy@redhat.com> 0.9.6-1
+- initial packaging
+
 
