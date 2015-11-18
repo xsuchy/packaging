@@ -32,6 +32,7 @@ BuildRequires:  pytz
 BuildRequires:  python-dateutil
 BuildRequires:  python-ordered-set
 BuildRequires:  python-tox
+BuildRequires:  python-simplejson
 %if %{with python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
@@ -41,6 +42,7 @@ BuildRequires:  python3-pytz
 BuildRequires:  python3-dateutil
 BuildRequires:  python3-ordered-set
 BuildRequires:  python3-tox
+BuildRequires:  python3-simplejson
 %endif
 
 %description
