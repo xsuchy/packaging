@@ -31,6 +31,7 @@ BuildRequires:  pytest
 BuildRequires:  pytz
 BuildRequires:  python-dateutil
 BuildRequires:  python-ordered-set
+BuildRequires:  python-tox
 %if %{with python3}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
@@ -39,6 +40,7 @@ BuildRequires:  python3-pytest
 BuildRequires:  python3-pytz
 BuildRequires:  python3-dateutil
 BuildRequires:  python3-ordered-set
+BuildRequires:  python3-tox
 %endif
 
 %description
