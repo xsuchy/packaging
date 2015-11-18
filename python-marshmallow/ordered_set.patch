@@ -1,9 +1,9 @@
---- marshmallow/schema.py.orig	2015-09-07 11:56:10.277293096 +0200
-+++ marshmallow/schema.py	2015-09-07 11:56:35.028387287 +0200
-@@ -17,7 +17,7 @@
- from marshmallow import base, fields, utils, class_registry, marshalling
+--- marshmallow/schema.py.orig	2015-11-18 14:16:22.000000000 +0100
++++ marshmallow/schema.py	2015-11-18 14:18:04.000000000 +0100
+@@ -18,7 +18,7 @@
  from marshmallow.compat import (with_metaclass, iteritems, text_type,
                                  binary_type, OrderedDict)
+ from marshmallow.exceptions import ValidationError
 -from marshmallow.orderedset import OrderedSet
 +from ordered_set import OrderedSet
  from marshmallow.decorators import (PRE_DUMP, POST_DUMP, PRE_LOAD, POST_LOAD,

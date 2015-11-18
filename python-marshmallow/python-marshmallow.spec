@@ -1,5 +1,5 @@
 %global upstream_name marshmallow
-%global commit a8b33850c74975250fa81308ce3aa4868128d3ba
+%global commit ea1def94e8dc534a1cd0da4aa6756d25cd2762ca
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 %global _docdir  %{_datadir}/doc
 
@@ -10,8 +10,8 @@
 %endif
 
 Name:           python-%{upstream_name}
-Version:        2.0.0
-Release:        0.6.git%{shortcommit}%{?dist}
+Version:        2.2.1
+Release:        0.0.git%{shortcommit}%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -156,6 +156,9 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %endif
 
 %changelog
+* Wed Nov 18 2015 Miroslav Suchý <miroslav@suchy.cz> 2.2.1-0.0.gitea1def9
+- rebase to 2.2.1
+
 * Fri Sep 11 2015 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-0.6.gita8b3385
 - 1219288 - fix ownership of docdir and use correct release number
 
