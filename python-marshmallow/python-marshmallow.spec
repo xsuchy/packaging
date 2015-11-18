@@ -11,7 +11,7 @@
 
 Name:           python-%{upstream_name}
 Version:        2.2.1
-Release:        0.1.git%{shortcommit}%{?dist}
+Release:        0.2.git%{shortcommit}%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -160,6 +160,10 @@ cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
 %endif
 
 %changelog
+* Wed Nov 18 2015 Miroslav Suchý <msuchy@redhat.com> 2.2.1-0.2.gitea1def9
+- add BR simplejson
+- add BR python-tox
+
 * Wed Nov 18 2015 Miroslav Suchý <msuchy@redhat.com> 2.2.1-0.1.gitea1def9
 - rebase to 2.2.1
 
