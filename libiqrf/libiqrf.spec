@@ -1,10 +1,10 @@
-%global checkout 20130729git%{shortcommit0}
+%global checkout .20130729git%{shortcommit0}
 %global commit0 36ac0ef7bc36159e990f62633fd4b9708e741a44
 %global shortcommit0 %(c=%{commit0}; echo ${c:0:7})
 
 Name: libiqrf
 Version: 0
-Release: %{checkout}%{?dist}
+Release: 0%{checkout}%{?dist}
 Summary: Interface library to iqrf devices
 License: LGPLv2+
 URL: http://open-nandra.com/projects/iqrf/libiqrf-library/
