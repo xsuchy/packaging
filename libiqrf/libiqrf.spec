@@ -4,7 +4,7 @@
 
 Name: libiqrf
 Version: 0
-Release: 0%{checkout}%{?dist}
+Release: 1%{checkout}%{?dist}
 Summary: Interface library to iqrf devices
 License: LGPLv2+
 URL: http://open-nandra.com/projects/iqrf/libiqrf-library/
@@ -52,4 +52,7 @@ make %{?_smp_mflags}
 
 
 %changelog
+* Thu Nov 19 2015 Miroslav Suchý <miroslav@suchy.cz> 0-1.20130729git36ac0ef
+- new package
+
 
