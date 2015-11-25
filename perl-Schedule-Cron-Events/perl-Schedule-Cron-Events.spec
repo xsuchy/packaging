@@ -1,6 +1,6 @@
 Name:           perl-Schedule-Cron-Events
 Version:        1.94
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Take a line from a crontab and find out when events will occur
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -59,6 +59,9 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Wed Nov 25 2015 Miroslav Suchý <msuchy@redhat.com> 1.94-1
+- rebase to 1.94
+
 * Thu Jun 18 2015 Miroslav Suchy <msuchy@redhat.com> 1.93-1
 - rebase to 1.93
 
