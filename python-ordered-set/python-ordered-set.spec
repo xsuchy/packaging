@@ -20,9 +20,9 @@ BuildArch:      noarch
 BuildRequires:  python2-devel
 %if 0%{?rhel}
 BuildRequires:  python-setuptools
+%endif # rhel
 #test
 BuildRequires:  python-nose
-%endif # rhel
 %if %{with python3}
 BuildRequires:  python3-devel
 #test
