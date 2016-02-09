@@ -9,7 +9,7 @@
 
 Name:           python-%{short_name}
 Version:        2.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        A Custom MutableSet that remembers its order
 
 License:        MIT
@@ -103,6 +103,9 @@ popd
 
 
 %changelog
+* Tue Feb 09 2016 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-2
+- add BR python-nose for test
+
 * Tue Feb 09 2016 Miroslav Suchý <miroslav@suchy.cz> 2.0.0-1
 - rebase to 2.0.0
 
