@@ -79,12 +79,12 @@ popd
 
 %check
 pushd python2
-%{__python2} setup.py test
+%{__python2} setup.py nosetests
 popd
 
 %if %{with python3}
 pushd python3
-%{__python2} setup.py test
+%{__python2} setup.py nosetests
 popd
 %endif
 
