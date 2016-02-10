@@ -1,6 +1,6 @@
 Name:           perl-Crypt-GeneratePassword
 Version:        0.05
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Generate secure random pronounceable passwords
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -42,6 +42,9 @@ make test
 %{_mandir}/man3/*
 
 %changelog
+* Wed Feb 10 2016 Miroslav Suchý <msuchy@redhat.com> 0.05-1
+- rebase to 0.05
+
 * Thu Jun 12 2014 Miroslav Suchý <msuchy@redhat.com> 0.04-2
 - add BR Test::More
 
