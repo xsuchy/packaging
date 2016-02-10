@@ -1,6 +1,6 @@
 Name:           perl-Crypt-GeneratePassword
-Version:        0.04
-Release:        2%{?dist}
+Version:        0.05
+Release:        0%{?dist}
 Summary:        Generate secure random pronounceable passwords
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -36,6 +36,7 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 make test
 
 %files
+%license LICENSE
 %doc Changes README
 %{perl_vendorlib}/*
 %{_mandir}/man3/*
