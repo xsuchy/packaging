@@ -69,17 +69,15 @@ fi
 %{gem_libdir}
 %doc %{gem_instdir}/MIT-LICENSE.txt
 %doc %{gem_instdir}/README.rdoc
-%doc %{gem_instdir}/CHANGELOG.rdoc
+%doc %{gem_instdir}/CHANGELOG.txt
 %{gem_instdir}/data
 %exclude %{gem_cache}
-%exclude %{gem_instdir}/.yardoc
 %{gem_spec}
 
 %files doc
 %doc %{gem_docdir}
 %{gem_instdir}/Rakefile
-%{gem_instdir}/.gemspec
-
+%{gem_instdir}/*.gemspec
 %changelog
 * Fri Feb 13 2015 Miroslav Suchý <msuchy@redhat.com> 0.2.0-1
 - rebase to upstream 0.2.0
