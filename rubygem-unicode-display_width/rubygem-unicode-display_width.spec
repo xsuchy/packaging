@@ -6,7 +6,7 @@
 Summary: Support for east_asian_width string widths
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: 0.2.0
+Version: 0.3.1
 Release: 1%{dist}
 Group: Development/Languages
 License: MIT
@@ -67,9 +67,9 @@ fi
 %files
 %dir %{gem_instdir}
 %{gem_libdir}
-%doc %{gem_instdir}/LICENSE.txt
+%doc %{gem_instdir}/MIT-LICENSE.txt
 %doc %{gem_instdir}/README.rdoc
-%doc %{gem_instdir}/CHANGELOG.txt
+%doc %{gem_instdir}/CHANGELOG.rdoc
 %{gem_instdir}/data
 %exclude %{gem_cache}
 %exclude %{gem_instdir}/.yardoc
