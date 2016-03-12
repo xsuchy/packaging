@@ -1,0 +1,11 @@
+--- doc/Makefile.orig	2016-03-12 23:01:56.761259837 +0100
++++ doc/Makefile	2016-03-12 23:02:47.282328884 +0100
+@@ -1,7 +1,7 @@
+ all: index.html
+ 
+ index.html: *.txt images/xmvn.svg
+-	asciidoc -b html5 -a icons -a toc2 -a toclevels=3 -a theme=flask index.txt
++	asciidoc -a icons -a theme=flask index.txt
+ 
+ %.svg: %.dia
+ 	dia -e $@ $<
