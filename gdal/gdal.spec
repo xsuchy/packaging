@@ -143,6 +143,7 @@ BuildRequires: unixODBC-devel
 BuildRequires: xerces-c-devel
 BuildRequires: xz-devel
 BuildRequires: zlib-devel
+BuildRequires: javapackages-tools
 
 # Run time dependency for gpsbabel driver
 Requires: gpsbabel
