@@ -4,7 +4,7 @@ All files with pending legal questions are stripped from the original tarball,
 to form this tarball. Legal information is mainly from PROVENANCE.TXT
 
 
-No files are manipulated.
+No files are manipulated. 
 
 Please see the cleaning script clean-gdal.sh!
 

@@ -20,9 +20,11 @@
 
 # He also suggest to use --with-static-proj4 to actually link to proj, instead of dlopen()ing it.
 
+# Major digit of the proj so version
+%global proj_somaj 9
 
 # Tests can be of a different version
-%global testversion 1.11.4
+%global testversion 2.0.2
 %global run_tests 1
 
 %global with_spatialite 1
@@ -39,7 +41,7 @@
 
 
 Name:      gdal
-Version:   1.11.4
+Version:   2.0.2
 Release:   4%{?dist}
 Summary:   GIS file format library
 Group:     System Environment/Libraries
@@ -66,7 +68,7 @@ Patch2:    %{name}-jni.patch
 Patch3:    %{name}-2.0.1-iso8211-include.patch
 
 # https://trac.osgeo.org/gdal/ticket/6360
-Patch4:    %{name}-1.11.4-sqlite-crash.patch
+Patch4:    %{name}-2.0.2-sqlite-crash.patch
 
 # Fedora uses Alternatives for Java
 Patch8:    %{name}-1.9.0-java.patch
@@ -78,7 +80,7 @@ BuildRequires: ant
 BuildRequires: armadillo-devel
 BuildRequires: cfitsio-devel
 # No CharLS in EL5
-BuildRequires: CharLS-devel
+#BuildRequires: CharLS-devel
 BuildRequires: chrpath
 BuildRequires: curl-devel
 BuildRequires: doxygen
@@ -116,6 +118,7 @@ BuildRequires: libdap-devel
 BuildRequires: librx-devel
 BuildRequires: mysql-devel
 BuildRequires: numpy
+BuildRequires: python3-numpy
 BuildRequires: pcre-devel
 BuildRequires: ogdi-devel
 BuildRequires: openjpeg2-devel
@@ -125,6 +128,7 @@ BuildRequires: poppler-devel
 BuildRequires: postgresql-devel
 BuildRequires: proj-devel
 BuildRequires: python2-devel
+BuildRequires: python3-devel
 BuildRequires: sqlite-devel
 BuildRequires: swig
 BuildRequires: texlive-latex
@@ -143,10 +147,16 @@ BuildRequires: unixODBC-devel
 BuildRequires: xerces-c-devel
 BuildRequires: xz-devel
 BuildRequires: zlib-devel
-BuildRequires: javapackages-tools
 
 # Run time dependency for gpsbabel driver
 Requires: gpsbabel
+
+# proj DL-opened in ogrct.cpp, see also fix in %%prep
+%if 0%{?__isa_bits} == 64
+Requires: libproj.so.%{proj_somaj}()(64bit)
+%else
+Requires: libproj.so.%{proj_somaj}
+%endif
 
 Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 
@@ -196,6 +206,7 @@ This package contains development files for GDAL.
 %package libs
 Summary: GDAL file format library
 Group: System Environment/Libraries
+# https://trac.osgeo.org/gdal/ticket/3978#comment:5
 Obsoletes: %{name}-ruby < 1.11.0-1
 
 %description libs
@@ -243,6 +254,16 @@ The GDAL Python modules provide support to handle multiple GIS file formats.
 The package also includes a couple of useful utilities in Python.
 
 
+%package python3
+Summary: Python modules for the GDAL file format library
+Group:   Development/Libraries
+Requires: python3-numpy
+Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+
+%description python3
+The GDAL Python 3 modules provide support to handle multiple GIS file formats.
+
+
 %package doc
 Summary: Documentation for GDAL
 Group:   Documentation
@@ -252,7 +273,7 @@ BuildArch: noarch
 This package contains HTML and PDF documentation for GDAL.
 
 # We don't want to provide private Python extension libs
-%global __provides_exclude_from ^%{python_sitearch}/.*\.so$
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\.so$
 
 %prep
 %setup -q -n %{name}-%{version}-fedora
@@ -331,10 +352,20 @@ sed -i 's|-L\$with_geotiff\/lib -lgeotiff $LIBS|-lgeotiff $LIBS|g' configure
 
 # libproj is dlopened; upstream sources point to .so, which is usually not present
 # http://trac.osgeo.org/gdal/ticket/3602
-sed -i 's|libproj.so|libproj.so.0|g' ogr/ogrct.cpp
+sed -i 's|libproj.so|libproj.so.%{proj_somaj}|g' ogr/ogrct.cpp
 
 # Fix Python installation path
 sed -i 's|setup.py install|setup.py install --root=%{buildroot}|' swig/python/GNUmakefile
+
+# Fix Python samples to depend on correct interpreter
+mkdir -p swig/python3/samples
+pushd swig/python/samples
+for f in `find . -name '*.py'`; do
+  sed 's|^#!.\+python$|#!/usr/bin/python3|' $f > ../../python3/samples/$f
+  chmod --reference=$f ../../python3/samples/$f
+  sed -i 's|^#!.\+python$|#!/usr/bin/python2|' $f
+done
+popd
 
 # Must be corrected for 64 bit architectures other than Intel
 # http://trac.osgeo.org/gdal/ticket/4544
@@ -350,10 +381,14 @@ sed -i 's|test \"$ARCH\" = \"x86_64\"|test \"$libdir\" = \"/usr/lib64\"|g' confi
 # Fix mandir
 sed -i "s|^mandir=.*|mandir='\${prefix}/share/man'|" configure
 
+# Add our custom cflags when trying to find geos
+# https://bugzilla.redhat.com/show_bug.cgi?id=1284714
+sed -i 's|CFLAGS=\"${GEOS_CFLAGS}\"|CFLAGS=\"${CFLAGS} ${GEOS_CFLAGS}\"|g' configure
+
 # Activate support for JPEGLS
-sed -i 's|^#HAVE_CHARLS|HAVE_CHARLS|' GDALmake.opt.in
-sed -i 's|#CHARLS_INC = -I/path/to/charls_include|CHARLS_INC = -I%{_includedir}/CharLS|' GDALmake.opt.in
-sed -i 's|#CHARLS_LIB = -L/path/to/charls_lib -lCharLS|CHARLS_LIB = -lCharLS|' GDALmake.opt.in
+#sed -i 's|^#HAVE_CHARLS|HAVE_CHARLS|' GDALmake.opt.in
+#sed -i 's|#CHARLS_INC = -I/path/to/charls_include|CHARLS_INC = -I%{_includedir}/CharLS|' GDALmake.opt.in
+#sed -i 's|#CHARLS_LIB = -L/path/to/charls_lib -lCharLS|CHARLS_LIB = -lCharLS|' GDALmake.opt.in
 
 # Replace default plug-in dir
 # Solved in 2.0
@@ -363,10 +398,6 @@ sed -i 's|#CHARLS_LIB = -L/path/to/charls_lib -lCharLS|CHARLS_LIB = -lCharLS|' G
     gcore/gdaldrivermanager.cpp \
     ogr/ogrsf_frmts/generic/ogrsfdriverregistrar.cpp
 %endif
-
-# Remove man dir, as it blocks a build target.
-# It obviously slipped into the tarball and is not in Trunk (April 17th, 2011)
-#rm -rf man
 
 
 %build
@@ -464,6 +495,11 @@ pushd swig/java
   ./make_doc.sh
 popd
 
+# Make Python 3 module
+pushd swig/python
+  %{__python3} setup.py build
+popd
+
 # --------- Documentation ----------
 
 # No useful documentation in swig
@@ -501,6 +537,12 @@ done
 %install
 rm -rf %{buildroot}
 
+# Install Python 3 module
+# Must be done first so executables are Python 2.
+pushd swig/python
+  %{__python3} setup.py install --skip-build --root %{buildroot}
+popd
+
 make    DESTDIR=%{buildroot} \
         install \
         install-man
@@ -536,35 +578,7 @@ install -pm 644 %{SOURCE2} %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
 sed -i 's|<version></version>|<version>%{version}</version>|' %{buildroot}%{_mavenpomdir}/JPP-%{name}.pom
 
 # Create depmap fragment
-%if 0%{?fedora}
 %add_maven_depmap JPP-%{name}.pom %{name}.jar
-%else
-set -e
-# default values
-_pompart="JPP-%{name}.pom"
-_jarpart="%{name}.jar"
-_filelist=".mfiles"
-install -dm 755 %{buildroot}/usr/share/maven-metadata
-_jbase=
-_jpath=
-for _dir in /usr/lib/java /usr/share/java; do
-    if [ -f %{buildroot}$_dir/$_jarpart ]; then
-        _jbase="%{buildroot}$_dir"
-        _jpath="$_jbase/$_jarpart"
-    fi
-done
-[ -z "$_jpath" ] && (echo "add_maven_depmap error: $_jarpart - file not found" 1>&2; exit 1)
-python /usr/share/java-utils/maven_depmap.py   \
-                 -n "" \
-                 --pom-base %{buildroot}/usr/share/maven-poms \
-                 --jar-base "$_jbase" \
-                 %{buildroot}/usr/share/maven-metadata/%{name}.xml \
-                 %{buildroot}/usr/share/maven-poms/$_pompart \
-          "${_jpath}" \
-        >> ${_filelist}
-sed -i 's:%{buildroot}::' ${_filelist}
-sort -u -o ${_filelist} ${_filelist}
-%endif
 
 # 775 on the .so?
 # copy JNI libraries and links, non versioned link needed by JNI
@@ -786,6 +800,7 @@ popd
 %files perl
 %doc swig/perl/README
 %{perl_vendorarch}/*
+%{_mandir}/man3/*.3pm*
 
 %files python
 %doc swig/python/README.txt
@@ -799,11 +814,23 @@ popd
 %{_mandir}/man1/gdal_merge.1*
 %{_mandir}/man1/gdal_retile.1*
 %{_mandir}/man1/gdal_sieve.1*
-%{python_sitearch}/osgeo
-%{python_sitearch}/GDAL-%{version}-py*.egg-info
-%{python_sitearch}/osr.py*
-%{python_sitearch}/ogr.py*
-%{python_sitearch}/gdal*.py*
+%{python2_sitearch}/osgeo
+%{python2_sitearch}/GDAL-%{version}-py*.egg-info
+%{python2_sitearch}/osr.py*
+%{python2_sitearch}/ogr.py*
+%{python2_sitearch}/gdal*.py*
+
+%files python3
+%doc swig/python/README.txt
+%doc swig/python3/samples
+%{python3_sitearch}/osgeo
+%{python3_sitearch}/GDAL-%{version}-py*.egg-info
+%{python3_sitearch}/osr.py
+%{python3_sitearch}/__pycache__/osr.*.py*
+%{python3_sitearch}/ogr.py
+%{python3_sitearch}/__pycache__/ogr.*.py*
+%{python3_sitearch}/gdal*.py
+%{python3_sitearch}/__pycache__/gdal*.*.py*
 
 %files doc
 %doc gdal_frmts ogrsf_frmts refman
@@ -817,22 +844,80 @@ popd
 #Or as before, using ldconfig
 
 %changelog
-* Fri Feb 26 2016 José Matos <jamatos@fedoraproject.org> - 1.11.4-2
+* Tue Feb 16 2016 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 2.0.2-4
+- Add Python 3 support
+
+* Sun Feb 14 2016 Volker Froehlich <volker27@gmx.at> - 2.0.2-3
+- Add patch for GDAL issue #6360
+
+* Mon Feb 08 2016 Volker Froehlich <volker27@gmx.at> - 2.0.2-2
 - Rebuild for armadillo 6
 
-* Sun Feb 14 2016 Volker Froehlich <volker27@gmx.at> - 1.11.4-1
-- New release
-- Patch for GDAL issue #6360
+* Thu Feb 04 2016 Volker Froehlich <volker27@gmx.at> - 2.0.2-1
+- New upstream release
+- Fix geos support (BZ #1284714)
 
-* Wed Oct 21 2015 Volker Froehlich <volker27@gmx.at> - 1.11.3-1
-- New release
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.1-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
-* Wed Oct 21 2015 Volker Froehlich <volker27@gmx.at> - 1.11.2-5
+* Fri Jan 22 2016 Marek Kasik <mkasik@redhat.com> 2.0.1-5
+- Rebuild for poppler-0.40.0
+
+* Fri Jan 15 2016 Adam Jackson <ajax@redhat.com> 2.0.1-4
+- Rebuild for libdap soname bump
+
+* Mon Dec 28 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.0.1-3
+- Rebuilt for libwebp soname bump
+
+* Sun Oct 18 2015 Volker Froehlich <volker27@gmx.at> - 2.0.1-2
 - Solve BZ #1271906 (Build iso8211 and s57 utilities)
+
+* Thu Sep 24 2015 Volker Froehlich <volker27@gmx.at> - 2.0.1-1
+- Updated for 2.0.1; Add Perl module manpage
+
+* Wed Sep 23 2015 Orion Poplawski <orion@cora.nwra.com> - 2.0.0-5
+- Rebuild for libdap 3.15.1
+
+* Sun Sep 20 2015 Volker Froehlich <volker27@gmx.at> - 2.0.0-4
 - Support openjpeg2
 
-* Wed Jul  8 2015 José Matos <jamatos@fedoraproject.org> - 1.11.2-4
+* Thu Aug 27 2015 Jonathan Wakely <jwakely@redhat.com> - 2.0.0-3
+- Rebuilt for Boost 1.59
+
+* Sun Aug 09 2015 Jonathan Wakely <jwakely@redhat.com> 2.0.0-2
+- Patch to set _XOPEN_SOURCE correctly (bug #1249703)
+
+* Sun Jul 26 2015 Volker Froehlich <volker27@gmx.at> - 2.0.0-1
+- Disable charls support due to build issues
+- Solve a string formatting and comment errors in the Perl swig template
+
+* Wed Jul 22 2015 Marek Kasik <mkasik@redhat.com> - 1.11.2-12
+- Rebuild (poppler-0.34.0)
+
+* Fri Jul  3 2015 José Matos <jamatos@fedoraproject.org> - 1.11.2-11
 - Rebuild for armadillo 5(.xxx.y)
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.11.2-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Fri Jun 12 2015 Volker Fröhlich <volker27@gmx.at> - 1.11.2-9
+- Rebuild for Perl's dropped module_compat_5.20.*
+
+* Tue Jun 09 2015 Dan Horák <dan[at]danny.cz> - 1.11.2-8
+- add upstream patch for poppler >= 31
+
+* Sat Jun 06 2015 Jitka Plesnikova <jplesnik@redhat.com> - 1.11.2-7
+- Perl 5.22 rebuild
+
+* Thu May 21 2015 Devrim Gündüz <devrim@gunduz.org> - 1.11.2-6
+- Fix proj soname in ogr/ogrct.cpp. Patch from Sandro Mani
+  <manisandro @ gmail.com>  Fixes #1212215.
+
+* Sun May 17 2015 Orion Poplawski <orion@cora.nwra.com> - 1.11.2-5
+- Rebuild for hdf5 1.8.15
+
+* Sat Apr 18 2015 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.11.2-4
+- Rebuild for gcc-5.0.1 ABI changes.
 
 * Tue Mar 31 2015 Orion Poplawski <orion@cora.nwra.com> - 1.11.2-3
 - Rebuild for g2clib fix
