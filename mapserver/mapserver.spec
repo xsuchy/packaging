@@ -6,7 +6,7 @@
 
 Name:           mapserver
 Version:        7.0.1
-Release:        1.git%{shortcommit}%{?dist}
+Release:        2.git%{shortcommit}%{?dist}
 Summary:        Environment for building spatially-enabled internet applications
 
 Group:          Development/Tools
@@ -294,6 +294,9 @@ EOF
 
 
 %changelog
+* Thu Mar 17 2016 Miroslav Suchý <miroslav@suchy.cz> 7.0.1-2.git6ae2bc6
+- new package
+
 * Thu  Feb 25 2016 Julien Enselme <jujens@jujens.eu> - 7.0.1-1.git6ae2bc6
 - Update to 7.0.1
 
