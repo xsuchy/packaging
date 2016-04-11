@@ -131,7 +131,8 @@ fi
 %{_mandir}/man1/icpfind.*
 %{_mandir}/man1/hugin_executor.*
 
-%doc AUTHORS COPYING README README_JP TODO src/celeste/LICENCE_LIBSVM doc/nona.txt doc/fulla.html src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
+%license COPYING src/celeste/LICENCE_LIBSVM src/hugin1/hugin/xrc/data/help_en_EN/LICENCE.manual
+%doc AUTHORS README TODO doc/nona.txt doc/fulla.html
 
 %files base
 %defattr(-, root, root,-)
