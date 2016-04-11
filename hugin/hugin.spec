@@ -121,9 +121,6 @@ fi
 %{_datadir}/%{name}/data/plugins/*.py*
 %{_datadir}/%{name}/data/plugins-templates/*.py*
 %{_datadir}/%{name}/data/hugin_exiftool_copy.arg
-%{_datadir}/appdata/PTBatcherGUI.appdata.xml
-%{_datadir}/appdata/calibrate_lens_gui.appdata.xml
-%{_datadir}/appdata/hugin.appdata.xml
 %{_mandir}/man1/PTBatcherGUI.*
 %{_mandir}/man1/calibrate_lens_gui.*
 %{_mandir}/man1/hugin.*
