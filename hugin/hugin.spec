@@ -173,6 +173,7 @@ fi
 
 %{_datadir}/%{name}/data/celeste.model
 %{_datadir}/%{name}/data/hugin_exiftool_copy.arg
+%{_datadir}/%{name}/data/*.executor
 %{_mandir}/man1/align_image_stack.*
 %{_mandir}/man1/autooptimiser.*
 %{_mandir}/man1/cpclean.*
