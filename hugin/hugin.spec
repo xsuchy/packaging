@@ -17,6 +17,7 @@ BuildRequires: cmake desktop-file-utils OpenEXR-devel exiv2-devel glew-devel
 BuildRequires: python-devel swig flann-devel perl-Image-ExifTool >= 9.09
 BuildRequires: mesa-libGLU-devel libXmu-devel sqlite-devel vigra-devel >= 1.9.0
 BuildRequires: perl-podlators fftw-devel
+BuildRequires: lcms2-devel
 
 %description
 hugin can be used to stitch multiple images together. The resulting image can
