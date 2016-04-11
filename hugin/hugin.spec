@@ -120,6 +120,7 @@ fi
 %{_datadir}/%{name}/data/plugins/README_*.txt
 %{_datadir}/%{name}/data/plugins/*.py*
 %{_datadir}/%{name}/data/plugins-templates/*.py*
+%{_datadir}/%{name}/data/*.executor
 %{_datadir}/%{name}/data/hugin_exiftool_copy.arg
 %{_mandir}/man1/PTBatcherGUI.*
 %{_mandir}/man1/calibrate_lens_gui.*
@@ -170,7 +171,6 @@ fi
 
 %{_datadir}/%{name}/data/celeste.model
 %{_datadir}/%{name}/data/hugin_exiftool_copy.arg
-%{_datadir}/%{name}/data/*.executor
 %{_mandir}/man1/align_image_stack.*
 %{_mandir}/man1/autooptimiser.*
 %{_mandir}/man1/cpclean.*
