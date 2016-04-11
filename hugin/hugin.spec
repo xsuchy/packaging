@@ -38,10 +38,14 @@ without a GUI environment.
 %setup -q
 
 %build
-%cmake . -DBUILD_HSI=1
+mkdir build
+pushd build
+%cmake .. -DBUILD_HSI=1
 make VERBOSE=1 %{?_smp_mflags}
+popd
 
 %install
+pushd build
 make install DESTDIR=%{buildroot}
 
 desktop-file-install --vendor="" --delete-original \
@@ -68,6 +72,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/appdata/calibrate_lens_gui.appdata.xml <<EOF
   </metadata>
 </component>
 EOF
+popd
 
 %post
 update-desktop-database &> /dev/null ||:
