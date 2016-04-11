@@ -97,7 +97,7 @@ fi
 
 %postun base -p /sbin/ldconfig
 
-%files -f %{name}.lang
+%files -f build/%{name}.lang
 %defattr(-, root, root,-)
 %{_bindir}/PTBatcherGUI
 %{_bindir}/hugin
