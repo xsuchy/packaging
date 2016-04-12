@@ -2,7 +2,7 @@
 Summary: A panoramic photo stitcher and more
 Name: hugin
 Version: 2016.0.0
-Release: 0%{?dist}
+Release: 1%{?dist}
 License: GPLv2+
 Group: Applications/Multimedia
 Source: http://downloads.sourceforge.net/hugin/%{name}-%{version}.tar.bz2
@@ -198,6 +198,9 @@ fi
 %{_mandir}/man1/hugin_lensdb.*
 
 %changelog
+* Tue Apr 12 2016 Miroslav Suchý <miroslav@suchy.cz> 2016.0.0-1
+- 2016 release
+
 * Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2015.0.0-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
 
