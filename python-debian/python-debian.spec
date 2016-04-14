@@ -18,6 +18,7 @@ Summary:        Modules for Debian-related data formats
 License:        GPLv2+ and GPLv3+
 Group:          Development/Libraries
 Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.xz
+Patch1:			0001-add-support-for-lzma.patch
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:      noarch
@@ -64,6 +65,7 @@ related files. Currently handled are:
 
 %prep
 %setup -q
+%patch1 -p1
 
 %if 0%{with_python3}
 rm -rf %{py3dir}
