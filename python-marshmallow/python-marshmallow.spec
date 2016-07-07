@@ -1,165 +1,133 @@
-%global upstream_name marshmallow
-%global commit ea1def94e8dc534a1cd0da4aa6756d25cd2762ca
-%global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global _docdir  %{_datadir}/doc
+%global modname marshmallow
+%global _docdir_fmt %{name}
 
-%if 0%{?fedora}
-%bcond_without python3
-%else
-%bcond_with python3
-%endif
-
-Name:           python-%{upstream_name}
-Version:        2.2.1
-Release:        0.2.git%{shortcommit}%{?dist}
+Name:           python-%{modname}
+Version:        2.9.0
+Release:        1%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
 # Using Github instead of PyPI because the PyPI tarballs don't include tests, 
 # docs, or examples, and upstream does not want to change that.
 # https://github.com/marshmallow-code/marshmallow/issues/201
-Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{commit}/%{upstream_name}-%{commit}.tar.gz
-# remove dependency on bundled ordered_set
-Patch0:         ordered_set.patch
+Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{version}/%{modname}-%{version}.tar.gz
+
 BuildArch:      noarch
+
+%global _description \
+Marshmallow is a framework-agnostic library for converting complex datatypes,\
+such as objects, to and from primitive Python datatypes.\
+\
+Marshmallow schemas can be used to:\
+* Validate input data.\
+* Deserialize input data to app-level objects.\
+* Serialize app-level objects to primitive Python types. The serialized objects\
+  can then be rendered to standard formats such as JSON for use in an HTTP API.
+
+%description %{_description}
+
+%package doc
+Summary:        Documentation for %{name}
+Provides:       python3-%{modname}-doc = %{version}
+Obsoletes:      python3-%{modname}-doc < 2.8.0-1
+BuildRequires:  /usr/bin/sphinx-build
+
+%description doc
+Documentation for %{name}.
+
+%package -n python2-%{modname}
+Summary:        %{summary}
+%{?python_provide:%python_provide python2-%{modname}}
 BuildRequires:  python2-devel
-BuildRequires:  python-setuptools
-Requires:       python-dateutil
-Requires:       python-ordered-set
+BuildRequires:  python2-setuptools
 # for tests
-BuildRequires:  pytest
-BuildRequires:  pytz
-BuildRequires:  python-dateutil
+BuildRequires:  python2-pytest
+BuildRequires:  python2-pytz
 BuildRequires:  python-ordered-set
-BuildRequires:  python-tox
+BuildRequires:  python2-dateutil
 BuildRequires:  python-simplejson
-%if %{with python3}
+Requires:       python-ordered-set
+Recommends:     python2-dateutil
+Recommends:     python-simplejson
+
+%description -n python2-%{modname} %{_description}
+
+Python 2 version.
+
+%package -n python3-%{modname}
+Summary:        %{summary}
+%{?python_provide:%python_provide python3-%{modname}}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
 # for tests
 BuildRequires:  python3-pytest
 BuildRequires:  python3-pytz
-BuildRequires:  python3-dateutil
 BuildRequires:  python3-ordered-set
-BuildRequires:  python3-tox
+BuildRequires:  python3-dateutil
 BuildRequires:  python3-simplejson
-%endif
-
-%description
-Marshmallow is a framework-agnostic library for converting complex datatypes, 
-such as objects, to and from primitive Python datatypes.
-
-Marshmallow schemas can be used to:
-* Validate input data.
-* Deserialize input data to app-level objects.
-* Serialize app-level objects to primitive Python types. The serialized objects 
-  can then be rendered to standard formats such as JSON for use in an HTTP API.
-
-%package doc
-Summary: Documentation for %{name}
-BuildArch: noarch
-
-%description doc
-Documentation for %{name}.
-
-%if %{with python3}
-%package -n python3-%{upstream_name}
-Summary:        Python 3 library for converting complex datatypes to and from primitive types
-Requires:       python3-dateutil
 Requires:       python3-ordered-set
+Recommends:     python3-dateutil
+Recommends:     python3-simplejson
 
-%description -n python3-%{upstream_name}
-Marshmallow is a framework-agnostic library for converting complex datatypes, 
-such as objects, to and from primitive Python datatypes.
+%description -n python3-%{modname} %{_description}
 
-Marshmallow schemas can be used to:
-* Validate input data.
-* Deserialize input data to app-level objects.
-* Serialize app-level objects to primitive Python types. The serialized objects 
-  can then be rendered to standard formats such as JSON for use in an HTTP API.
-
-%package -n python3-%{upstream_name}-doc
-Summary: Documentation for python3-%{upstream_name}
-BuildArch: noarch
-
-%description -n python3-%{upstream_name}-doc
-Documentation for %{name}.
-
-%endif # with python3
+Python 3 version.
 
 %prep
-%setup -q -n %{upstream_name}-%{commit}
-%patch0
+%autosetup -n %{modname}-%{version}
 
 # remove bundled library
 # instead of orderedsett we patch code to usu python-ordered-set
 # ordereddict.py is used only for compatibility with python2.6,
 # which we do not need
 rm -f ./marshmallow/ordereddict.py ./marshmallow/orderedset.py
+sed -i -e "s/from marshmallow.orderedset/from ordered_set/g" %{modname}/schema.py
 
+# Drop support for sphinx-issues as it's not yet packaged
+sed -i -e "/sphinx_issues/d" docs/conf.py
 
 %build
 %py2_build
-%if %{with python3}
 %py3_build
-%endif
+sphinx-build -b html docs html
 
 %install
 %py2_install
-mkdir -p %{buildroot}%{_docdir}/python-%{upstream_name}
-cp -a docs/* examples %{buildroot}%{_docdir}/python-%{upstream_name}/
-
-%if %{with python3}
 %py3_install
-mkdir -p %{buildroot}%{_docdir}/python3-%{upstream_name}
-cp -a docs/* examples %{buildroot}%{_docdir}/python3-%{upstream_name}/
-%endif
+rm -rf html/{.buildinfo,.doctrees}
 
 %check
-%{__python2} setup.py test
-%if %{with python3}
-%{__python3} setup.py test
-%endif
-
-%files
-%doc CHANGELOG.rst AUTHORS.rst README.rst
-%exclude %{_docdir}/python-%{upstream_name}/*
-%license LICENSE
-%{python_sitelib}/%{upstream_name}
-%{python_sitelib}/%{upstream_name}*.egg-info
+py.test-%{python2_version} -v
+py.test-%{python3_version} -v
 
 %files doc
 %license LICENSE
-%doc %{_docdir}/python-%{upstream_name}
-%exclude %{_docdir}/python-%{upstream_name}/CHANGELOG.rst
-%exclude %{_docdir}/python-%{upstream_name}/AUTHORS.rst
-%exclude %{_docdir}/python-%{upstream_name}/README.rst
-%exclude %{_docdir}/python-%{upstream_name}/*.pyc
-%exclude %{_docdir}/python-%{upstream_name}/*.pyo
-%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyc
-%exclude %{_docdir}/python-%{upstream_name}/examples/*.pyo
+%doc html examples
 
-%if %{with python3}
-%files -n python3-%{upstream_name}
-%doc CHANGELOG.rst AUTHORS.rst README.rst
-%exclude %{_docdir}/python3-%{upstream_name}/*
+%files -n python2-%{modname}
 %license LICENSE
-%{python3_sitelib}/%{upstream_name}
-%{python3_sitelib}/%{upstream_name}*.egg-info
+%doc CHANGELOG.rst README.rst
+%{python2_sitelib}/%{modname}/
+%{python2_sitelib}/%{modname}-*.egg-info/
 
-%files -n python3-%{upstream_name}-doc
+%files -n python3-%{modname}
 %license LICENSE
-%doc %{_docdir}/python3-%{upstream_name}
-%exclude %{_docdir}/python3-%{upstream_name}/CHANGELOG.rst
-%exclude %{_docdir}/python3-%{upstream_name}/AUTHORS.rst
-%exclude %{_docdir}/python3-%{upstream_name}/README.rst
-%exclude %{_docdir}/python3-%{upstream_name}/*.pyc
-%exclude %{_docdir}/python3-%{upstream_name}/*.pyo
-%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyc
-%exclude %{_docdir}/python3-%{upstream_name}/examples/*.pyo
-%endif
+%doc CHANGELOG.rst README.rst
+%{python3_sitelib}/%{modname}/
+%{python3_sitelib}/%{modname}-*.egg-info/
 
 %changelog
+* Thu Jul 07 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.9.0-1
+- Update to 2.9.0
+
+* Wed Jul 06 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.8.0-1
+- Update to 2.8.0
+- Add recommends
+- Modernize spec
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 2.2.1-0.3.gitea1def9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
 * Wed Nov 18 2015 Miroslav Suchý <msuchy@redhat.com> 2.2.1-0.2.gitea1def9
 - add BR simplejson
 - add BR python-tox
