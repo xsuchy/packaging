@@ -2,7 +2,7 @@
 
 Name:		glacier-cli
 Version:	0
-Release:	8.20131113git%{githash}%{?dist}
+Release:	12.20131113git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
 Group:		Applications/Internet
@@ -16,7 +16,7 @@ BuildArch:  noarch
 Requires:	python-boto
 Requires:   python-iso8601
 Requires:   python-sqlalchemy
-%if 0%{?rhel} < 7
+%if 0%{?rhel} == 6
 Requires:   python-argparse
 BuildRequires: python-argparse
 %endif
