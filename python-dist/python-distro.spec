@@ -124,7 +124,9 @@ sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 # not included in tar.gz
 # see https://github.com/nir0s/distro/issues/139
 #%license LICENSE
+%if ! 0%{with_python3}
 %{_bindir}/distro
+%endif
 %{_bindir}/distro-2
 %{_bindir}/distro-%{python2_version}
 
@@ -135,6 +137,9 @@ sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 %files -n python3-%{pypi_name}
 %doc README.rst
 #%license LICENSE
+%if 0%{with_python3}
+%{_bindir}/distro
+%endif
 %{_bindir}/distro-3
 %{_bindir}/distro-%{python3_version}
 %{python3_sitelib}/__pycache__/*
