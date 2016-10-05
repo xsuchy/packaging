@@ -35,6 +35,8 @@ Summary:        Linux Distribution - a Linux OS platform information API
 %{?python_provide:%python_provide python2-%{pypi_name}}
  
 Requires:       python-setuptools
+Requires:       /usr/bin/lsb_release
+
 %description -n python2-%{pypi_name}
 The distro (for: Linux Distribution) package provides information about the
 Linux distribution it runs on, such as a reliable machine-readable ID, or
@@ -56,6 +58,8 @@ Summary:        Linux Distribution - a Linux OS platform information API
 %{?python_provide:%python_provide python3-%{pypi_name}}
  
 Requires:       python3-setuptools
+Requires:       /usr/bin/lsb_release
+
 %description -n python3-%{pypi_name}
 The distro (for: Linux Distribution) package provides information about the
 Linux distribution it runs on, such as a reliable machine-readable ID, or
