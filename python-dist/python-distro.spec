@@ -2,7 +2,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -119,6 +119,9 @@ ln -sf %{_bindir}/distro-2 %{buildroot}/%{_bindir}/distro-%{python2_version}
 %{python3_sitelib}/%{pypi_name}-%{version}-py?.?.egg-info
 
 %changelog
+* Wed Oct 05 2016 Miroslav Suchý 1.0.0-2
+- require lsb_release
+
 * Wed Oct 05 2016 Miroslav Suchý 1.0.0-1
 - initial packaging
 
