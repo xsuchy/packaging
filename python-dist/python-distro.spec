@@ -13,7 +13,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.0
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -143,6 +143,10 @@ sed -i 's|^#!.\+python$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 %endif
 
 %changelog
+* Wed Oct 05 2016 Miroslav Suchý 1.0.0-3
+- python2 subpackages only on rhel
+- correct description
+
 * Wed Oct 05 2016 Miroslav Suchý 1.0.0-2
 - require lsb_release
 
