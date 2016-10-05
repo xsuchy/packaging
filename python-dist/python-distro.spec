@@ -13,7 +13,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.0
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -143,6 +143,9 @@ sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 %endif
 
 %changelog
+* Wed Oct 05 2016 Miroslav Suchý 1.0.0-4
+- use python3 in /usr/bin/distro on Fedoras
+
 * Wed Oct 05 2016 Miroslav Suchý 1.0.0-3
 - python2 subpackages only on rhel
 - correct description
