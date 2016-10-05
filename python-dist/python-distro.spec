@@ -116,7 +116,7 @@ cp %{buildroot}/%{_bindir}/distro %{buildroot}/%{_bindir}/distro-2
 ln -sf %{_bindir}/distro-2 %{buildroot}/%{_bindir}/distro-%{python2_version}
 
 %if 0%{with_python3}
-sed -i 's|^#!.\+python$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
+sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 %endif
 
 %files -n python2-%{pypi_name}
