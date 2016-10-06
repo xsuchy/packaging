@@ -13,7 +13,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.0
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -142,6 +142,9 @@ ln -sf %{_bindir}/distro-3 %{buildroot}/%{_bindir}/distro-%{python3_version}
 %endif
 
 %changelog
+* Thu Oct 06 2016 Miroslav Suchý <msuchy@redhat.com> 1.0.0-6
+- polish spec according the package review
+
 * Wed Oct 05 2016 Miroslav Suchý 1.0.0-5
 - use python3 in /usr/bin/distro on Fedoras
 
