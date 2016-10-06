@@ -105,18 +105,14 @@ rm -rf %{pypi_name}.egg-info
 %install
 # Must do the subpackages' install first because the scripts in /usr/bin are
 # overwritten with every setup.py install.
-%if 0%{with_python3}
-%py3_install
-cp %{buildroot}/%{_bindir}/distro %{buildroot}/%{_bindir}/distro-3
-ln -sf %{_bindir}/distro-3 %{buildroot}/%{_bindir}/distro-%{python3_version}
-%endif
-
 %py2_install
 cp %{buildroot}/%{_bindir}/distro %{buildroot}/%{_bindir}/distro-2
 ln -sf %{_bindir}/distro-2 %{buildroot}/%{_bindir}/distro-%{python2_version}
 
 %if 0%{with_python3}
-sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
+%py3_install
+cp %{buildroot}/%{_bindir}/distro %{buildroot}/%{_bindir}/distro-3
+ln -sf %{_bindir}/distro-3 %{buildroot}/%{_bindir}/distro-%{python3_version}
 %endif
 
 %files -n python2-%{pypi_name}
@@ -137,9 +133,7 @@ sed -i 's|^#!.\+python2$|#!/usr/bin/python3|' %{buildroot}/%{_bindir}/distro
 %files -n python3-%{pypi_name}
 %doc README.rst
 #%license LICENSE
-%if 0%{with_python3}
 %{_bindir}/distro
-%endif
 %{_bindir}/distro-3
 %{_bindir}/distro-%{python3_version}
 %{python3_sitelib}/__pycache__/*
