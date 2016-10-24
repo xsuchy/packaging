@@ -13,8 +13,8 @@
 Summary: A Ruby interface for the the Kerberos library
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
-Version: 0.1.3
-Release: 9%{?dist}
+Version: 0.1.5
+Release: 0%{?dist}
 Group: Development/Languages
 License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
