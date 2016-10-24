@@ -14,7 +14,7 @@ Summary: A Ruby interface for the the Kerberos library
 Name: %{?scl_prefix}rubygem-%{gem_name}
 
 Version: 0.1.5
-Release: 0%{?dist}
+Release: 1%{?dist}
 Group: Development/Languages
 License: Artistic 2.0
 URL: http://github.com/domcleal/rkerberos
@@ -130,6 +130,9 @@ popd
 
 
 %changelog
+* Mon Oct 24 2016 Miroslav Suchý <msuchy@redhat.com> 0.1.5-1
+- rebase to 0.1.5
+
 * Thu Oct 22 2015 Miroslav Suchý <msuchy@redhat.com> 0.1.3-9
 - rebuild due abi change of krb5 
 
