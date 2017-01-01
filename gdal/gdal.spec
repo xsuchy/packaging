@@ -107,7 +107,7 @@ BuildRequires: libgta-devel
 BuildRequires: libjpeg-devel
 BuildRequires: libpng-devel
 # No libkml in EL
-BuildRequires: libkml-devel
+#BuildRequires: libkml-devel
 
 %if %{with_spatialite}
 BuildRequires: libspatialite-devel
@@ -440,7 +440,7 @@ export CPPFLAGS="$CPPFLAGS -I%{_includedir}/libgeotiff"
         --enable-shared           \
         --with-perl               \
         --with-python             \
-        --with-libkml
+#        --with-libkml
 
         #--with-rasdaman           # 8.3 rasdaman has no -lcompression; doesn't work
 
