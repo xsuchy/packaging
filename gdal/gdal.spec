@@ -24,7 +24,7 @@
 %global proj_somaj 9
 
 # Tests can be of a different version
-%global testversion 2.0.2
+%global testversion 2.1.1
 %global run_tests 1
 
 %global with_spatialite 1
@@ -39,10 +39,12 @@
 %endif
 %endif
 
+%global compdir %(dirname $(pkg-config --variable=compatdir bash-completion))
+
 
 Name:      gdal
-Version:   2.0.2
-Release:   4%{?dist}
+Version:   2.1.2
+Release:   5%{?dist}
 Summary:   GIS file format library
 Group:     System Environment/Libraries
 License:   MIT
@@ -63,21 +65,21 @@ Source4:   PROVENANCE.TXT-fedora
 Patch1:    %{name}-g2clib.patch
 # Patch for Fedora JNI library location
 Patch2:    %{name}-jni.patch
-
-# https://trac.osgeo.org/gdal/ticket/6159#ticket
-Patch3:    %{name}-2.0.1-iso8211-include.patch
-
-# https://trac.osgeo.org/gdal/ticket/6360
-Patch4:    %{name}-2.0.2-sqlite-crash.patch
+# Fix bash-completion install dir
+Patch3:    %{name}-completion.patch
+# Fix uchar type
+Patch4:    %{name}-uchar.patch
 
 # Fedora uses Alternatives for Java
 Patch8:    %{name}-1.9.0-java.patch
+Patch9:    %{name}-2.1.0-zlib.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires: ant
 # No armadillo in EL5
 BuildRequires: armadillo-devel
+BuildRequires: bash-completion
 BuildRequires: cfitsio-devel
 # No CharLS in EL5
 #BuildRequires: CharLS-devel
@@ -97,12 +99,15 @@ BuildRequires: hdf5-devel
 BuildRequires: java-devel >= 1:1.6.0
 BuildRequires: jasper-devel
 BuildRequires: jpackage-utils
+BuildRequires: json-c-devel
 BuildRequires: libgeotiff-devel
 # No libgta in EL5
 BuildRequires: libgta-devel
 
 BuildRequires: libjpeg-devel
 BuildRequires: libpng-devel
+# No libkml in EL
+BuildRequires: libkml-devel
 
 %if %{with_spatialite}
 BuildRequires: libspatialite-devel
@@ -118,9 +123,11 @@ BuildRequires: libdap-devel
 BuildRequires: librx-devel
 BuildRequires: mysql-devel
 BuildRequires: numpy
-#BuildRequires: python3-numpy
+BuildRequires: python3-numpy
 BuildRequires: pcre-devel
 BuildRequires: ogdi-devel
+BuildRequires: perl-devel
+BuildRequires: perl-generators
 BuildRequires: openjpeg2-devel
 BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: pkgconfig
@@ -128,7 +135,7 @@ BuildRequires: poppler-devel
 BuildRequires: postgresql-devel
 BuildRequires: proj-devel
 BuildRequires: python2-devel
-#BuildRequires: python3-devel
+BuildRequires: python3-devel
 BuildRequires: sqlite-devel
 BuildRequires: swig
 BuildRequires: texlive-latex
@@ -254,14 +261,14 @@ The GDAL Python modules provide support to handle multiple GIS file formats.
 The package also includes a couple of useful utilities in Python.
 
 
-#%package python3
-#Summary: Python modules for the GDAL file format library
-#Group:   Development/Libraries
-#Requires: python3-numpy
-#Requires: %{name}-libs%{?_isa} = %{version}-%{release}
+%package python3
+Summary: Python modules for the GDAL file format library
+Group:   Development/Libraries
+Requires: python3-numpy
+Requires: %{name}-libs%{?_isa} = %{version}-%{release}
 
-#%description python3
-#The GDAL Python 3 modules provide support to handle multiple GIS file formats.
+%description python3
+The GDAL Python 3 modules provide support to handle multiple GIS file formats.
 
 
 %package doc
@@ -273,13 +280,10 @@ BuildArch: noarch
 This package contains HTML and PDF documentation for GDAL.
 
 # We don't want to provide private Python extension libs
-%global __provides_exclude_from ^(%{python2_sitearch})/.*\.so$
+%global __provides_exclude_from ^(%{python2_sitearch}|%{python3_sitearch})/.*\.so$
 
 %prep
-%setup -q -n %{name}-%{version}-fedora
-
-# Unpack tests to the same directory
-%setup -q -D -a 1 -n %{name}-%{version}-fedora
+%setup -q -n %{name}-%{version}-fedora -a 1
 
 # Delete bundled libraries
 rm -rf frmts/zlib
@@ -293,9 +297,10 @@ rm -r frmts/grib/degrib18/g2clib-1.0.4
 
 %patch1 -p1 -b .g2clib~
 %patch2 -p1 -b .jni~
-%patch3 -p1 -b .iso8211~
-%patch4 -p4 -b .sqlite~
+%patch3 -p1 -b .completion~
+%patch4 -p1 -b .uchar~
 %patch8 -p1 -b .java~
+%patch9 -p1 -b .zlib~
 
 # Copy in PROVENANCE.TXT-fedora
 cp -p %SOURCE4 .
@@ -327,17 +332,6 @@ pushd $f
 popd
 done
 
-# Fix build order with parallel make
-# http://trac.osgeo.org/gdal/ticket/5346
-sed -i '/^swig-modules:/s/lib-target/apps-target/' GNUmakefile
-
-# Workaround about wrong result in configure
-# armadillo returns a warning about gcc versions 4.7.0 or 4.7.1
-# due to http://gcc.gnu.org/bugzilla/show_bug.cgi?id=53549
-# configure interprets the result as an error so ignore it
-# this patch can/should be removed after gcc 4.7.2 is released
-sed -i 's|if test -z "`${CXX} testarmadillo.cpp -o testarmadillo -larmadillo 2>&1`"|if true|' configure
-
 # Replace hard-coded library- and include paths
 sed -i 's|@LIBTOOL@|%{_bindir}/libtool|g' GDALmake.opt.in
 sed -i 's|-L\$with_cfitsio -L\$with_cfitsio/lib -lcfitsio|-lcfitsio|g' configure
@@ -358,19 +352,14 @@ sed -i 's|libproj.so|libproj.so.%{proj_somaj}|g' ogr/ogrct.cpp
 sed -i 's|setup.py install|setup.py install --root=%{buildroot}|' swig/python/GNUmakefile
 
 # Fix Python samples to depend on correct interpreter
-#mkdir -p swig/python3/samples
-#pushd swig/python/samples
-#for f in `find . -name '*.py'`; do
-#  sed 's|^#!.\+python$|#!/usr/bin/python3|' $f > ../../python3/samples/$f
-#  chmod --reference=$f ../../python3/samples/$f
-#  sed -i 's|^#!.\+python$|#!/usr/bin/python2|' $f
-#done
-#popd
-
-# Must be corrected for 64 bit architectures other than Intel
-# http://trac.osgeo.org/gdal/ticket/4544
-# Should be gone in 2.0
-sed -i 's|test \"$ARCH\" = \"x86_64\"|test \"$libdir\" = \"/usr/lib64\"|g' configure
+mkdir -p swig/python3/samples
+pushd swig/python/samples
+for f in `find . -name '*.py'`; do
+  sed 's|^#!.\+python$|#!/usr/bin/python3|' $f > ../../python3/samples/$f
+  chmod --reference=$f ../../python3/samples/$f
+  sed -i 's|^#!.\+python$|#!/usr/bin/python2|' $f
+done
+popd
 
 # Adjust check for LibDAP version
 # http://trac.osgeo.org/gdal/ticket/4545
@@ -389,15 +378,6 @@ sed -i 's|CFLAGS=\"${GEOS_CFLAGS}\"|CFLAGS=\"${CFLAGS} ${GEOS_CFLAGS}\"|g' confi
 #sed -i 's|^#HAVE_CHARLS|HAVE_CHARLS|' GDALmake.opt.in
 #sed -i 's|#CHARLS_INC = -I/path/to/charls_include|CHARLS_INC = -I%{_includedir}/CharLS|' GDALmake.opt.in
 #sed -i 's|#CHARLS_LIB = -L/path/to/charls_lib -lCharLS|CHARLS_LIB = -lCharLS|' GDALmake.opt.in
-
-# Replace default plug-in dir
-# Solved in 2.0
-# http://trac.osgeo.org/gdal/ticket/4444
-%if %cpuarch == 64
-  sed -i 's|GDAL_PREFIX "/lib/gdalplugins"|GDAL_PREFIX "/lib64/gdalplugins"|' \
-    gcore/gdaldrivermanager.cpp \
-    ogr/ogrsf_frmts/generic/ogrsfdriverregistrar.cpp
-%endif
 
 
 %build
@@ -436,6 +416,7 @@ export CPPFLAGS="$CPPFLAGS -I%{_includedir}/libgeotiff"
         --with-jasper             \
         --with-java               \
         --with-jpeg               \
+        --with-libjson-c          \
         --without-jpeg12          \
         --with-liblzma            \
         --with-libtiff=external   \
@@ -458,7 +439,8 @@ export CPPFLAGS="$CPPFLAGS -I%{_includedir}/libgeotiff"
         --with-xerces             \
         --enable-shared           \
         --with-perl               \
-        --with-python
+        --with-python             \
+        --with-libkml
 
         #--with-rasdaman           # 8.3 rasdaman has no -lcompression; doesn't work
 
@@ -496,9 +478,9 @@ pushd swig/java
 popd
 
 # Make Python 3 module
-#pushd swig/python
-#  %{__python3} setup.py build
-#popd
+pushd swig/python
+  %{__python3} setup.py build
+popd
 
 # --------- Documentation ----------
 
@@ -539,9 +521,9 @@ rm -rf %{buildroot}
 
 # Install Python 3 module
 # Must be done first so executables are Python 2.
-#pushd swig/python
-#  %{__python3} setup.py install --skip-build --root %{buildroot}
-#popd
+pushd swig/python
+  %{__python3} setup.py install --skip-build --root %{buildroot}
+popd
 
 make    DESTDIR=%{buildroot} \
         install \
@@ -700,6 +682,13 @@ rm -f %{buildroot}%{_datadir}/%{name}/LICENSE.TXT
 for f in 'GDAL*' BandProperty ColorAssociation CutlineTransformer DatasetProperty EnhanceCBInfo ListFieldDesc NamedColor OGRSplitListFieldLayer VRTBuilder; do
   rm -rf %{buildroot}%{_mandir}/man1/$f.1*
 done
+
+# Fix python interpreter
+sed -i '1s|^#!/usr/bin/env python$|#!%{__python2}|' %{buildroot}%{_bindir}/*.py
+
+# Cleanup .pyc for now
+rm -f %{buildroot}%{_bindir}/*.pyc
+
 #TODO: What's that?
 rm -f %{buildroot}%{_mandir}/man1/*_%{name}-%{version}-fedora_apps_*
 rm -f %{buildroot}%{_mandir}/man1/_home_rouault_dist_wrk_gdal_apps_.1*
@@ -742,6 +731,7 @@ popd
 
 
 %files
+%{compdir}/
 %{_bindir}/gdallocationinfo
 %{_bindir}/gdal_contour
 %{_bindir}/gdal_rasterize
@@ -772,6 +762,8 @@ popd
 %exclude %{_mandir}/man1/gdal_sieve.1*
 %{_mandir}/man1/nearblack.1*
 %{_mandir}/man1/ogr*.1*
+%{_mandir}/man1/gnm*.1.*
+
 
 %files libs
 %doc LICENSE.TXT NEWS PROVENANCE.TXT COMMITERS PROVENANCE.TXT-fedora
@@ -820,17 +812,17 @@ popd
 %{python2_sitearch}/ogr.py*
 %{python2_sitearch}/gdal*.py*
 
-#%files python3
-#%doc swig/python/README.txt
-#%doc swig/python3/samples
-#%{python3_sitearch}/osgeo
-#%{python3_sitearch}/GDAL-%{version}-py*.egg-info
-#%{python3_sitearch}/osr.py
-#%{python3_sitearch}/__pycache__/osr.*.py*
-#%{python3_sitearch}/ogr.py
-#%{python3_sitearch}/__pycache__/ogr.*.py*
-#%{python3_sitearch}/gdal*.py
-#%{python3_sitearch}/__pycache__/gdal*.*.py*
+%files python3
+%doc swig/python/README.txt
+%doc swig/python3/samples
+%{python3_sitearch}/osgeo
+%{python3_sitearch}/GDAL-%{version}-py*.egg-info
+%{python3_sitearch}/osr.py
+%{python3_sitearch}/__pycache__/osr.*.py*
+%{python3_sitearch}/ogr.py
+%{python3_sitearch}/__pycache__/ogr.*.py*
+%{python3_sitearch}/gdal*.py
+%{python3_sitearch}/__pycache__/gdal*.*.py*
 
 %files doc
 %doc gdal_frmts ogrsf_frmts refman
@@ -844,6 +836,60 @@ popd
 #Or as before, using ldconfig
 
 %changelog
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.1.2-5
+- Rebuild for Python 3.6
+
+* Fri Dec 16 2016 David Tardon <dtardon@redhat.com> - 2.1.2-4
+- rebuild for poppler 0.50.0
+
+* Thu Dec 01 2016 Orion Poplawski <orion@cora.nwra.com> - 2.1.2-3
+- Rebuild for jasper 2.0
+- Add patch to fix build with jasper 2.0
+
+* Wed Nov 23 2016 David Tardon <dtardon@redhat.com> - 2.1.2-2
+- rebuild for poppler 0.49.0
+
+* Sun Oct 30 2016 Volker Froehlich <volker27@gmx.at> - 2.1.2-1
+- New upstream release
+
+* Sat Oct 22 2016 Orion Poplawski <orion@cora.nwra.com> - 2.1.1-2
+- Use system libjson-c
+
+* Fri Oct 21 2016 Marek Kasik <mkasik@redhat.com> - 2.1.1-2
+- Rebuild for poppler-0.48.0
+
+* Fri Aug 12 2016 Orion Poplawski <orion@cora.nwra.com> - 2.1.1-1
+- Update to 2.1.1
+- Add patch to fix bash-completion installation and install it (bug #1337143)
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.1.0-8
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
+* Mon Jul 18 2016 Marek Kasik <mkasik@redhat.com> - 2.1.0-7
+- Rebuild for poppler-0.45.0
+
+* Tue May 17 2016 Jitka Plesnikova <jplesnik@redhat.com> - 2.1.0-6
+- Perl 5.24 rebuild
+
+* Mon May 09 2016 Volker Froehlich <volker27@gmx.at> - 2.1.0-5
+- Add missing BR for libkml
+
+* Fri May 06 2016 Sandro Mani <manisandro@gmail.com>- 2.1.0-4
+- Enable libKML support
+  Resolves: #1332008
+
+* Tue May 03 2016 Adam Williamson <awilliam@redhat.com> - 2.1.0-3
+- rebuild for updated poppler
+
+* Tue May  3 2016 Marek Kasik <mkasik@redhat.com> - 2.1.0-2
+- Rebuild for poppler-0.43.0
+
+* Mon May 02 2016 Jozef Mlich <imlich@fit.vutbr.cz> - 2.1.0-1
+- New upstream release
+
+* Mon Apr 18 2016 Tom Hughes <tom@compton.nu> - 2.0.2-5
+- Rebuild for libdap change Resoloves: #1328104
+
 * Tue Feb 16 2016 Elliott Sales de Andrade <quantum.analyst@gmail.com> - 2.0.2-4
 - Add Python 3 support
 
