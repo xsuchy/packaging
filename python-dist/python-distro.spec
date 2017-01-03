@@ -41,7 +41,9 @@ BuildRequires:  python-setuptools
 %else
 BuildRequires:  python2-setuptools
 %endif
-Requires:       /usr/bin/lsb_release
+%if 0%{?fedora}
+Suggests:       /usr/bin/lsb_release
+%endif
 
 %description -n python2-%{pypi_name} %{_description}
 
@@ -53,7 +55,9 @@ Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
-Requires:       /usr/bin/lsb_release
+%if 0%{?fedora}
+Suggests:       /usr/bin/lsb_release
+%endif
 
 %description -n python3-%{pypi_name} %{_description}
 
