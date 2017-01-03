@@ -8,7 +8,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -101,6 +101,9 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/distro
 
 %changelog
+* Tue Jan 03 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.1-2
+- soft deps on lsb_release
+
 * Sun Jan 01 2017 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 1.0.1-1
 - Update to 1.0.1
 - Provide only one copy of $bindir/distro
