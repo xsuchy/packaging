@@ -7,8 +7,8 @@
 %endif
 
 Name:           python-%{pypi_name}
-Version:        1.0.1
-Release:        2%{?dist}
+Version:        1.0.2
+Release:        0%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -85,17 +85,15 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %files -n python2-%{pypi_name}
-%doc README.rst
-# not included in tar.gz
-# see https://github.com/nir0s/distro/issues/139
-#%%license LICENSE
+%doc README.rst CHANGES README.md
+%%license LICENSE
 %{python2_sitelib}/%{pypi_name}-*.egg-info/
 %{python2_sitelib}/%{pypi_name}.py*
 
 %if %{with python3}
 %files -n python3-%{pypi_name}
-%doc README.rst
-#%%license LICENSE
+%doc README.rst CHANGES README.md
+%%license LICENSE
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 %{python3_sitelib}/%{pypi_name}.py
 %{python3_sitelib}/__pycache__/%{pypi_name}.*
