@@ -1,4 +1,6 @@
 %global pypi_name distro
+# compatibility for RHEL <= 6
+%{!?_licensedir:%global license %%doc}
 
 %if 0%{?rhel} && 0%{?rhel} <= 7
 %bcond_with python3
