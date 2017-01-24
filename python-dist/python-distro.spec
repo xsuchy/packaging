@@ -88,14 +88,14 @@ rm -rf %{pypi_name}.egg-info
 
 %files -n python2-%{pypi_name}
 %doc README.rst CHANGES README.md
-%%license LICENSE
+%license LICENSE
 %{python2_sitelib}/%{pypi_name}-*.egg-info/
 %{python2_sitelib}/%{pypi_name}.py*
 
 %if %{with python3}
 %files -n python3-%{pypi_name}
 %doc README.rst CHANGES README.md
-%%license LICENSE
+%license LICENSE
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 %{python3_sitelib}/%{pypi_name}.py
 %{python3_sitelib}/__pycache__/%{pypi_name}.*
