@@ -10,7 +10,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.2
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -104,6 +104,9 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/distro
 
 %changelog
+* Tue Jan 24 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.2-2
+- add license macro for el6
+
 * Tue Jan 24 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.2-1
 - update to 1.0.2
 - 1415667 - require python-argparse on EL6
