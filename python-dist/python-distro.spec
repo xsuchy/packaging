@@ -41,6 +41,9 @@ BuildRequires:  python-setuptools
 %else
 BuildRequires:  python2-setuptools
 %endif
+%if 0%{?rhel} == 6
+Requires:       python-argparse
+%endif
 %if 0%{?fedora}
 Suggests:       /usr/bin/lsb_release
 %endif
