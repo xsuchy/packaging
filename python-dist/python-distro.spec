@@ -9,8 +9,8 @@
 %endif
 
 Name:           python-%{pypi_name}
-Version:        1.0.2
-Release:        3%{?dist}
+Version:        1.0.3
+Release:        0%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
