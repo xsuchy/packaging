@@ -10,7 +10,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.0.3
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -104,6 +104,9 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/distro
 
 %changelog
+* Mon Mar 20 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.3-1
+- rebase to 1.0.3
+
 * Tue Jan 24 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.2-3
 - typo in license macro
 
