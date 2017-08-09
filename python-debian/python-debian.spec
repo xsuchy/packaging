@@ -11,7 +11,7 @@
 
 Name:           python-debian
 Version:        0.1.30
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -139,6 +139,10 @@ popd
 %endif
 
 %changelog
+* Wed Aug 09 2017 Miroslav Suchý <msuchy@redhat.com> 0.1.30-1
+- remove lzma patch as it is already in upstream
+- update to python-debian_0.1.30
+
 * Fri Apr 15 2016 Miroslav Suchý <msuchy@redhat.com> 0.1.27-4
 - bump up release 
 
