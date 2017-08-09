@@ -10,8 +10,8 @@
 %endif
 
 Name:           python-debian
-Version:        0.1.27
-Release:        4%{?dist}
+Version:        0.1.30
+Release:        0%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -20,7 +20,6 @@ Group:          Development/Libraries
 Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.xz
 Patch1:			0001-add-support-for-lzma.patch
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
-BuildRoot:      %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:      noarch
 Requires:       python >= 2.4
 Requires:		python-chardet
@@ -84,7 +83,6 @@ popd
 %endif
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install --prefix=%{_prefix} --root=$RPM_BUILD_ROOT
 
 %if 0%{?with_python3}
@@ -95,7 +93,6 @@ popd
 
 
 %clean
-[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py clean
 
 %check
@@ -120,7 +117,6 @@ popd
 %endif
 
 %files
-%defattr(-,root,root,-)
 %dir %{python_sitelib}/debian
 %dir %{python_sitelib}/debian_bundle
 %{python_sitelib}/*.py*
