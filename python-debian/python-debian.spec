@@ -39,7 +39,7 @@ related files. Currently handled are:\
 %package -n python2-debian
 Summary: %summary
 Requires:       python >= 2.4
-Requires:		python-chardet
+Requires:       python-chardet
 Requires:       xz
 Requires:       python-six
 Suggests:       gnupg
@@ -154,10 +154,6 @@ popd
 * Wed Aug 09 2017 Miroslav Suchý <msuchy@redhat.com> 0.1.30-1
 - remove lzma patch as it is already in upstream
 - update to python-debian_0.1.30
-
-* Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.1.27-8
-- Python 2 binary package renamed to python2-debian
-  See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
 
 * Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.27-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
