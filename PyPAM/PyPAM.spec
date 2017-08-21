@@ -10,7 +10,7 @@
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
-Release:        20%{?dist}
+Release:        32%{?dist}
 # Note that the upstream site is dead.
 Source0:        http://www.pangalactic.org/PyPAM/%{name}-%{version}.tar.gz
 Url:            http://www.pangalactic.org/PyPAM
@@ -24,13 +24,25 @@ License:        LGPLv2
 Group:          Development/Libraries
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python2-devel pam-devel
-Requires:       python
 %filter_provides_in %{python_sitearch}/PAM.so$
 %filter_provides_in %{python3_sitearch}/PAM*.so$
 %filter_setup
 
-%description
+%global _description\
 PAM (Pluggable Authentication Module) bindings for Python.
+
+%description %_description
+
+%package -n python2-pypam
+Summary: %summary
+Requires:       python
+%{?python_provide:%python_provide python2-pypam}
+# Remove before F30
+Provides: PyPAM = %{version}-%{release}
+Provides: PyPAM%{?_isa} = %{version}-%{release}
+Obsoletes: PyPAM < %{version}-%{release}
+
+%description -n python2-pypam %_description
 
 %if 0%{?with_python3}
 %package -n python3-PyPAM
@@ -92,7 +104,7 @@ PYTHONPATH=build/lib.linux-`uname -m`-%{python3_version}/ %{__python3} tests/Pam
 popd
 %endif
 
-%files
+%files -n python2-pypam
 %defattr(-, root, root, -)
 %{python_sitearch}/PAM.so
 %{python_sitearch}/*.egg-info
@@ -108,6 +120,43 @@ popd
 %endif
 
 %changelog
+* Sun Aug 20 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.5.0-32
+- Add Provides for the old name without %%_isa
+
+* Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.5.0-31
+- Python 2 binary package renamed to python2-pypam
+  See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
+
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-30
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-29
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Fri Jul 07 2017 Igor Gnatenko <ignatenko@redhat.com> - 0.5.0-28
+- Rebuild due to bug in RPM (RHBZ #1468476)
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-27
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Thu Dec 22 2016 Miro Hrončok <mhroncok@redhat.com> - 0.5.0-26
+- Rebuild for Python 3.6
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.0-25
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
+* Wed Feb 03 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-24
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Tue Nov 10 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.0-23
+- Rebuilt for https://fedoraproject.org/wiki/Changes/python3.5
+
+* Tue Jun 16 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.0-22
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Fri Aug 15 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.5.0-21
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
 * Tue Jun 24 2014 Bohuslav Kabrda <bkabrda@redhat.com> - 0.5.0-20
 - Add Python 3 support.
 
