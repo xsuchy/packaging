@@ -16,36 +16,49 @@ Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
 License:        GPLv2+ and GPLv3+
-Group:          Development/Libraries
 Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.xz
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildArch:      noarch
+BuildRequires:  python-devel, python-setuptools, python-chardet
+BuildRequires:  python-six
+
+%global _description\
+This package provides Python modules that abstract many formats of Debian\
+related files. Currently handled are:\
+* Debtags information (debian.debtags module)\
+* debian/changelog (debian.changelog module)\
+* Packages files, pdiffs (debian.debian_support module)\
+* Control files of single or multiple RFC822-style paragraphs, e.g.\
+  debian/control, .changes, .dsc, Packages, Sources, Release, etc.\
+  (debian.deb822 module)\
+* Raw .deb and .ar files, with (read-only) access to contained\
+  files and meta-information
+
+%description %_description
+
+%package -n python2-debian
+Summary: %summary
 Requires:       python >= 2.4
 Requires:		python-chardet
 Requires:       xz
 Requires:       python-six
-#not available now
-#Recommends:    python-apt
 Suggests:       gnupg
-BuildRequires:  python-devel, python-setuptools, python-chardet
-BuildRequires:  python-six
+#not available now
+#Recommends:    python2-apt
+%{?python_provide:%python_provide python2-debian}
 
-%description
-This package provides Python modules that abstract many formats of Debian 
-related files. Currently handled are:
-* Debtags information (debian.debtags module)
-* debian/changelog (debian.changelog module)
-* Packages files, pdiffs (debian.debian_support module)
-* Control files of single or multiple RFC822-style paragraphs, e.g.
-  debian/control, .changes, .dsc, Packages, Sources, Release, etc.
-  (debian.deb822 module)
-* Raw .deb and .ar files, with (read-only) access to contained
-  files and meta-information
+%description -n python2-debian %_description
 
 %if 0%{?with_python3}
 %package -n python3-debian
 Summary:        Modules for Debian-related data formats
 BuildRequires:  python3-devel
+Requires:       python3-chardet
+Requires:       xz
+Requires:       python3-six
+Suggests:       gnupg
+#not available now
+#Recommends:    python3-apt
 
 %description -n python3-debian
 This package provides Python modules that abstract many formats of Debian
@@ -114,7 +127,7 @@ cd tests;
 popd
 %endif
 
-%files
+%files -n python2-debian
 %dir %{python_sitelib}/debian
 %dir %{python_sitelib}/debian_bundle
 %{python_sitelib}/*.py*
@@ -125,7 +138,6 @@ popd
 
 %if 0%{?with_python3}
 %files -n python3-debian
-%defattr(-,root,root,-)
 %dir %{python3_sitelib}/debian
 %dir %{python3_sitelib}/debian_bundle
 %{python3_sitelib}/*.py*
@@ -143,8 +155,21 @@ popd
 - remove lzma patch as it is already in upstream
 - update to python-debian_0.1.30
 
-* Fri Apr 15 2016 Miroslav Suchý <msuchy@redhat.com> 0.1.27-4
-- bump up release 
+* Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 0.1.27-8
+- Python 2 binary package renamed to python2-debian
+  See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
+
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.27-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.27-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 0.1.27-5
+- Rebuild for Python 3.6
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.1.27-4
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
 
 * Thu Apr 14 2016 Miroslav Suchý <msuchy@redhat.com> 0.1.27-3
 - 1021625 - add support for lzma
