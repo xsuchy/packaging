@@ -9,7 +9,7 @@
 
 Name:           python-%{short_name}
 Version:        2.0.2
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        A Custom MutableSet that remembers its order
 
 License:        MIT
@@ -113,6 +113,9 @@ popd
 
 
 %changelog
+* Mon Aug 21 2017 Miroslav Suchý <msuchy@redhat.com> 2.0.2-1
+- add license
+
 * Sat Aug 19 2017 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 2.0.0-8
 - Python 2 binary package renamed to python2-ordered-set
   See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3
