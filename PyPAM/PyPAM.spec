@@ -21,8 +21,6 @@ Patch3:         PyPAM-0.5.0-memory-errors.patch
 Patch4:         PyPAM-0.5.0-return-value.patch
 Patch5:         PyPAM-python3-support.patch
 License:        LGPLv2
-Group:          Development/Libraries
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  python2-devel pam-devel
 %filter_provides_in %{python_sitearch}/PAM.so$
 %filter_provides_in %{python3_sitearch}/PAM*.so$
@@ -79,7 +77,6 @@ popd
 %endif
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %{__python} setup.py install --root=$RPM_BUILD_ROOT
 
 %if 0%{?with_python3}
@@ -92,9 +89,6 @@ popd
 chmod 644 examples/pamtest.py
 rm -f examples/pamexample
 
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %check
 PYTHONPATH=build/lib.linux-`uname -m`-%{python_version}/ %{__python} tests/PamTest.py
 
@@ -105,17 +99,18 @@ popd
 %endif
 
 %files -n python2-pypam
-%defattr(-, root, root, -)
 %{python_sitearch}/PAM.so
 %{python_sitearch}/*.egg-info
-%doc AUTHORS NEWS README ChangeLog COPYING INSTALL 
+%license COPYING
+%doc AUTHORS NEWS README ChangeLog INSTALL 
 %doc examples
 
 %if 0%{?with_python3}
 %files -n python3-PyPAM
 %{python3_sitearch}/PAM*.so
 %{python3_sitearch}/*.egg-info
-%doc AUTHORS NEWS README ChangeLog COPYING INSTALL
+%license COPYING
+%doc AUTHORS NEWS README ChangeLog INSTALL
 %doc examples
 %endif
 
