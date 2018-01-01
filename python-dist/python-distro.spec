@@ -43,6 +43,10 @@ BuildRequires:  python2-setuptools
 %if 0%{?fedora}
 Suggests:       /usr/bin/lsb_release
 %endif
+%if %{with python3}
+#for tests
+BuildRequires: python3-tox
+%endif
 
 %description -n python2-%{pypi_name} %{_description}
 
@@ -96,6 +100,11 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %{_bindir}/distro
+
+%check
+%if %{with python3}
+tox
+%endif
 
 %changelog
 * Mon Mar 20 2017 Miroslav Suchý <msuchy@redhat.com> 1.0.3-1
