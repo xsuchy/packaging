@@ -1,7 +1,4 @@
 %global pypi_name distro
-# compatibility for RHEL <= 6
-%{!?_licensedir:%global license %%doc}
-
 %if 0%{?rhel} && 0%{?rhel} <= 7
 %bcond_with python3
 %else
@@ -9,8 +6,8 @@
 %endif
 
 Name:           python-%{pypi_name}
-Version:        1.0.3
-Release:        1%{?dist}
+Version:        1.2.0
+Release:        0%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -42,9 +39,6 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 %else
 BuildRequires:  python2-setuptools
-%endif
-%if 0%{?rhel} == 6
-Requires:       python-argparse
 %endif
 %if 0%{?fedora}
 Suggests:       /usr/bin/lsb_release
