@@ -5,12 +5,10 @@ Release:    14%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
-Group:      Applications/System
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:   dmidecode
 BuildRequires: perl-generators
 BuildRequires: perl(ExtUtils::MakeMaker)
-Buildroot:  %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 ExclusiveArch: %{ix86} x86_64 ia64
 
 %description
