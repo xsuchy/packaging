@@ -10,7 +10,7 @@
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
-Release:        33%{?dist}
+Release:        35%{?dist}
 # Note that the upstream site is dead.
 Source0:        http://www.pangalactic.org/PyPAM/%{name}-%{version}.tar.gz
 Url:            http://www.pangalactic.org/PyPAM
@@ -33,7 +33,7 @@ PAM (Pluggable Authentication Module) bindings for Python.
 
 %package -n python2-pypam
 Summary: %summary
-Requires:       python
+Requires:       python2
 %{?python_provide:%python_provide python2-pypam}
 # Remove before F30
 Provides: PyPAM = %{version}-%{release}
@@ -115,6 +115,13 @@ popd
 %endif
 
 %changelog
+* Wed Feb 07 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.5.0-35
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.5.0-34
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Mon Aug 21 2017 Miroslav Suchý <msuchy@redhat.com> 0.5.0-33
 - remove obsoleted parts of spec
 
