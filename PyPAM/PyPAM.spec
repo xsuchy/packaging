@@ -10,7 +10,7 @@
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
-Release:        35%{?dist}
+Release:        36%{?dist}
 # Note that the upstream site is dead.
 Source0:        http://www.pangalactic.org/PyPAM/%{name}-%{version}.tar.gz
 Url:            http://www.pangalactic.org/PyPAM
@@ -116,6 +116,9 @@ popd
 %endif
 
 %changelog
+* Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 0.5.0-36
+- add gcc as buildrequires
+
 * Wed Feb 07 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.5.0-35
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
