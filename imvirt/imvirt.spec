@@ -9,6 +9,7 @@ Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:   dmidecode
 BuildRequires: perl-generators
 BuildRequires: perl(ExtUtils::MakeMaker)
+BuildRequires: gcc
 ExclusiveArch: %{ix86} x86_64 ia64
 
 %description
