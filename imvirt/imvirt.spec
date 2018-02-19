@@ -1,13 +1,14 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    3%{?dist}
+Release:    14%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
 Group:      Applications/System
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:   dmidecode
+BuildRequires: perl-generators
 BuildRequires: perl(ExtUtils::MakeMaker)
 Buildroot:  %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 ExclusiveArch: %{ix86} x86_64 ia64
@@ -64,8 +65,41 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
-* Mon Oct 14 2013 Miroslav Suchý <msuchy@redhat.com> 0.9.6-3
-- change license
+* Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-14
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Wed Aug 02 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-13
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Binutils_Mass_Rebuild
+
+* Wed Jul 26 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-12
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Sun Jun 04 2017 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-11
+- Perl 5.26 rebuild
+
+* Fri Feb 10 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Sun May 15 2016 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-9
+- Perl 5.24 rebuild
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Wed Jun 17 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.6-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Wed Jun 03 2015 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-6
+- Perl 5.22 rebuild
+
+* Wed Aug 27 2014 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-5
+- Perl 5.20 rebuild
+
+* Sat Aug 16 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.6-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9.6-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
 * Mon Aug 26 2013 Miroslav Suchý <msuchy@redhat.com> 0.9.6-2
 - tar file already contain name-version prefix
