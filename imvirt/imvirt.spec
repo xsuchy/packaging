@@ -39,7 +39,6 @@ The following containers are detected:
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT
 
 rm $RPM_BUILD_ROOT%{perl_vendorarch}/auto/ImVirt/.packlist
@@ -49,11 +48,9 @@ rm $RPM_BUILD_ROOT%{perl_archlib}/perllocal.pod
 #make check
 
 %clean
-rm -rf $RPM_BUILD_ROOT
 make clean
 
 %files
-%defattr(-,root,root,-)
 %{_sbindir}/imvirt-report
 %{_bindir}/*
 %dir %{_libexecdir}/imvirt
