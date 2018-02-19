@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    14%{?dist}
+Release:    15%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
@@ -61,6 +61,11 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
+* Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 0.9.6-15
+- remove cleanup of buildroot, not needed
+- add gcc as BR
+- remove buildroot and group
+
 * Wed Feb 07 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-14
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
