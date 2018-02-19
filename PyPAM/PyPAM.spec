@@ -22,6 +22,7 @@ Patch4:         PyPAM-0.5.0-return-value.patch
 Patch5:         PyPAM-python3-support.patch
 License:        LGPLv2
 BuildRequires:  python2-devel pam-devel
+BuildRequires:  gcc
 %filter_provides_in %{python_sitearch}/PAM.so$
 %filter_provides_in %{python3_sitearch}/PAM*.so$
 %filter_setup
