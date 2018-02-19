@@ -23,6 +23,7 @@ Requires:         gnupg2
 Requires(post):   systemd
 Requires(preun):  systemd
 Requires(postun): systemd
+Requires(pre):    shadow-utils
 BuildRequires:    perl-generators
 BuildRequires:    systemd
 
