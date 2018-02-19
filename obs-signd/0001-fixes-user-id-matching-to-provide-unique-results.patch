@@ -1,0 +1,94 @@
+From 62caf3db341c5b23abebfe7540ce85c2fec7705b Mon Sep 17 00:00:00 2001
+From: clime <clime@redhat.com>
+Date: Mon, 2 May 2016 21:05:43 +0200
+Subject: [PATCH] fixes user-id matching to provide unique results
+
+Supposing you have got these two keys (generated in this order) in the gpg homedir:
+pub   rsa2048/DB5F2C7E 2016-05-02 [SCEA]
+uid         [ultimate] abc (abc) <foobar@foobar.com>
+
+pub   rsa2048/9F129E90 2016-05-02 [SCEA]
+uid         [ultimate] abc (abc) <bar@foobar.com>
+
+and content of the phrases directory is the following:
+bar@foobar.com  foobar@foobar.com
+
+Then if you call /bin/sign -u bar@foobar.com -p, both keys are returned (| gpg2 --list-packets | grep 'user ID'):
+:user ID packet: "abc (abc) <foobar@foobar.com>"
+:user ID packet: "abc (abc) <bar@foobar.com>"
+
+If you try to sign a rpm like this: /bin/sign -u bar@foobar.com -r unsigned35.rpm, you will get it signed by foobar's key:
+$ rpm -Kv unsigned35.rpm
+unsigned35.rpm:
+    Header V3 RSA/SHA1 Signature, key ID db5f2c7e: NOKEY
+    Header SHA1 digest: OK (6289e7d8d0a73be107945df48cefb762a5036eb1)
+    V3 RSA/SHA1 Signature, key ID db5f2c7e: NOKEY
+    MD5 digest: OK (3c8cafddad94a1e75adf52c59203cd3a)
+
+If you generate a new key-pair with: /bin/sign -u bar@foobar.com -P test.priv -g rsa@2048 800 test test@test.cz > test.pub,
+then test.pub is again signed by foobar's key:
+
+(Here I generated new keys in a different gpg homedir to test this with gpg-1.4.20)
+pub   2048R/12390294 2016-05-02
+uid                  abc (abc) <foobar@foobar.com>
+
+pub   2048R/2CD4F3AA 2016-05-02
+uid                  abc (abc) <bar@foobar.com>
+
+$ cat test.pub | gpg --list-packets | grep 'signature packet'
+:signature packet: algo 1, keyid 8CCC8E826051E7F0
+:signature packet: algo 1, keyid 2F34AD5812390294
+(the second signature has foobar's short key id: 12390294)
+
+The problem is that without angle brackets (<>) around email, gpg performs substring match on user ids. With angle brackets, it performs exact matching,
+which produces the (I suppose) expected behaviour of signd.
+
+An alternative to this patch is to keep all phrases' file names in form <email> (so that you can then call sign client with -u '<email>')
+but I don't think this was intended.
+---
+ signd | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/signd b/signd
+index bf79b22..c9e013b 100755
+--- a/signd
++++ b/signd
+@@ -570,7 +570,7 @@ sub rungpg_fatal {
+ 
+ if ($cmd eq 'pubkey') {
+   die("pubkey: one argument expected\n") if @argv != 2;
+-  my $pubkey = rungpg_fatal('/dev/null', undef, $gpg, '--export', '-a', $user);
++  my $pubkey = rungpg_fatal('/dev/null', undef, $gpg, '--export', '-a', "<$user>");
+   if (!$oldproto) {
+     $pubkey = pack('nn', 1, length($pubkey)).$pubkey;
+   }
+@@ -619,7 +619,7 @@ if ($cmd eq 'keygen') {
+   $keyid = $keyid[0];
+ 
+   # add user sig to pubkey
+-  rungpg_fatal("$phrases/$user", ["$tmpdir/pubkey.$$", "$tmpdir/privkey.$$"], $gpg, '--batch', '--no-secmem-warning', "--keyring=$tmpdir/pubkey.$$", "--passphrase-fd=0", "-u", $user, '--yes', '--trustdb-name', "$tmpdir/trustdb.$$", '--default-cert-level', '3', '--edit-key', $keyid, 'sign', 'save');
++  rungpg_fatal("$phrases/$user", ["$tmpdir/pubkey.$$", "$tmpdir/privkey.$$"], $gpg, '--batch', '--no-secmem-warning', "--keyring=$tmpdir/pubkey.$$", "--passphrase-fd=0", "-u", "<$user>", '--yes', '--trustdb-name', "$tmpdir/trustdb.$$", '--default-cert-level', '3', '--edit-key', $keyid, 'sign', 'save');
+   unlink("$tmpdir/pubkey.$$~");
+   unlink("$tmpdir/trustdb.$$");
+ 
+@@ -628,7 +628,7 @@ if ($cmd eq 'keygen') {
+   unlink("$tmpdir/pubkey.$$");
+ 
+   # encrypt privkey
+-  my $privkey = rungpg_fatal('/dev/null', ["$tmpdir/privkey.$$"], $gpg, '--batch', '--encrypt', '--no-verbose', '--no-secmem-warning', '--trust-model', 'always', '-o-', '-r', "$user", "$tmpdir/privkey.$$");
++  my $privkey = rungpg_fatal('/dev/null', ["$tmpdir/privkey.$$"], $gpg, '--batch', '--encrypt', '--no-verbose', '--no-secmem-warning', '--trust-model', 'always', '-o-', '-r', "<$user>", "$tmpdir/privkey.$$");
+   unlink("$tmpdir/privkey.$$");
+ 
+   # send back
+@@ -737,7 +737,7 @@ if ($cmd eq 'sign' || $cmd eq 'privsign') {
+     if (@keyargs) {
+       ($status, $lout, $lerr) = rungpg('/dev/null', ["$tmpdir/privkey.$$", "$tmpdir/pubkey.$$"], $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--allow-non-selfsigned-uid", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", @keyargs, "-sbo", "-", $argv[2]);
+     } else {
+-      ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", "-u", $user, "-sbo", "-", $argv[2]);
++      ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", "-u", "<$user>", "-sbo", "-", $argv[2]);
+     }
+     $lout = patchclasstime($lout, $classtime) if $classtime && !$status;
+     splice(@argv, 2, 1);
+-- 
+2.5.5
+

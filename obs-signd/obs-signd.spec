@@ -6,7 +6,7 @@ Summary:          The OBS sign daemon
 License:          GPLv2
 Url:              https://github.com/openSUSE/obs-sign
 Version:          2.2.1
-Release:          13%{?dist}
+Release:          14%{?dist}
 # Taken from upstream git
 # git clone https://github.com/openSUSE/obs-sign && cd obs-sign
 # git checkout 2.2.1
@@ -88,6 +88,9 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 2.2.1-14
+- fix broken build 
+
 * Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 2.2.1-13
 - BR gcc
 - require shadow-utils because of adding user

@@ -1,0 +1,54 @@
+From 56587e4c1938e2310ffc48210b2eca237bf03ee3 Mon Sep 17 00:00:00 2001
+From: Josef Stribny <jstribny@redhat.com>
+Date: Tue, 27 May 2014 12:20:35 +0200
+Subject: [PATCH] Rename option --files-are-digests to --file-is-digest
+
+---
+ signd | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/signd b/signd
+index 1e30f58..1f9f302 100755
+--- a/signd
++++ b/signd
+@@ -734,9 +734,9 @@ if ($cmd eq 'sign' || $cmd eq 'privsign') {
+       $argv[2] = substr($argv[2], 0, -10)."0000000000";
+     }
+     if (@keyargs) {
+-      ($status, $lout, $lerr) = rungpg('/dev/null', ["$tmpdir/privkey.$$", "$tmpdir/pubkey.$$"], $gpg, "--batch", "--force-v3-sigs", "--files-are-digests", "--allow-non-selfsigned-uid", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", @keyargs, "-sbo", "-", $argv[2]);
++      ($status, $lout, $lerr) = rungpg('/dev/null', ["$tmpdir/privkey.$$", "$tmpdir/pubkey.$$"], $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--allow-non-selfsigned-uid", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", @keyargs, "-sbo", "-", $argv[2]);
+     } else {
+-      ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--files-are-digests", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", "-u", $user, "-sbo", "-", $argv[2]);
++      ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--passphrase-fd=0", "-u", $user, "-sbo", "-", $argv[2]);
+     }
+     $lout = patchclasstime($lout, $classtime) if $classtime && !$status;
+     splice(@argv, 2, 1);
+-- 
+1.8.3.1
+
+From 9a873338117cfd8f76c6b7d1aa7baab8c6a07c41 Mon Sep 17 00:00:00 2001
+From: Josef Stribny <jstribny@redhat.com>
+Date: Tue, 27 May 2014 12:44:48 +0200
+Subject: [PATCH] Fix man page to feature --file-is-digest
+
+---
+ signd.8 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+
+diff --git a/signd.8 b/signd.8
+index f5c3215..23ca2d0 100644
+--- a/signd.8
++++ b/signd.8
+@@ -14,7 +14,7 @@ to another signd. The -f option makes signd fork on startup.
+ 
+ signd uses the same configuration used for sign, /etc/sign.conf.
+ It needs a gpg implementation that understands the
+-"--files-are-digests" option to work correctly.
++"--file-is-digest" option to work correctly.
+ 
+ .SH SECURITY
+ signd allows only connections from reserved ports and ip
+-- 
+1.8.3.1
+
