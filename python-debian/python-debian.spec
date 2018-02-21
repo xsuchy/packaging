@@ -11,7 +11,7 @@
 
 Name:           python-debian
 Version:        0.1.30
-Release:        2%{?dist}
+Release:        4%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -19,8 +19,8 @@ License:        GPLv2+ and GPLv3+
 Source0:        http://ftp.debian.org/debian/pool/main/p/python-debian/python-debian_%{version}.tar.xz
 URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildArch:      noarch
-BuildRequires:  python-devel, python-setuptools, python-chardet
-BuildRequires:  python-six
+BuildRequires:  python2-devel, python2-setuptools, python2-chardet
+BuildRequires:  python2-six
 
 %global _description\
 This package provides Python modules that abstract many formats of Debian\
@@ -38,10 +38,10 @@ related files. Currently handled are:\
 
 %package -n python2-debian
 Summary: %summary
-Requires:       python >= 2.4
-Requires:       python-chardet
+Requires:       python2 >= 2.4
+Requires:       python2-chardet
 Requires:       xz
-Requires:       python-six
+Requires:       python2-six
 Suggests:       gnupg
 #not available now
 #Recommends:    python2-apt
@@ -151,6 +151,13 @@ popd
 %endif
 
 %changelog
+* Wed Feb 21 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.1.30-4
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.30-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Mon Aug 21 2017 Miroslav Suchý <msuchy@redhat.com> 0.1.30-2
 - Python 2 binary package renamed to python2-debian
 
