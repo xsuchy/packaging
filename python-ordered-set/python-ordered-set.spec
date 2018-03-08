@@ -22,7 +22,7 @@ BuildRequires:  python2-devel
 BuildRequires:  python-setuptools
 %endif # rhel
 #test
-BuildRequires:  python-nose
+BuildRequires:  python2-nose
 %if %{with python3}
 BuildRequires:  python3-devel
 #test
