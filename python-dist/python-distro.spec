@@ -7,7 +7,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.3.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -107,6 +107,9 @@ tox
 %endif
 
 %changelog
+* Thu May 10 2018 Miroslav Suchý <msuchy@redhat.com> 1.3.0-1
+- rebase to distro 1.3.0
+
 * Tue Jan 02 2018 Miroslav Suchý <msuchy@redhat.com> 1.2.0-1
 - run tests
 - rebase to distro 1.2.0
