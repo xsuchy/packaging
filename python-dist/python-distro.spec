@@ -6,8 +6,8 @@
 %endif
 
 Name:           python-%{pypi_name}
-Version:        1.2.0
-Release:        1%{?dist}
+Version:        1.3.0
+Release:        0%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -85,14 +85,14 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %files -n python2-%{pypi_name}
-%doc README.rst CHANGES README.md
+%doc README.rst CHANGELOG.md CONTRIBUTORS.md README.md
 %license LICENSE
 %{python2_sitelib}/%{pypi_name}-*.egg-info/
 %{python2_sitelib}/%{pypi_name}.py*
 
 %if %{with python3}
 %files -n python3-%{pypi_name}
-%doc README.rst CHANGES README.md
+%doc README.rst CHANGELOG.md CONTRIBUTORS.md README.md
 %license LICENSE
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 %{python3_sitelib}/%{pypi_name}.py
