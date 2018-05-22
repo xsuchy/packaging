@@ -6,7 +6,7 @@ Summary:          The OBS sign daemon
 License:          GPLv2
 Url:              https://github.com/openSUSE/obs-sign
 Version:          2.4.2
-Release:          0%{?dist}
+Release:          1%{?dist}
 # Taken from upstream git
 # git clone https://github.com/openSUSE/obs-sign && cd obs-sign
 # git checkout 2.4.2
@@ -88,6 +88,9 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Tue May 22 2018 Miroslav Suchý <msuchy@redhat.com> 2.4.2-1
+- rebase to 2.4.2
+
 * Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 2.2.1-14
 - fix broken build 
 
