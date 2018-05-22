@@ -5,13 +5,13 @@ Name:             obs-signd
 Summary:          The OBS sign daemon
 License:          GPLv2
 Url:              https://github.com/openSUSE/obs-sign
-Version:          2.2.1
-Release:          14%{?dist}
+Version:          2.4.2
+Release:          0%{?dist}
 # Taken from upstream git
 # git clone https://github.com/openSUSE/obs-sign && cd obs-sign
-# git checkout 2.2.1
-# tar czvf obs-signd-2.2.1.tar.bz2 \
-#   sign.8  sign.c  sign.conf  sign.conf.5  signd signd.8 obssignd
+# git checkout 2.4.2
+# tar czvf obs-signd-2.4.2.tar.bz2 \
+#   sign.8  sign.c  sign.conf  sign.conf.5  signd signd.8
 Source0:          obs-signd-%version.tar.bz2
 # Upstream doesn't provide systemd service file
 Source1:          signd.service
