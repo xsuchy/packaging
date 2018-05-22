@@ -19,6 +19,7 @@ Source1:          signd.service
 Patch0:           obs-sign-rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
 Patch1:			  0001-fixes-user-id-matching-to-provide-unique-results.patch
+Patch2:           0001-Get-rid-of-compiler-warnings.patch
 Requires:         gnupg2
 Requires(post):   systemd
 Requires(preun):  systemd
@@ -39,6 +40,7 @@ on the same server.
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 gcc %{optflags} -fPIC -pie -o sign sign.c
