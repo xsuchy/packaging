@@ -1,20 +1,17 @@
 # http://fedoraproject.org/wiki/Packaging:Guidelines?rd=Packaging/Guidelines#PIE
 %global _hardened_build 1
+%global commit 65f9cab3937822234e214e4ed5442db73f640f0c
+%global shortcommit %(c=%{commit}; echo ${c:0:7})
+%global snapdate 20180614
+%global snapshotrel .%{snapdate}git%{shortcommit}
 
 Name:             obs-signd
 Summary:          The OBS sign daemon
 License:          GPLv2
 Url:              https://github.com/openSUSE/obs-sign
 Version:          2.4.2
-Release:          1%{?dist}
-# Taken from upstream git
-# git clone https://github.com/openSUSE/obs-sign && cd obs-sign
-# git checkout 2.4.2
-# tar czvf obs-signd-2.4.2.tar.bz2 \
-#   sign.8  sign.c  sign.conf  sign.conf.5  signd signd.8
-Source0:          obs-signd-%version.tar.bz2
-# Upstream doesn't provide systemd service file
-Source1:          signd.service
+Release:          1%{?snapshotrel}%{?dist}
+Source0:          https://github.com/openSUSE/obs-sign/archive/%{commit}/obs-sign-%{shortcommit}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
 Patch0:           obs-sign-rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
@@ -35,10 +32,7 @@ with a remote server to avoid the need to host the private key
 on the same server.
 
 %prep
-%setup -q -c -n obs-signd-%version
-
-%patch0 -p1
-%patch1 -p1
+%autosetup -n obs-sign-%{commit}
 
 %build
 gcc %{optflags} -fPIC -pie -o sign sign.c
@@ -55,7 +49,7 @@ install -m 0644 sign.conf %{buildroot}%{_sysconfdir}
 
 # systemd service
 mkdir -p %{buildroot}%{_unitdir}
-install -m 0644 %SOURCE1 %{buildroot}%{_unitdir}
+install -m 0644 dist/signd.service %{buildroot}%{_unitdir}
 
 # man pages
 install -d -m 0755 %{buildroot}%{_mandir}/man{5,8}
