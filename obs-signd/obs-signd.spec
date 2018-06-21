@@ -13,9 +13,9 @@ Version:          2.4.2
 Release:          1%{?snapshotrel}%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/%{commit}/obs-sign-%{shortcommit}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
-Patch0:           obs-sign-rename-option-files-are-digests-to-file-is-digest.patch
+Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
-Patch1:			  0001-fixes-user-id-matching-to-provide-unique-results.patch
+Patch1:			  0002-fixes-user-id-matching-to-provide-unique-results.patch
 Requires:         gnupg2
 Requires(post):   systemd
 Requires(preun):  systemd
