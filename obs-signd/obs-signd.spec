@@ -10,7 +10,7 @@ Summary:          The OBS sign daemon
 License:          GPLv2
 Url:              https://github.com/openSUSE/obs-sign
 Version:          2.4.2
-Release:          3%{?snapshotrel}%{?dist}
+Release:          4%{?snapshotrel}%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/%{commit}/obs-sign-%{shortcommit}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
 Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
@@ -83,6 +83,9 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Mon Jun 25 2018 Miroslav Suchý <msuchy@redhat.com> 2.4.2-4.20180614git65f9cab
+- re-add BR gcc
+
 * Thu Jun 21 2018 Miroslav Suchý <msuchy@redhat.com> 2.4.2-3.20180614git65f9cab
 - update to snapshot of 20180614
 
