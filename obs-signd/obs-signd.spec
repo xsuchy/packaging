@@ -23,6 +23,7 @@ Requires(postun): systemd
 Requires(pre):    shadow-utils
 BuildRequires:    perl-generators
 BuildRequires:    systemd
+BuildRequires:    gcc
 
 %description
 The OpenSUSE Build Service sign client and daemon.
