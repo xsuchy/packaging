@@ -92,7 +92,7 @@ cp -a . %{py3dir}
 
 
 %build
-sed -e 's/__CHANGELOG_VERSION__/$(VERSION)/' < setup.py.in > setup.py
+sed -e 's/__CHANGELOG_VERSION__/%{version}/' < setup.py.in > setup.py
 %py2_build
 
 %if 0%{with_python3}
