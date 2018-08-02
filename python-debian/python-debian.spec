@@ -11,7 +11,7 @@
 
 Name:           python-debian
 Version:        0.1.32
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -151,6 +151,12 @@ popd
 %endif
 
 %changelog
+* Thu Aug 02 2018 Miroslav Suchý <msuchy@redhat.com> 0.1.32-2
+- BR python-chardet for tests
+- BR python-six for tests
+- BR dpkg for tests
+- do not call python but rather python2
+
 * Thu Aug 02 2018 Miroslav Suchý <msuchy@redhat.com> 0.1.32-1
 - rebase python-debian to 0.1.32
 
