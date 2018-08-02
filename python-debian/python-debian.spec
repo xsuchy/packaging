@@ -11,7 +11,7 @@
 
 Name:           python-debian
 Version:        0.1.32
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -145,6 +145,9 @@ popd
 %endif
 
 %changelog
+* Thu Aug 02 2018 Miroslav Suchý <msuchy@redhat.com> 0.1.32-1
+- rebase python-debian to 0.1.32
+
 * Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.30-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
