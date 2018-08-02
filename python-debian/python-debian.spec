@@ -21,6 +21,8 @@ URL:            http://git.debian.org/?p=pkg-python-debian/python-debian.git
 BuildArch:      noarch
 BuildRequires:  python2-devel, python2-setuptools, python2-chardet
 BuildRequires:  python2-six
+#tests
+BuildRequires:  dpkg
 
 %global _description\
 This package provides Python modules that abstract many formats of Debian\
