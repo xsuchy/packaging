@@ -10,8 +10,8 @@
 %endif
 
 Name:           python-debian
-Version:        0.1.30
-Release:        4%{?dist}
+Version:        0.1.32
+Release:        0%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -85,11 +85,11 @@ cp -a . %{py3dir}
 
 %build
 sed -e 's/__CHANGELOG_VERSION__/$(VERSION)/' < setup.py.in > setup.py
-%{__python} setup.py build
+%py2_build
 
 %if 0%{with_python3}
 pushd %{py3dir}
-%{__python3} setup.py build
+%py3_build
 popd
 %endif
 
@@ -107,33 +107,27 @@ popd
 %{__python} setup.py clean
 
 %check
-cd tests;
-#./test_deb822.py
-#TODO - fix this test
-#./test_debfile.py
-./test_debtags.py
-./test_changelog.py
-#./test_debian_support.py
+# this fail because of missing apt-get python module, but this file is
+# use to create test.ar file
+rm lib/debian/tests/test_deb822.py
+touch lib/debian/tests/test_deb822.py
+python2 -m unittest discover lib
 
 %if 0%{with_python3}
 pushd %{py3dir}
-cd tests;
-#./test_deb822.py
-#TODO - fix this test
-#./test_debfile.py
-./test_debtags.py
-./test_changelog.py
-#./test_debian_support.py
+rm lib/debian/tests/test_deb822.py
+touch lib/debian/tests/test_deb822.py
+python3 -m unittest discover lib
 popd
 %endif
 
 %files -n python2-debian
 %dir %{python_sitelib}/debian
 %dir %{python_sitelib}/debian_bundle
-%{python_sitelib}/*.py*
-%{python_sitelib}/debian/*.py*
-%{python_sitelib}/debian_bundle/__init__.py*
-%{python_sitelib}/python_debian*
+%{python2_sitelib}/*.py*
+%{python2_sitelib}/debian/*.py*
+%{python2_sitelib}/debian_bundle/__init__.py*
+%{python2_sitelib}/python_debian*
 %doc README README.changelog README.deb822 HISTORY.deb822 ACKNOWLEDGEMENTS
 
 %if 0%{?with_python3}
@@ -151,6 +145,12 @@ popd
 %endif
 
 %changelog
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.1.30-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 0.1.30-5
+- Rebuilt for Python 3.7
+
 * Wed Feb 21 2018 Iryna Shcherbina <ishcherb@redhat.com> - 0.1.30-4
 - Update Python 2 dependency declarations to new packaging standards
   (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
