@@ -24,8 +24,10 @@ BuildRequires:  python2-six
 #tests
 BuildRequires:  dpkg
 BuildRequires:  python2-six
+BuildRequires:  python2-chardet
 %if 0%{?with_python3}
 BuildRequires:  python3-six
+BuildRequires:  python3-chardet
 %endif
 
 %global _description\
