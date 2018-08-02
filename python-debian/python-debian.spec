@@ -93,18 +93,16 @@ pushd %{py3dir}
 popd
 %endif
 
+
 %install
-%{__python} setup.py install --prefix=%{_prefix} --root=$RPM_BUILD_ROOT
+%py2_install
 
 %if 0%{?with_python3}
 pushd %{py3dir}
-%{__python3} setup.py install --root=$RPM_BUILD_ROOT
+%py3_install
 popd
 %endif
 
-
-%clean
-%{__python} setup.py clean
 
 %check
 # this fail because of missing apt-get python module, but this file is
