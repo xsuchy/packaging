@@ -23,6 +23,10 @@ BuildRequires:  python2-devel, python2-setuptools, python2-chardet
 BuildRequires:  python2-six
 #tests
 BuildRequires:  dpkg
+BuildRequires:  python2-six
+%if 0%{?with_python3}
+BuildRequires:  python3-six
+%endif
 
 %global _description\
 This package provides Python modules that abstract many formats of Debian\
