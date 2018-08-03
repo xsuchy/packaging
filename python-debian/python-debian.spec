@@ -128,8 +128,8 @@ popd
 %endif
 
 %files -n python2-debian
-%dir %{python_sitelib}/debian
-%dir %{python_sitelib}/debian_bundle
+%dir %{python2_sitelib}/debian
+%dir %{python2_sitelib}/debian_bundle
 %{python2_sitelib}/*.py*
 %{python2_sitelib}/debian/*.py*
 %{python2_sitelib}/debian_bundle/__init__.py*
