@@ -1,8 +1,8 @@
-%global githash e8a2536
+%global githash 8982862
 
 Name:		glacier-cli
-Version:	0
-Release:	13.20131113git%{githash}%{?dist}
+Version:	0.1.0
+Release:	1.20180914git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
 License:	MIT
@@ -12,6 +12,7 @@ URL:		https://github.com/basak/glacier-cli
 Source0:	glacier-cli-%{githash}.tar.gz
 BuildArch:  noarch
 
+%if 0%{?rhel}
 Requires:	python-boto
 Requires:   python-iso8601
 Requires:   python-sqlalchemy
@@ -19,12 +20,17 @@ Requires:   python-sqlalchemy
 Requires:   python-argparse
 BuildRequires: python-argparse
 %endif
+%else
+Requires:   python2-boto
+Requires:   python2-iso8601
+Requires:   python2-sqlalchemy
 # tests
-BuildRequires: python-iso8601
-BuildRequires: python-mock
-BuildRequires: python-nose
-BuildRequires: python-boto
-BuildRequires: python-sqlalchemy
+BuildRequires: python2-iso8601
+BuildRequires: python2-mock
+BuildRequires: python2-nose
+BuildRequires: python2-boto
+BuildRequires: python2-sqlalchemy
+%endif
 
 %description
 This tool provides a sysadmin-friendly command line interface to Amazon
@@ -38,7 +44,9 @@ integration with git-annex, making Glacier even more useful.
 
 
 %build
-sed -i '1s|#!/usr/bin/env python|#!%{__python}|' glacier.py
+for i in glacier.py glacier_test.py setup.py; do
+  sed -i '1s|#!/usr/bin/env python|#!%{__python}|' $i
+done
 
 %install
 mkdir -p %{buildroot}%{_bindir}
@@ -59,6 +67,10 @@ nosetests
 
 
 %changelog
+* Fri Sep 019 2018 Miroslav Suchý 0.1.0-1.20180914git8982862
+- rebase to new version
+- remove 'env python' in all scripts
+
 * Fri Sep 02 2016 Miroslav Suchý 0-13.20131113gite8a2536
 - correctly require argparse only on rhel6
 
