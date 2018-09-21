@@ -3,7 +3,7 @@
 
 Name:           python-%{modname}
 Version:        2.11.1
-Release:        7%{?dist}
+Release:        8%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -120,6 +120,9 @@ py.test-%{python3_version} -v
 %{python3_sitelib}/%{modname}-*.egg-info/
 
 %changelog
+* Fri Sep 21 2018 Miroslav Suchý <msuchy@redhat.com> 2.11.1-8
+- add patch for CVE-2018-17175.patch
+
 * Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-7
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
 
