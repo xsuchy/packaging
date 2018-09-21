@@ -2,15 +2,14 @@
 %global _docdir_fmt %{name}
 
 Name:           python-%{modname}
-Version:        2.9.0
-Release:        1%{?dist}
+Version:        2.11.1
+Release:        7%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
-# Using Github instead of PyPI because the PyPI tarballs don't include tests, 
-# docs, or examples, and upstream does not want to change that.
-# https://github.com/marshmallow-code/marshmallow/issues/201
 Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{version}/%{modname}-%{version}.tar.gz
+Patch0:         ordered_set.patch
+Patch1:         CVE-2018-17175.patch
 
 BuildArch:      noarch
 
@@ -30,7 +29,7 @@ Marshmallow schemas can be used to:\
 Summary:        Documentation for %{name}
 Provides:       python3-%{modname}-doc = %{version}
 Obsoletes:      python3-%{modname}-doc < 2.8.0-1
-BuildRequires:  /usr/bin/sphinx-build
+BuildRequires:  python2-sphinx
 
 %description doc
 Documentation for %{name}.
@@ -43,12 +42,12 @@ BuildRequires:  python2-setuptools
 # for tests
 BuildRequires:  python2-pytest
 BuildRequires:  python2-pytz
-BuildRequires:  python-ordered-set
+BuildRequires:  python2-ordered-set
 BuildRequires:  python2-dateutil
-BuildRequires:  python-simplejson
-Requires:       python-ordered-set
+BuildRequires:  python2-simplejson
+Requires:       python2-ordered-set
 Recommends:     python2-dateutil
-Recommends:     python-simplejson
+Recommends:     python2-simplejson
 
 %description -n python2-%{modname} %{_description}
 
@@ -74,17 +73,21 @@ Recommends:     python3-simplejson
 Python 3 version.
 
 %prep
-%autosetup -n %{modname}-%{version}
+%setup -n %{modname}-%{version}
+%patch0 -p1
+%patch1 -p1
 
 # remove bundled library
 # instead of orderedsett we patch code to usu python-ordered-set
 # ordereddict.py is used only for compatibility with python2.6,
 # which we do not need
 rm -f ./marshmallow/ordereddict.py ./marshmallow/orderedset.py
-sed -i -e "s/from marshmallow.orderedset/from ordered_set/g" %{modname}/schema.py
 
 # Drop support for sphinx-issues as it's not yet packaged
 sed -i -e "/sphinx_issues/d" docs/conf.py
+
+# unsupported theme option 'donate_url' given
+sed -i -e "/donate_url/d" docs/conf.py
 
 %build
 %py2_build
@@ -97,7 +100,7 @@ sphinx-build -b html docs html
 rm -rf html/{.buildinfo,.doctrees}
 
 %check
-py.test-%{python2_version} -v
+py.test-%{python2_version} -v --ignore tests/test_py3/
 py.test-%{python3_version} -v
 
 %files doc
@@ -117,6 +120,52 @@ py.test-%{python3_version} -v
 %{python3_sitelib}/%{modname}-*.egg-info/
 
 %changelog
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Tue Jun 19 2018 Miro Hrončok <mhroncok@redhat.com> - 2.11.1-6
+- Rebuilt for Python 3.7
+
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Thu Jan 25 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.11.1-4
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Mon Jan 09 2017 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.11.1-1
+- Update to 2.11.1 (RHBZ #1411181)
+
+* Tue Dec 27 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.5-1
+- Update to 2.10.5 (RHBZ #1408340)
+
+* Mon Dec 19 2016 Miro Hrončok <mhroncok@redhat.com> - 2.10.4-2
+- Rebuild for Python 3.6
+
+* Thu Dec 01 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.4-1
+- Update to 2.10.4 (RHBZ #1400189)
+
+* Tue Oct 04 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.3-1
+- Update to 2.10.3 (RHBZ #1381098)
+
+* Thu Sep 15 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.1-2
+- Update to 2.10.1 (RHBZ #1376432)
+
+* Tue Sep 06 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.0-2
+- Trivial fix in spec
+
+* Tue Sep 06 2016 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 2.10.0-1
+- Update to 2.10.0
+
+* Tue Jul 19 2016 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 2.9.0-2
+- https://fedoraproject.org/wiki/Changes/Automatic_Provides_for_Python_RPM_Packages
+
 * Thu Jul 07 2016 Igor Gnatenko <ignatenko@redhat.com> - 2.9.0-1
 - Update to 2.9.0
 
