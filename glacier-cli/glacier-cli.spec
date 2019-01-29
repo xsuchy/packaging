@@ -5,7 +5,6 @@ Version:	0
 Release:	13.20131113git%{githash}%{?dist}
 Summary:	Command-line interface to Amazon Glacier
 
-Group:		Applications/Internet
 License:	MIT
 URL:		https://github.com/basak/glacier-cli
 # git clone git@github.com:basak/glacier-cli.git && cd glacier-cli
