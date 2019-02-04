@@ -4,6 +4,12 @@
 %else
 %bcond_without python3
 %endif
+%if 0%{?fedora} > 29
+%bcond_with python2
+%else
+%bcond_without python2
+%endif
+
 
 Name:           python-%{pypi_name}
 Version:        1.4.0
@@ -31,26 +37,26 @@ for more information.
 
 %description %{_description}
 
+%if %{with python2}
 %package -n     python2-%{pypi_name}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{pypi_name}}
 BuildRequires:  python2-devel
 %if 0%{?rhel} && 0%{?rhel} <= 7
 BuildRequires:  python-setuptools
+BuildRequires:  pytest
 %else
 BuildRequires:  python2-setuptools
+BuildRequires:  python2-pytest
 %endif
 %if 0%{?fedora}
 Suggests:       /usr/bin/lsb_release
-%endif
-%if %{with python3}
-#for tests
-BuildRequires: python3-tox
 %endif
 
 %description -n python2-%{pypi_name} %{_description}
 
 Python 2 version.
+%endif
 
 %if %{with python3}
 %package -n     python3-%{pypi_name}
@@ -58,6 +64,7 @@ Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{pypi_name}}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
+BuildRequires:  python3-pytest
 %if 0%{?fedora}
 Suggests:       /usr/bin/lsb_release
 %endif
@@ -73,22 +80,28 @@ Python 3 version.
 rm -rf %{pypi_name}.egg-info
 
 %build
+%if %{with python2}
 %py2_build
+%endif
 %if %{with python3}
 %py3_build
 %endif
 
 %install
+%if %{with python2}
 %py2_install
+%endif
 %if %{with python3}
 %py3_install
 %endif
 
+%if %{with python2}
 %files -n python2-%{pypi_name}
 %doc README.md CHANGELOG.md CONTRIBUTORS.md CONTRIBUTING.md README.md
 %license LICENSE
 %{python2_sitelib}/%{pypi_name}-*.egg-info/
 %{python2_sitelib}/%{pypi_name}.py*
+%endif
 
 %if %{with python3}
 %files -n python3-%{pypi_name}
@@ -102,8 +115,11 @@ rm -rf %{pypi_name}.egg-info
 %{_bindir}/distro
 
 %check
+%if %{with python2}
+%{__python2} -m pytest tests -v
+%endif
 %if %{with python3}
-tox
+%{__python3} -m pytest tests -v
 %endif
 
 %changelog
