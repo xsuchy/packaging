@@ -85,14 +85,14 @@ rm -rf %{pypi_name}.egg-info
 %endif
 
 %files -n python2-%{pypi_name}
-%doc README.rst CHANGELOG.md CONTRIBUTORS.md README.md
+%doc README.md CHANGELOG.md CONTRIBUTORS.md CONTRIBUTING.md README.md
 %license LICENSE
 %{python2_sitelib}/%{pypi_name}-*.egg-info/
 %{python2_sitelib}/%{pypi_name}.py*
 
 %if %{with python3}
 %files -n python3-%{pypi_name}
-%doc README.rst CHANGELOG.md CONTRIBUTORS.md README.md
+%doc README.md CHANGELOG.md CONTRIBUTORS.md CONTRIBUTING.md README.md
 %license LICENSE
 %{python3_sitelib}/%{pypi_name}-*.egg-info/
 %{python3_sitelib}/%{pypi_name}.py
