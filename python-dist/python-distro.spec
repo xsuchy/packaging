@@ -7,7 +7,7 @@
 
 Name:           python-%{pypi_name}
 Version:        1.4.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Linux Distribution - a Linux OS platform information API
 
 License:        ASL 2.0
@@ -107,6 +107,13 @@ tox
 %endif
 
 %changelog
+* Mon Feb 04 2019 Miroslav Suchý <msuchy@redhat.com> 1.4.0-1
+- rename README
+- Prefer the VERSION_CODENAME field of os-release to parsing it from VERSION
+- Return _uname_info from the uname_info() method
+- Fixed CloudLinux id discovery
+- Update Oracle matching
+
 * Thu May 10 2018 Miroslav Suchý <msuchy@redhat.com> 1.3.0-1
 - rebase to distro 1.3.0
 
