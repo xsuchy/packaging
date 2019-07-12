@@ -51,17 +51,13 @@ cp -a . %{py3dir}
 
 %build
 %if 0%{with_python3}
-pushd %{py3dir}
 %set_build_flags
 CFLAGS="$CFLAGS -fno-strict-aliasing" %{__python3} setup.py build
-popd
 %endif
 
 %install
 %if 0%{?with_python3}
-pushd %{py3dir}
 %{__python3} setup.py install --root=$RPM_BUILD_ROOT
-popd
 %endif
 
 # Make sure we don't include binary files in the docs
@@ -70,9 +66,7 @@ rm -f examples/pamexample
 
 %check
 %if 0%{with_python3}
-pushd %{py3dir}
 PYTHONPATH=build/lib.linux-`uname -m`-%{python3_version}/ %{__python3} tests/PamTest.py
-popd
 %endif
 
 %if 0%{?with_python3}
