@@ -1,5 +1,3 @@
-%global with_python3 1
-
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
@@ -24,14 +22,12 @@ PAM (Pluggable Authentication Module) bindings for Python.
 
 %description %_description
 
-%if 0%{?with_python3}
 %package -n python3-PyPAM
 Summary:        PAM bindings for Python 3
 BuildRequires:  python3-devel
 
 %description -n python3-PyPAM
 PAM (Pluggable Authentication Module) bindings for Python 3.
-%endif
 
 %prep
 %setup -q
@@ -44,39 +40,26 @@ PAM (Pluggable Authentication Module) bindings for Python 3.
 # remove prebuild rpm and others binaries
 rm -rf build dist
 
-%if 0%{with_python3}
-rm -rf %{py3dir}
-cp -a . %{py3dir}
-%endif
-
 %build
-%if 0%{with_python3}
 %set_build_flags
 CFLAGS="$CFLAGS -fno-strict-aliasing" %{__python3} setup.py build
-%endif
 
 %install
-%if 0%{?with_python3}
 %{__python3} setup.py install --root=$RPM_BUILD_ROOT
-%endif
 
 # Make sure we don't include binary files in the docs
 chmod 644 examples/pamtest.py
 rm -f examples/pamexample
 
 %check
-%if 0%{with_python3}
 PYTHONPATH=build/lib.linux-`uname -m`-%{python3_version}/ %{__python3} tests/PamTest.py
-%endif
 
-%if 0%{?with_python3}
 %files -n python3-PyPAM
 %{python3_sitearch}/PAM*.so
 %{python3_sitearch}/*.egg-info
 %license COPYING
 %doc AUTHORS NEWS README ChangeLog INSTALL
 %doc examples
-%endif
 
 %changelog
 * Fri Jul 12 2019 Miroslav Suchý <msuchy@redhat.com> 0.5.0-41
