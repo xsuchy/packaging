@@ -1,7 +1,7 @@
 Summary:        PAM bindings for Python
 Name:           PyPAM
 Version:        0.5.0
-Release:        41%{?dist}
+Release:        42%{?dist}
 # Note that the upstream site is dead.
 Source0:        http://www.pangalactic.org/PyPAM/%{name}-%{version}.tar.gz
 Url:            http://www.pangalactic.org/PyPAM
@@ -62,6 +62,10 @@ PYTHONPATH=build/lib.linux-`uname -m`-%{python3_version}/ %{__python3} tests/Pam
 %doc examples
 
 %changelog
+* Mon Jul 15 2019 Miroslav Suchý <msuchy@redhat.com> 0.5.0-42
+- simplify spec
+- fix build issue
+
 * Fri Jul 12 2019 Miroslav Suchý <msuchy@redhat.com> 0.5.0-41
 - stop building python2 bindings
 
