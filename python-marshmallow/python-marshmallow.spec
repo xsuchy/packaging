@@ -1,15 +1,18 @@
+%bcond_with    python2
+%bcond_without python3
+
 %global modname marshmallow
 %global _docdir_fmt %{name}
 
 Name:           python-%{modname}
-Version:        2.11.1
-Release:        8%{?dist}
+Version:        3.1.1
+Release:        0%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
 Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{version}/%{modname}-%{version}.tar.gz
 Patch0:         ordered_set.patch
-Patch1:         CVE-2018-17175.patch
+Patch1:         versionwarning-disable.patch
 
 BuildArch:      noarch
 
@@ -29,11 +32,13 @@ Marshmallow schemas can be used to:\
 Summary:        Documentation for %{name}
 Provides:       python3-%{modname}-doc = %{version}
 Obsoletes:      python3-%{modname}-doc < 2.8.0-1
-BuildRequires:  python2-sphinx
+BuildRequires:  python3-sphinx
 
 %description doc
 Documentation for %{name}.
 
+
+%if %{with python2}
 %package -n python2-%{modname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{modname}}
@@ -52,7 +57,10 @@ Recommends:     python2-simplejson
 %description -n python2-%{modname} %{_description}
 
 Python 2 version.
+%endif
 
+
+%if %{with python3}
 %package -n python3-%{modname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python3-%{modname}}
@@ -71,17 +79,14 @@ Recommends:     python3-simplejson
 %description -n python3-%{modname} %{_description}
 
 Python 3 version.
+%endif
 
 %prep
-%setup -n %{modname}-%{version}
-%patch0 -p1
-%patch1 -p1
+%autosetup -n %{modname}-%{version} -p1
 
 # remove bundled library
 # instead of orderedsett we patch code to usu python-ordered-set
-# ordereddict.py is used only for compatibility with python2.6,
-# which we do not need
-rm -f ./marshmallow/ordereddict.py ./marshmallow/orderedset.py
+rm -f ./marshmallow/orderedset.py
 
 # Drop support for sphinx-issues as it's not yet packaged
 sed -i -e "/sphinx_issues/d" docs/conf.py
@@ -90,36 +95,70 @@ sed -i -e "/sphinx_issues/d" docs/conf.py
 sed -i -e "/donate_url/d" docs/conf.py
 
 %build
-%py2_build
-%py3_build
+%{?with_python2:%py2_build}
+%{?with_python3:%py3_build}
 sphinx-build -b html docs html
 
 %install
-%py2_install
-%py3_install
+%{?with_python2:%py2_install}
+%{?with_python3:%py3_install}
 rm -rf html/{.buildinfo,.doctrees}
 
+
 %check
-py.test-%{python2_version} -v --ignore tests/test_py3/
-py.test-%{python3_version} -v
+%{?with_python2:py.test-%{python2_version} -v --ignore tests/test_py3/}
+%{?with_pythoN3:py.test-%{python3_version} -v}
+
 
 %files doc
 %license LICENSE
 %doc html examples
 
+
+%if %{with python2}
 %files -n python2-%{modname}
 %license LICENSE
 %doc CHANGELOG.rst README.rst
 %{python2_sitelib}/%{modname}/
 %{python2_sitelib}/%{modname}-*.egg-info/
+%endif
 
+%if %{with python3}
 %files -n python3-%{modname}
 %license LICENSE
 %doc CHANGELOG.rst README.rst
 %{python3_sitelib}/%{modname}/
 %{python3_sitelib}/%{modname}-*.egg-info/
+%endif
+
 
 %changelog
+* Wed Aug 21 2019 Miro Hrončok <mhroncok@redhat.com> - 2.20.0-2
+- Rebuilt for Python 3.8
+
+* Mon Aug 19 2019 Pavel Raiskup <praiskup@redhat.com> - 2.20.0-1
+- latest upstream release
+
+* Mon Aug 19 2019 Miro Hrončok <mhroncok@redhat.com> - 2.19.4-3
+- Rebuilt for Python 3.8
+
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.19.4-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Mon Jun 17 2019 Pavel Raiskup <praiskup@redhat.com> - 2.19.4-1
+- new upstream release
+
+* Sun Mar 31 2019 Pavel Raiskup <praiskup@redhat.com> - 2.19.2-1
+- new upstream release
+
+* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.11.1-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Wed Nov 14 2018 Pavel Raiskup <praiskup@redhat.com> - 2.11.1-9
+- add rpmbuild --wit{,hout}=python{2,3} options
+- generate docs by python3-sphinx
+- don't build Python 2 subpackage by default
+
 * Fri Sep 21 2018 Miroslav Suchý <msuchy@redhat.com> 2.11.1-8
 - add patch for CVE-2018-17175.patch
 
