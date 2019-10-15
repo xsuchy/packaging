@@ -4,13 +4,13 @@ Release: 6%{?dist}
 
 Summary: Small weblog engine for the UNIX command line
 License: GPLv2+
-Group: Applications/Internet
 
 Url: http://nanoblogger.sourceforge.net/
 BuildArch: noarch
 
-Source: http://nanoblogger.sourceforge.net/downloads/%name-%version.tar.gz
+Source0: http://nanoblogger.sourceforge.net/downloads/%name-%version.tar.gz
 Source1: nb.1
+Patch0:  version.patch
 
 %description
 NanoBlogger is a small weblog engine written in Bash for the command line. It
@@ -54,6 +54,7 @@ cons:
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 sed -i 's/%%version/%{version}/g' nb
@@ -80,7 +81,8 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/nb.1
 %{_datadir}/%{name}
 %{_mandir}/man1/nb.1*
 
-%doc ChangeLog README copyright docs/nanoblogger.html TODO
+%license copyright
+%doc ChangeLog README docs/nanoblogger.html TODO
 
 %changelog
 * Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-6
