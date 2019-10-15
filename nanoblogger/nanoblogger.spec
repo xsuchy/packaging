@@ -1,6 +1,6 @@
 Name: nanoblogger
 Version: 3.4.2
-Release: 6%{?dist}
+Release: 7%{?dist}
 
 Summary: Small weblog engine for the UNIX command line
 License: GPLv2+
@@ -85,6 +85,9 @@ install -D -m 644 %{SOURCE1} %{buildroot}%{_mandir}/man1/nb.1
 %doc ChangeLog README docs/nanoblogger.html TODO
 
 %changelog
+* Tue Oct 15 2019 Miroslav Suchý <msuchy@redhat.com> 3.4.2-7
+- apply patch for detecting markdown
+
 * Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-6
 - fix sed expression
 
