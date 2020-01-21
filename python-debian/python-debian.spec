@@ -1,6 +1,6 @@
 Name:           python-debian
 Version:        0.1.36
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
@@ -85,6 +85,9 @@ python3 -m unittest discover lib
 %doc README.rst HISTORY.deb822
 
 %changelog
+* Tue Jan 21 2020 Miroslav Suchý <msuchy@redhat.com> 0.1.36-1
+- rebase to 0.1.36
+
 * Tue Oct 16 2018 Miroslav Suchý <msuchy@redhat.com> 0.1.33-1
 - rebase to python-debian-0.1.33
 - update url to new homepage
