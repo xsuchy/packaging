@@ -1,6 +1,6 @@
 Name:           python-debian
-Version:        0.1.33
-Release:        1%{?dist}
+Version:        0.1.36
+Release:        0%{?dist}
 Summary:        Modules for Debian-related data formats
 # debfile.py, arfile.py, debtags.py are release under GPL v3 or above
 # everything else is GPLv2+
