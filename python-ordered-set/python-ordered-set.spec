@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        3.1.1
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -50,6 +50,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
+* Fri Mar 13 2020 Miroslav Suchý 3.1.1-1
+- rebase to 3.1.1
+
 * Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-5
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
 
