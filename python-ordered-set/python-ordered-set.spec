@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        3.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -50,6 +50,9 @@ Python 3 version.
 %{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
+* Fri Mar 13 2020 Miroslav Suchý <miroslav@suchy.cz> 3.1.1-2
+- rebase to 3.1.1
+
 * Fri Mar 13 2020 Miroslav Suchý 3.1.1-1
 - rebase to 3.1.1
 
