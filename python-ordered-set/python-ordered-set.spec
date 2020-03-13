@@ -1,33 +1,16 @@
-%if 0%{?fedora}
-%bcond_without python3
-%else
-%bcond_with python3
-%global __python2 python2
-%endif
-%global short_name ordered-set
+%global srcname ordered-set
 %global dir_name ordered_set
 
-Name:           python-%{short_name}
-Version:        2.0.2
-Release:        1%{?dist}
-Summary:        A Custom MutableSet that remembers its order
+Name:           python-%{srcname}
+Version:        3.1.1
+Release:        0%{?dist}
+Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
 URL:            https://github.com/LuminosoInsight/ordered-set
-Source0:        https://pypi.python.org/packages/source/o/%{short_name}/%{short_name}-%{version}.tar.gz
+Source0:        %{pypi_source}
 
 BuildArch:      noarch
-BuildRequires:  python2-devel
-%if 0%{?rhel}
-BuildRequires:  python-setuptools
-%endif # rhel
-#test
-BuildRequires:  python2-nose
-%if %{with python3}
-BuildRequires:  python3-devel
-#test
-BuildRequires:  python3-nose
-%endif # with python3
 
 %global _description\
 An OrderedSet is a custom MutableSet that remembers its order, so that every\
@@ -35,84 +18,78 @@ entry has an index that can be looked up.
 
 %description %_description
 
-%package -n python2-%{short_name}
-Summary: %summary
-%{?python_provide:%python_provide python2-%{short_name}}
+%package     -n python3-%{srcname}
+Summary:        %{summary}
+%{?python_provide:%python_provide python2-%{srcname}}
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-nose
+BuildRequires:  python3-pytest
 
-%description -n python2-%{short_name} %_description
+%description -n python3-%{srcname} %{_description}
 
-%if %{with python3}
-%package     -n python3-%{short_name}
-Summary:        A Custom MutableSet that remembers its order
-
-%description -n python3-%{short_name}
-An OrderedSet is a custom MutableSet that remembers its order, so that every
-entry has an index that can be looked up.
-
-This package contains python3 bindings.
-%endif # with python3
-
+Python 3 version.
 
 %prep
-%setup -qc
-mv %{short_name}-%{version} python2
-
-%if %{with python3}
-cp -a python2 python3
-%endif # with python3
-
+%autosetup -n %{srcname}-%{version}
 
 %build
-pushd python2
-%{__python2} setup.py build
-popd
-
-%if %{with python3}
-pushd python3
-%{__python3} setup.py build
-popd
-%endif # with python3
+%py3_build
 
 %install
-%if %{with python3}
-pushd python3
-%{__python3} setup.py install -O1 --skip-build --root %{buildroot}
-popd
-%endif # with python3
-
-pushd python2
-%{__python2} setup.py install -O1 --skip-build --root %{buildroot}
-popd
-
+%py3_install
 
 %check
-pushd python2
-%{__python2} setup.py nosetests
-popd
+%{__python3} setup.py nosetests
 
-%if %{with python3}
-pushd python3
-%{__python2} setup.py nosetests
-popd
-%endif
-
-
-%files -n python2-%{short_name}
-%doc python2/README
-%license python2/MIT-LICENSE
-%{python_sitelib}/*
-
-%if %{with python3}
-%files -n python3-%{short_name} 
-%doc python3/README
-%license python3/MIT-LICENSE
+%files -n python3-%{srcname}
+%license MIT-LICENSE
+%doc README.md
+%{python3_sitelib}/%{dir_name}-*.egg-info/
 %{python3_sitelib}/%{dir_name}.py
-%{python3_sitelib}/*egg-info/
-%{python3_sitelib}/__pycache__/*
-%endif # with python3
-
+%{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
+* Thu Oct 03 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1-4
+- Rebuilt for Python 3.8.0rc1 (#1748018)
+
+* Fri Aug 16 2019 Miro Hrončok <mhroncok@redhat.com> - 3.1-3
+- Rebuilt for Python 3.8
+
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 3.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Sat Mar 16 2019 Pavel Raiskup <praiskup@redhat.com> - 3.1-1
+- the latest upstream release (rhbz#1592092)
+
+* Mon Mar 11 2019 Igor Gnatenko <ignatenkobrain@fedoraproject.org> - 2.0.2-9
+- Drop python2 subpackage
+
+* Sat Feb 02 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.2-8
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Thu Jul 19 2018 Igor Gnatenko <ignatenkobrain@fedoraprojcet.org> - 2.0.2-7
+- Modernize spec
+
+* Sat Jul 14 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.2-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Fri Jun 15 2018 Miro Hrončok <mhroncok@redhat.com> - 2.0.2-5
+- Rebuilt for Python 3.7
+
+* Tue Feb 27 2018 Iryna Shcherbina <ishcherb@redhat.com> - 2.0.2-4
+- Update Python 2 dependency declarations to new packaging standards
+  (See https://fedoraproject.org/wiki/FinalizingFedoraSwitchtoPython3)
+
+* Fri Feb 09 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.0.2-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Wed Sep 27 2017 Troy Dawson <tdawson@redhat.com> - 2.0.2-2
+- Cleanup spec file conditionals
+
 * Mon Aug 21 2017 Miroslav Suchý <msuchy@redhat.com> 2.0.2-1
 - add license
 
