@@ -6,7 +6,7 @@
 
 Name:           python-%{modname}
 Version:        3.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -133,6 +133,9 @@ rm -rf html/{.buildinfo,.doctrees}
 
 
 %changelog
+* Thu Jan 30 2020 Fedora Release Engineering <releng@fedoraproject.org> - 3.1.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
 * Mon Sep 16 2019 Miroslav Suchý <msuchy@redhat.com> 3.1.1-1
 - rebase to python-marshmallow 3.1.1
 
