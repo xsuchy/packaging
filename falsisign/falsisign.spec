@@ -4,7 +4,7 @@
 
 Name:           falsisign
 Version:        0
-Release:        20200411.0%{?dist}
+Release:        20200411.1%{?dist}
 Summary:        Make it look like a PDF has been hand signed and scanned
 
 License:        WTF
@@ -41,5 +41,5 @@ cp -a falsisign.sh signdiv.sh %{buildroot}%{_bindir}/
 
 
 %changelog
-* Sat Apr 11 2020 Miroslav Suchý <msuchy@redhat.com>
+* Sat Apr 11 2020 Miroslav Suchý 0-20200411.1
 - initial packaging
