@@ -1,15 +1,15 @@
-diff -Naur marshmallow-3.5.1.orig/docs/conf.py marshmallow-3.5.1/docs/conf.py
---- marshmallow-3.5.1.orig/docs/conf.py	2020-03-05 14:01:01.000000000 +0100
-+++ marshmallow-3.5.1/docs/conf.py	2020-03-24 12:42:34.539237871 +0100
+diff -Naur marshmallow-3.8.0.orig/docs/conf.py marshmallow-3.8.0/docs/conf.py
+--- marshmallow-3.8.0.orig/docs/conf.py	2020-09-16 11:21:17.000000000 +0200
++++ marshmallow-3.8.0/docs/conf.py	2020-09-16 14:32:51.570352158 +0200
 @@ -14,7 +14,6 @@
      "sphinx.ext.viewcode",
      "alabaster",
      "sphinx_issues",
 -    "versionwarning.extension",
+     "autodocsumm",
  ]
  
- primary_domain = "py"
-@@ -87,28 +86,3 @@
+@@ -90,31 +89,3 @@
          "searchbox.html",
      ],
  }
@@ -21,18 +21,21 @@ diff -Naur marshmallow-3.5.1.orig/docs/conf.py marshmallow-3.5.1/docs/conf.py
 -        'For the stable version documentation, see <a href="/en/stable/">here</a>.'
 -    ),
 -    "stable": (
--        "This document is for the latest 3.x stable release. "
--        'For the 2.x documentation, see <a href="/en/2.x-line/">here</a>.'
+-        "<strong>Black Lives Matter.</strong> "
+-        'Support the <a href="https://eji.org/">Equal Justice Initiative</a> and '
+-        '<a href="https://colorofchange.org/">Color of Change</a>.'
 -    ),
 -    "2.x-line": (
--        "This document is for the 2.x release branch. "
--        'For the 3.x documentation, see <a href="/en/stable/">here</a>.'
+-        "marshmallow 2 is no longer supported as of 2020-08-18. "
+-        '<a href="https://marshmallow.readthedocs.io/en/latest/upgrading.html#upgrading-to-3-0">'
+-        "Update your code to use marshmallow 3</a>."
 -    ),
 -}
 -# Show warning at top of page
 -versionwarning_body_selector = "div.document"
+-versionwarning_banner_title = ""
 -# For debugging locally
--# versionwarning_project_version = 'latest'
+-# versionwarning_project_version = "stable"
 -
 -
 -def setup(app):
