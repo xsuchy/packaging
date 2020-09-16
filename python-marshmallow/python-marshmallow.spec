@@ -13,6 +13,9 @@ URL:            http://marshmallow.readthedocs.org/
 Source0:        https://github.com/marshmallow-code/marshmallow/archive/%{version}/%{modname}-%{version}.tar.gz
 Patch0:         ordered_set.patch
 Patch1:         versionwarning-disable.patch
+# python3-autodocsumm is not in Fedora
+# This is needed only for doc subpackage.
+Patch2:         disable-autodocsumm.patch
 
 BuildArch:      noarch
 

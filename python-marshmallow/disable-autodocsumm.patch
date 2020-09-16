@@ -1,0 +1,33 @@
+diff -Naur marshmallow-3.8.0.orig/docs/conf.py marshmallow-3.8.0/docs/conf.py
+--- marshmallow-3.8.0.orig/docs/conf.py	2020-09-16 14:39:21.046758182 +0200
++++ marshmallow-3.8.0/docs/conf.py	2020-09-16 14:40:23.317387570 +0200
+@@ -14,7 +14,6 @@
+     "sphinx.ext.viewcode",
+     "alabaster",
+     "sphinx_issues",
+-    "autodocsumm",
+ ]
+ 
+ primary_domain = "py"
+diff -Naur marshmallow-3.8.0.orig/setup.py marshmallow-3.8.0/setup.py
+--- marshmallow-3.8.0.orig/setup.py	2020-09-16 11:21:17.000000000 +0200
++++ marshmallow-3.8.0/setup.py	2020-09-16 14:40:01.087876853 +0200
+@@ -14,7 +14,6 @@
+         "sphinx-issues==1.2.0",
+         "alabaster==0.7.12",
+         "sphinx-version-warning==1.1.2",
+-        "autodocsumm==0.2.0",
+     ],
+ }
+ EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + ["tox"]
+diff -Naur marshmallow-3.8.0.orig/src/marshmallow.egg-info/requires.txt marshmallow-3.8.0/src/marshmallow.egg-info/requires.txt
+--- marshmallow-3.8.0.orig/src/marshmallow.egg-info/requires.txt	2020-09-16 11:21:27.000000000 +0200
++++ marshmallow-3.8.0/src/marshmallow.egg-info/requires.txt	2020-09-16 14:40:36.315101481 +0200
+@@ -14,7 +14,6 @@
+ sphinx-issues==1.2.0
+ alabaster==0.7.12
+ sphinx-version-warning==1.1.2
+-autodocsumm==0.2.0
+ 
+ [lint]
+ mypy==0.782
