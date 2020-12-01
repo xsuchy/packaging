@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    15%{?dist}
+Release:    23%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
@@ -10,6 +10,7 @@ Requires:   dmidecode
 BuildRequires: perl-generators
 BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: gcc
+BuildRequires: make
 ExclusiveArch: %{ix86} x86_64 ia64
 
 %description
@@ -61,6 +62,30 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Mon Jun 22 2020 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-22
+- Perl 5.32 rebuild
+
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-21
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-20
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Thu May 30 2019 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-19
+- Perl 5.30 rebuild
+
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-18
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-17
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Thu Jun 28 2018 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-16
+- Perl 5.28 rebuild
+
 * Mon Feb 19 2018 Miroslav Suchý <msuchy@redhat.com> 0.9.6-15
 - remove cleanup of buildroot, not needed
 - add gcc as BR
