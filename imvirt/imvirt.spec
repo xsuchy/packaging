@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    23%{?dist}
+Release:    24%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPLv2+
@@ -62,6 +62,9 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
+* Tue Dec 01 2020 Miroslav Suchý <msuchy@redhat.com> 0.9.6-24
+- BR make
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-23
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
