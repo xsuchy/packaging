@@ -1,25 +1,24 @@
 # http://fedoraproject.org/wiki/Packaging:Guidelines?rd=Packaging/Guidelines#PIE
 %global _hardened_build 1
-%global commit 65f9cab3937822234e214e4ed5442db73f640f0c
+%global commit 5675e2337d6a89876fa463f6474ce203c2e0198e
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global snapdate 20180614
+%global snapdate 20190913
 %global snapshotrel .%{snapdate}git%{shortcommit}
+# To make rpmdev-bumpspec work properly
+%global baserelease 3
 
 Name:             obs-signd
 Summary:          The OBS sign daemon
 License:          GPLv2
-Url:              https://github.com/openSUSE/obs-sign
-Version:          2.4.2
-Release:          4%{?snapshotrel}%{?dist}
+URL:              https://github.com/openSUSE/obs-sign
+Version:          2.5.4
+Release:          %{baserelease}%{?snapshotrel}%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/%{commit}/obs-sign-%{shortcommit}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
 Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
-Patch1:			  0002-fixes-user-id-matching-to-provide-unique-results.patch
+Patch1:           0002-fixes-user-id-matching-to-provide-unique-results.patch
 Requires:         gnupg2
-Requires(post):   systemd
-Requires(preun):  systemd
-Requires(postun): systemd
 Requires(pre):    shadow-utils
 BuildRequires:    perl-generators
 BuildRequires:    systemd
@@ -36,7 +35,7 @@ on the same server.
 %autosetup -n obs-sign-%{commit}
 
 %build
-gcc %{optflags} -fPIC -pie -o sign sign.c
+%make_build CFLAGS="%{build_cflags}" LDFLAGS="%{build_ldflags}" sign
 
 %install
 mkdir -p %{buildroot}%{_sbindir} %{buildroot}%{_sysconfdir}
@@ -77,12 +76,36 @@ exit 0
 
 %files
 %config(noreplace) %{_sysconfdir}/sign.conf
-%verify(not mode) %attr(4750,root,obsrun) %{_bindir}/sign
+%attr(4750,root,obsrun) %{_bindir}/sign
 %{_sbindir}/signd
 %{_unitdir}/signd.service
 %doc %{_mandir}/man*/*
 
 %changelog
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-3.20190913git5675e23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-2.20190913git5675e23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
+* Thu Jan 02 2020 Neal Gompa <ngompa13@gmail.com> - 2.5.4-1.20190913git5675e23
+- Rebase to 2.5.4 post-release snapshot
+- Drop systemd scriptlet requires per updated packaging policy
+- Drop useless verification exception
+
+* Thu Jul 25 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.3-2.20190613gitc3d5984
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Mon Jun 24 2019 Jakub Kadlčík <jkadlcik@redhat.com> - 2.5.3-1.20180614gitc3d5984
+- update to new upstream version 2.5.3
+- use Makefile that is provided by upstream nowadays
+
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 2.4.2-6.20180614git65f9cab
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 2.4.2-5.20180614git65f9cab
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
 * Mon Jun 25 2018 Miroslav Suchý <msuchy@redhat.com> 2.4.2-4.20180614git65f9cab
 - re-add BR gcc
 
