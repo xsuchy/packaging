@@ -2,7 +2,7 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 Name:           email2domain
 Summary:        Implements RFC 7929, section 3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Version:        0.1.%{shortcommit}
 BuildArch:      noarch
 License:        FIXME
@@ -44,5 +44,8 @@ python3 -m unittest email2domain.py
 
 
 %changelog
+* Wed Jan 20 2021 Miroslav Suchý <msuchy@redhat.com> 0.1.cc8cba9-3
+- update format of tarball
+
 * Wed Jan 20 16:35:14 CET 2021 msuchy <msuchy@redhat.com>
 - initial package
