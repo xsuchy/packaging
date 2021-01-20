@@ -6,11 +6,20 @@ Release: 0%{?dist}
 License: GPLv2 and MIT and BSD and zlib and OFL
 Source0: http://git.openembedded.org/bitbake/snapshot/%{name}-%{version}.tar.gz
 URL: http://git.openembedded.org/bitbake/
-#BuildRequires: python-devel, xmlto-tex, lynx
+Patch0: remove.path.insert.patch
+Patch1: path.mangling.path
 BuildArch: noarch
 
+Requires: python3-beautifulsoup4
+Requires: python3-ply
+Requires: python3-progressbar2
+Recommends: python3-pytz
+
+BuildRequires: python3-devel
 # documentation
 BuildRequires: sphinx
+BuildRequires: python3-sphinx
+BuildRequires: python3-sphinx_rtd_theme
 
 %description
 BitBake is a generic task execution engine that allows shell and Python tasks
@@ -33,45 +42,64 @@ Documentation for BitBake in HTML format.
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
+
 
 %build
-#CFLAGS="$RPM_OPT_FLAGS" python3 setup.py build
+# this is symbolic link, recreate it later
+rm -f bin/bitbake-dumpsig
 
-# Generating docs
-make -C doc/manual all
+# remove bundled modules
+# beautifulsoup4
+rm -rf lib/bs4
+# ply
+rm -rf lib/ply
+# progressbar2
+rm -rf progressbar
+# FIXME - the following modules are bundled but not yet packaged
+# simplediff
 
-iconv -f iso-8859-1 -t utf-8 doc/manual/xhtml/docbook.css > docbook.css.tmp
-touch -r doc/manual/xhtml/docbook.css docbook.css.tmp
-mv docbook.css.tmp doc/manual/xhtml/docbook.css
+
+
+# this is not needed when we put modules on propper place
+for i in bin/*; do
+  sed -i '/sys.path.insert/d' "$i"
+done
+# bitbake has the insert on two lines
+sed -i "/'lib'))/d" bin/bitbake
+
+make -C doc html
+
+#iconv -f iso-8859-1 -t utf-8 doc/manual/xhtml/docbook.css > docbook.css.tmp
+#touch -r doc/manual/xhtml/docbook.css docbook.css.tmp
+#mv docbook.css.tmp doc/manual/xhtml/docbook.css
 
 %install
-#python3 setup.py install -O1 --skip-build --root %{buildroot}
+mkdir -p %{buildroot}%{_bindir}
+cp -a bin/* %{buildroot}%{_bindir}
+# recreate the symlink which we deleted in prep
+ln -s bitbake-diffsigs %{buildroot}%{_bindir}/bitbake-dumpsig
 
-# We strip bad shebangs (/usr/bin/env) instead of fixing them
-# since these files are not executable anyways
-find %{buildroot}/%{python3_sitelib} -name '*.py' \
-  -exec grep -q '^#!' '{}' \; -print | while read F
-do
-  awk '/^#!/ {if (FNR == 1) next;} {print}' $F >chopped
-  touch -r $F chopped
-  mv chopped $F
-done
+mkdir -p %{buildroot}%{python3_sitelib}
+cp -a lib/* %{buildroot}%{python3_sitelib}/
 
 # Removing extra docs
 rm -rf %{buildroot}%{_docdir}
 
-make -C doc html
-make html
 mkdir -p %{buildroot}%{_pkgdocdir}
-cp -a html/_build/html/* %{buildroot}%{_pkgdocdir}/
+cp -a doc/_build/html/* %{buildroot}%{_pkgdocdir}/
 
+mkdir -p %{buildroot}%{_sysconfdir}/bitbake
+cp -a conf/bitbake.conf %{buildroot}%{_sysconfdir}/bitbake/
 
 %files
-#%doc doc/COPYING.GPL doc/manual/xhtml/ doc/manual/txt/usermanual.txt doc/manual/pdf/usermanual.pdf
-#%{_bindir}/bbimage
-#%{_bindir}/bitbake
-#%{_datadir}/bitbake/
-#%{python333_sitelib}/*
+%doc AUTHORS ChangeLog README
+%license LICENSE LICENSE.GPL-2.0-only LICENSE.MIT
+%dir %{_sysconfdir}/bitbake
+%config(noreplace) %{_sysconfdir}/bitbake/bitbake.conf
+%{_bindir}/*
+%{python3_sitelib}/*
 
 %files doc
 %{_pkgdocdir}
