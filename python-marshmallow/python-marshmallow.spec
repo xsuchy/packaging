@@ -5,8 +5,8 @@
 %global _docdir_fmt %{name}
 
 Name:           python-%{modname}
-Version:        3.8.0
-Release:        1%{?dist}
+Version:        3.11.1
+Release:        0%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -136,6 +136,9 @@ rm -rf html/{.buildinfo,.doctrees}
 
 
 %changelog
+* Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 3.8.0-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
 * Wed Sep 16 2020 Miroslav Suchý <msuchy@redhat.com> 3.8.0-1
 - disable autodocsumm in doc
 - rebase to 3.8.0
