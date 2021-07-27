@@ -3,7 +3,7 @@
 
 Name:           python-%{pypi_name}
 Version:        0.7.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Python client library for IBM Cloud VPC Services
 
 License:        ASL 2.0
@@ -66,4 +66,6 @@ rm -rf %{pypi_name}.egg-info
 %{python3_sitelib}/ibm_vpc-%{pypi_version}-py%{python3_version}.egg-info
 
 %changelog
+* Tue Jul 27 2021 Miroslav Suchý <msuchy@redhat.com> 0.7.0-1
+- new package
 
