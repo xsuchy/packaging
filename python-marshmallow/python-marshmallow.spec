@@ -5,8 +5,8 @@
 %global _docdir_fmt %{name}
 
 Name:           python-%{modname}
-Version:        3.11.1
-Release:        1%{?dist}
+Version:        3.13.0
+Release:        0%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
