@@ -6,7 +6,7 @@
 
 Name:           python-%{modname}
 Version:        3.13.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -136,6 +136,9 @@ rm -rf html/{.buildinfo,.doctrees}
 
 
 %changelog
+* Tue Jul 27 2021 Miroslav Suchý <msuchy@redhat.com> 3.13.0-1
+- update to 3.13.0
+
 * Tue Mar 30 2021 Miroslav Suchý <msuchy@redhat.com> 3.11.1-1
 - rebase to 3.11.1
 
