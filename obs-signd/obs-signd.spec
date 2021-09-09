@@ -1,19 +1,19 @@
 # http://fedoraproject.org/wiki/Packaging:Guidelines?rd=Packaging/Guidelines#PIE
 %global _hardened_build 1
-%global commit 5675e2337d6a89876fa463f6474ce203c2e0198e
+%global commit 5c320501dc048bbcf56480dfc5780fb43dd20de5
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
-%global snapdate 20190913
+%global snapdate 20210907
 %global snapshotrel .%{snapdate}git%{shortcommit}
 # To make rpmdev-bumpspec work properly
-%global baserelease 7
+%global baserelease 1
 
 Name:             obs-signd
 Summary:          The OBS sign daemon
 License:          GPLv2
 URL:              https://github.com/openSUSE/obs-sign
-Version:          2.5.4
+Version:          2.5.10
 Release:          %{baserelease}%{?snapshotrel}%{?dist}
-Source0:          https://github.com/openSUSE/obs-sign/archive/%{commit}/obs-sign-%{shortcommit}.tar.gz
+Source0:          https://github.com/openSUSE/obs-sign/archive/refs/tags/obs-sign-%{version}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
 Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
@@ -33,7 +33,7 @@ with a remote server to avoid the need to host the private key
 on the same server.
 
 %prep
-%autosetup -n obs-sign-%{commit}
+%autosetup -n obs-sign-%{version}
 
 %build
 %make_build CFLAGS="%{build_cflags}" LDFLAGS="%{build_ldflags}" sign
@@ -83,6 +83,9 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Tue Sep 07 2021 Silvie Chlupova <schlupov@redhat.com> - 2.5.10-1
+- rebase to 2.5.10
+
 * Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-7.20190913git5675e23
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
