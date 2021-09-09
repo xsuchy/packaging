@@ -5,7 +5,7 @@
 %global snapdate 20190913
 %global snapshotrel .%{snapdate}git%{shortcommit}
 # To make rpmdev-bumpspec work properly
-%global baserelease 3
+%global baserelease 7
 
 Name:             obs-signd
 Summary:          The OBS sign daemon
@@ -23,6 +23,7 @@ Requires(pre):    shadow-utils
 BuildRequires:    perl-generators
 BuildRequires:    systemd
 BuildRequires:    gcc
+BuildRequires:    make
 
 %description
 The OpenSUSE Build Service sign client and daemon.
@@ -82,6 +83,19 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-7.20190913git5675e23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Tue Mar 02 2021 Zbigniew Jędrzejewski-Szmek <zbyszek@in.waw.pl> - 2.5.4-6.20190913git5675e23
+- Rebuilt for updated systemd-rpm-macros
+  See https://pagure.io/fesco/issue/2583.
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-5.20190913git5675e23
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Tue Dec  1 15:23:34 CET 2020 msuchy <msuchy@redhat.com> - 2.5.4-4.20190913git5675e23
+- Add make to BR - https://fedoraproject.org/wiki/Changes/Remove_make_from_BuildRoot
+
 * Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.4-3.20190913git5675e23
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
