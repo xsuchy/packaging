@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        4.0.1
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -51,6 +51,9 @@ pytest
 %{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
+* Tue Dec 14 2021 Miroslav Suchý <msuchy@redhat.com> 4.0.1-7
+- run pytest instead of nose
+
 * Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
 
