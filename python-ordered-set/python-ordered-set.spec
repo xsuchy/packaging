@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        4.0.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -51,6 +51,10 @@ pytest
 %{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
+* Tue Dec 14 2021 Miroslav Suchý <msuchy@redhat.com> 4.0.1-2
+- do not run tests in epel
+- use pytest instead of nose
+
 * Thu Apr 30 2020 Miroslav Suchý <msuchy@redhat.com> 4.0.1-1
 - Update to 4.0.1 (#1829620)
 
