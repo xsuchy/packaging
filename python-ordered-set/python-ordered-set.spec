@@ -23,7 +23,6 @@ Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
 BuildRequires:  python3-devel
 BuildRequires:  python3-setuptools
-BuildRequires:  python3-nose
 BuildRequires:  python3-pytest
 
 %description -n python3-%{srcname} %{_description}
@@ -40,7 +39,7 @@ Python 3 version.
 %py3_install
 
 %check
-%{__python3} setup.py nosetests
+pytest
 
 %files -n python3-%{srcname}
 %license MIT-LICENSE
