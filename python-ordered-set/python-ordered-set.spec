@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        4.0.1
-Release:        2%{?dist}
+Release:        6%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -51,9 +51,20 @@ pytest
 %{python3_sitelib}/__pycache__/%{dir_name}.*
 
 %changelog
-* Tue Dec 14 2021 Miroslav Suchý <msuchy@redhat.com> 4.0.1-2
-- do not run tests in epel
-- use pytest instead of nose
+* Fri Jul 23 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Thu Jun 03 2021 Python Maint <python-maint@redhat.com> - 4.0.1-5
+- Rebuilt for Python 3.10
+
+* Wed Jan 27 2021 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Wed Jul 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Sat May 23 2020 Miro Hrončok <mhroncok@redhat.com> - 4.0.1-2
+- Rebuilt for Python 3.9
 
 * Thu Apr 30 2020 Miroslav Suchý <msuchy@redhat.com> 4.0.1-1
 - Update to 4.0.1 (#1829620)
