@@ -11,6 +11,9 @@ URL:            https://github.com/LuminosoInsight/ordered-set
 Source0:        %{pypi_source}
 
 BuildArch:      noarch
+BuildRequires:  python3-devel
+BuildRequires:  python3-setuptools
+BuildRequires:  python3-pytest
 
 %global _description\
 An OrderedSet is a custom MutableSet that remembers its order, so that every\
@@ -21,9 +24,6 @@ entry has an index that can be looked up.
 %package     -n python3-%{srcname}
 Summary:        %{summary}
 %{?python_provide:%python_provide python2-%{srcname}}
-BuildRequires:  python3-devel
-BuildRequires:  python3-setuptools
-BuildRequires:  python3-pytest
 
 %description -n python3-%{srcname} %{_description}
 
@@ -39,7 +39,9 @@ Python 3 version.
 %py3_install
 
 %check
+%if 0%{?fedora}
 pytest
+%endif
 
 %files -n python3-%{srcname}
 %license MIT-LICENSE
