@@ -2,8 +2,8 @@
 %global dir_name ordered_set
 
 Name:           python-%{srcname}
-Version:        4.0.1
-Release:        7%{?dist}
+Version:        4.1.0
+Release:        0%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
