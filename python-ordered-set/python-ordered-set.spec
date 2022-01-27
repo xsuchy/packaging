@@ -7,7 +7,7 @@ Release:        7%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
-URL:            https://github.com/LuminosoInsight/ordered-set
+URL:            https://github.com/rspeer/ordered-set
 Source0:        %{pypi_source}
 
 BuildArch:      noarch
