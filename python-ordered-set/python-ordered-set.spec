@@ -47,8 +47,9 @@ Python 3 version.
 %license MIT-LICENSE
 %doc README.md
 %{python3_sitelib}/%{dir_name}-*.egg-info/
-%{python3_sitelib}/%{dir_name}.py
-%{python3_sitelib}/__pycache__/%{dir_name}.*
+%dir %{python3_sitelib}/%{dir_name}
+%{python3_sitelib}/%{dir_name}/*.py
+%{python3_sitelib}/%{dir_name}/__pycache__
 
 %changelog
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.0.1-7
