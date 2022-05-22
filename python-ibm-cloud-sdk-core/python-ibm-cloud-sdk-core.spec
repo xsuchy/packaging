@@ -1,6 +1,6 @@
 Name:           python-ibm-cloud-sdk-core
 Version:        3.15.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Core library used by SDKs for IBM Cloud Services
 
 License:        ASL 2.0
@@ -53,6 +53,9 @@ echo > requirements-dev.txt
 %exclude %{python3_sitelib}/test_integration
 
 %changelog
+* Mon May 23 2022 Miroslav Suchý <msuchy@redhat.com> 3.15.1-2
+- do not use dev requirements
+
 * Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.13.2-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
 
