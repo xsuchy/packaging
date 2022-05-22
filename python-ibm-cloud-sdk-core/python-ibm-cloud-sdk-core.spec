@@ -4,7 +4,7 @@
 
 Name:           python-%{pypi_name}
 Version:        3.15.1
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Core library used by SDKs for IBM Cloud Services
 
 License:        ASL 2.0
@@ -63,5 +63,8 @@ rm -rf %{pypi_name}.egg-info
 %{python3_sitelib}/ibm_cloud_sdk_core-%{pypi_version}-py%{python3_version}.egg-info
 
 %changelog
+* Sun May 22 2022 Miroslav Suchý <msuchy@redhat.com> 3.15.1-1
+- rebase to 3.15.1
+
 * Tue Jul 27 2021 Miroslav Suchý <msuchy@redhat.com> 3.10.1-1
 - new package
