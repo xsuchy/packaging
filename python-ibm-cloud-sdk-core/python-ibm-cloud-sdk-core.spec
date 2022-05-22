@@ -3,8 +3,8 @@
 %global pypi_version %{version}
 
 Name:           python-%{pypi_name}
-Version:        3.10.1
-Release:        1%{?dist}
+Version:        3.15.1
+Release:        0%{?dist}
 Summary:        Core library used by SDKs for IBM Cloud Services
 
 License:        ASL 2.0
