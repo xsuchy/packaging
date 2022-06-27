@@ -75,6 +75,7 @@ BuildRequires:  python3-pytz
 BuildRequires:  python3-ordered-set
 BuildRequires:  python3-dateutil
 BuildRequires:  python3-simplejson
+BuildRequires:  python3-sphinx-issues
 Requires:       python3-ordered-set
 Recommends:     python3-dateutil
 Recommends:     python3-simplejson
@@ -90,9 +91,6 @@ Python 3 version.
 # remove bundled library
 # instead of orderedsett we patch code to usu python-ordered-set
 rm -f ./marshmallow/orderedset.py
-
-# Drop support for sphinx-issues as it's not yet packaged
-sed -i -e "/sphinx_issues/d" docs/conf.py
 
 # unsupported theme option 'donate_url' given
 sed -i -e "/donate_url/d" docs/conf.py
