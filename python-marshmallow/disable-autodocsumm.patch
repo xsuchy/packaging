@@ -1,6 +1,17 @@
-diff -Naur marshmallow-3.11.1.orig/docs/conf.py marshmallow-3.11.1/docs/conf.py
---- marshmallow-3.11.1.orig/docs/conf.py	2021-03-30 19:51:32.829382094 +0200
-+++ marshmallow-3.11.1/docs/conf.py	2021-03-30 19:52:00.738398342 +0200
+diff -Naur marshmallow-3.17.0.orig/setup.py marshmallow-3.17.0/setup.py
+--- marshmallow-3.17.0.orig/setup.py	2022-06-26 23:46:49.000000000 +0200
++++ marshmallow-3.17.0/setup.py	2022-06-27 19:07:26.976431607 +0200
+@@ -14,7 +14,6 @@
+         "sphinx-issues==3.0.1",
+         "alabaster==0.7.12",
+         "sphinx-version-warning==1.1.2",
+-        "autodocsumm==0.2.8",
+     ],
+ }
+ EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + ["tox"]
+diff -Naur marshmallow-3.17.0.orig/docs/conf.py marshmallow-3.17.0/docs/conf.py
+--- marshmallow-3.17.0.orig/docs/conf.py     2022-06-26 23:46:49.000000000 +0200
++++ marshmallow-3.17.0/docs/conf.py     2022-06-27 19:07:26.976431607 +0200
 @@ -14,7 +14,6 @@
      "sphinx.ext.viewcode",
      "alabaster",
@@ -9,14 +20,3 @@ diff -Naur marshmallow-3.11.1.orig/docs/conf.py marshmallow-3.11.1/docs/conf.py
  ]
  
  primary_domain = "py"
-diff -Naur marshmallow-3.11.1.orig/setup.py marshmallow-3.11.1/setup.py
---- marshmallow-3.11.1.orig/setup.py	2021-03-30 02:11:23.000000000 +0200
-+++ marshmallow-3.11.1/setup.py	2021-03-30 19:52:09.434403403 +0200
-@@ -14,7 +14,6 @@
-         "sphinx-issues==1.2.0",
-         "alabaster==0.7.12",
-         "sphinx-version-warning==1.1.2",
--        "autodocsumm==0.2.6",
-     ],
- }
- EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + ["tox"]
