@@ -19,6 +19,8 @@ Source0:          https://github.com/openSUSE/obs-sign/archive/refs/tags/obs-sig
 Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
 # https://github.com/openSUSE/obs-sign/pull/6
 Patch1:           0002-fixes-user-id-matching-to-provide-unique-results.patch
+# https://github.com/openSUSE/obs-sign/pull/36
+Patch2:           0003-Implement-allow-unprivileged-ports-for-the-client.patch
 Requires:         gnupg2
 Requires(pre):    shadow-utils
 BuildRequires:    perl-generators
@@ -84,6 +86,15 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.10-4.20210907git5c32050
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+                                                                                          
+* Tue May 24 2022 Pavel Raiskup <praiskup@redhat.com> - 2.5.10-3.20210907git5c32050
+- implemented 'unprivileged-client-port' option for the OpenShift environments
+
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.10-2.20210907git5c32050
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
 * Tue Sep 07 2021 Silvie Chlupova <schlupov@redhat.com> - 2.5.10-1
 - rebase to 2.5.10
 

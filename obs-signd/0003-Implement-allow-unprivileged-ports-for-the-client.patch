@@ -1,0 +1,134 @@
+From e4a1668e31569c0fdcc334c98fbc68ff0cd71e9c Mon Sep 17 00:00:00 2001
+From: Pavel Raiskup <praiskup@redhat.com>
+Date: Thu, 12 May 2022 09:02:43 +0200
+Subject: [PATCH] Implement 'allow-unprivileged-ports' for the client
+
+The restricted rootless container environment (e.g. OpenShift) doesn't
+allow us to call seteuid(), call setuid binaries, or bind to privileged
+ports.  Therefore we need to have some opt-out for the use of privileged
+ports.
+
+With the very same option, the signd-side can already accept
+such connections (before the option was useful when the source port was
+changed to a non-privileged one, e.g. by some proxy).
+
+Proposed upstream: https://github.com/openSUSE/obs-sign/pull/36
+
+Needed for: https://pagure.io/copr/copr/pull-request/2193
+---
+ sign.c |  6 ++++++
+ sock.c | 67 ++++++++++++++++++++++++++++++++++++----------------------
+ 2 files changed, 48 insertions(+), 25 deletions(-)
+
+diff --git a/sign.c b/sign.c
+index f86718b..72e69ca 100644
+--- a/sign.c
++++ b/sign.c
+@@ -38,6 +38,7 @@
+ char *host;
+ int port = MYPORT;
+ char *test_sign;
++int allow_unprivileged_ports = 0;
+ static char *user;
+ static char *algouser;
+ static int allowuser;
+@@ -1309,6 +1310,11 @@ read_sign_conf(const char *conf)
+ 	      exit(1);
+ 	    }
+ 	}
++      if (!strcmp(buf, "allow-unprivileged-ports"))
++	{
++	  if (!strcmp(bp, "true"))
++	    allow_unprivileged_ports = 1;
++	}
+       if (uid && !allowuser && !strcmp(buf, "allowuser"))
+ 	{
+ 	  if (pwd && !strcmp(pwd->pw_name, bp))
+diff --git a/sock.c b/sock.c
+index 3008375..8b35683 100644
+--- a/sock.c
++++ b/sock.c
+@@ -37,6 +37,45 @@ extern char *test_sign;
+ extern char *host;
+ extern int port;
+ extern uid_t uid;
++extern int allow_unprivileged_ports;
++
++/* Best effort bindresvport().  We still try, but we don't enforce binding to
++ * a privileged source port (works only if 'allow-unprivileged-ports' is 'true'
++ * both on the client and server side. */
++static void
++do_bindresvport(void)
++{
++  if (uid)
++    {
++      if (seteuid(0))
++	{
++	  if (allow_unprivileged_ports)
++	    /* go with an unprivileged src port */
++	    return;
++	  perror("seteuid (for bindresvport)");
++	  exit(1);
++	}
++    }
++
++  while (bindresvport(sock, NULL) != 0)
++    {
++      if (errno != EADDRINUSE)
++	{
++	  perror("bindresvport");
++	  exit(1);
++	}
++      sleep(1);
++    }
++
++  if (uid)
++    {
++      if (seteuid(uid))
++	{
++	  perror("seteuid");
++	  exit(1);
++	}
++    }
++}
+ 
+ void
+ opensocket(void)
+@@ -70,31 +109,9 @@ opensocket(void)
+       perror("socket");
+       exit(1);
+     }
+-  if (uid)
+-    {
+-      if (seteuid(0))
+-	{
+-	  perror("seteuid");
+-	  exit(1);
+-	}
+-    }
+-  while (bindresvport(sock, NULL) != 0)
+-    {
+-      if (errno != EADDRINUSE)
+-	{
+-	  perror("bindresvport");
+-	  exit(1);
+-	}
+-      sleep(1);
+-    }
+-  if (uid)
+-    {
+-      if (seteuid(uid))
+-	{
+-	  perror("seteuid");
+-	  exit(1);
+-	}
+-    }
++
++  do_bindresvport();
++
+   if (connect(sock, (struct sockaddr *)&svt, sizeof(svt)))
+     {
+       perror(host);
+-- 
+2.36.1
+
