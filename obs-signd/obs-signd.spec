@@ -12,7 +12,7 @@ Summary:          The OBS sign daemon
 License:          GPLv2
 URL:              https://github.com/openSUSE/obs-sign
 Version:          2.6.1
-Release:          0
+Release:          1
 #Release:          %%{baserelease}%%{?snapshotrel}%%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/refs/tags/obs-sign-%{version}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
@@ -86,6 +86,10 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Mon Nov 14 2022 Miroslav Suchý <msuchy@redhat.com> 2.6.1-1
+- rebase patches
+- rebase obs-sign to 2.6.1
+
 * Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 2.5.10-4.20210907git5c32050
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
                                                                                           
