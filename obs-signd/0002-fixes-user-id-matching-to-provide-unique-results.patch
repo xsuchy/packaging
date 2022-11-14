@@ -49,11 +49,19 @@ but I don't think this was intended.
  signd | 8 ++++----
  1 file changed, 4 insertions(+), 4 deletions(-)
 
-diff --git a/signd b/signd
-index 3033466..8607569 100755
---- a/signd
-+++ b/signd
-@@ -710,7 +710,7 @@ sub cmd_keygen {
+diff -Naur obs-sign-2.6.1.orig/signd obs-sign-2.6.1/signd
+--- obs-sign-2.6.1.orig/signd	2022-11-14 10:36:26.807971895 +0100
++++ obs-sign-2.6.1/signd	2022-11-14 10:40:50.214630869 +0100
+@@ -788,7 +788,7 @@
+   my ($user, $purpose) = @_;
+   $purpose ||= 's';
+   $purpose = qr/$purpose/;
+-  my $lines = rungpg_fatal('/dev/null', undef, $gpg, '--locate-key', '--with-fingerprint', '--with-fingerprint', '--with-keygrip', '--with-colons', '--', $user);
++  my $lines = rungpg_fatal('/dev/null', undef, $gpg, '--locate-key', '--with-fingerprint', '--with-fingerprint', '--with-keygrip', '--with-colons', '--', "<$user>");
+   my $fpr;
+   my $grp;
+   my $keyid;
+@@ -972,7 +972,7 @@
    rungpg_fatal("$phrases/$user", $tdir, $gpg, '--batch', '--no-secmem-warning',
          @pinentrymode,
          "--passphrase-fd=0", "--yes",
@@ -62,7 +70,7 @@ index 3033466..8607569 100755
          '--default-cert-level', '3',
          "--keyring", $pubring,
          '--edit-key', $keyid,
-@@ -730,7 +730,7 @@ sub cmd_keygen {
+@@ -992,7 +992,7 @@
    close(F) || die("privkey close error\n");
  
    $ENV{GNUPGHOME} = $org_gnupghome;
@@ -71,7 +79,7 @@ index 3033466..8607569 100755
    remove_tree($tdir);
  
    # send back
-@@ -791,7 +791,7 @@ EOL
+@@ -1053,7 +1053,7 @@
  sub cmd_pubkey {
    my ($cmd, $user, $hashalgo, @args) = @_;
    die("pubkey: one argument expected\n") if @args;
@@ -80,15 +88,12 @@ index 3033466..8607569 100755
    return (0, '', $pubkey);
  }
  
-@@ -854,7 +854,7 @@ sub cmd_sign {
-       $classtime = $1;
-       $args[0] = substr($args[0], 0, -10)."0000000000";
+@@ -1231,7 +1231,7 @@
+     if ($isprivsign) {
+       push @args, '--allow-non-selfsigned-uid';
+     } else {
+-      push @args, '-u', $user;
++      push @args, '-u', "<$user>";
      }
--    ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-u", $user, "-sbo", "-", $args[0]);
-+    ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-u", "<$user>", "-sbo", "-", $args[0]);
-     $lout = patchclasstime($lout, $classtime) if $classtime && !$status;
-     shift @args;
-     push @out, $lout;
--- 
-2.23.0
-
+     return rungpg($phrasesfile, undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digests", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", @args, "-sbo", "-", $hash);
+   }

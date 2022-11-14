@@ -4,45 +4,37 @@ Date: Tue, 27 May 2014 12:20:35 +0200
 Subject: [PATCH 1/2] Rename option --files-are-digests to --file-is-digest
 
 ---
- signd   | 4 ++--
- signd.8 | 2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/signd b/signd
-index eeb68f5..3033466 100755
---- a/signd
-+++ b/signd
-@@ -828,7 +828,7 @@ sub cmd_privsign {
-       $classtime = $1;
-       $args[0] = substr($args[0], 0, -10)."0000000000";
+diff -Naur obs-sign-2.6.1.orig/signd obs-sign-2.6.1/signd
+--- obs-sign-2.6.1.orig/signd	2022-07-29 12:59:54.000000000 +0200
++++ obs-sign-2.6.1/signd	2022-11-14 09:16:15.416146448 +0100
+@@ -880,7 +880,7 @@
+ }
+ 
+ sub have_files_are_digests {
+-  my ($status) = rungpg('/dev/null', undef, $gpg, '--files-are-digests', '--version');
++  my ($status) = rungpg('/dev/null', undef, $gpg, '--file-is-digests', '--version');
+   return !$status;
+ }
+ 
+@@ -1233,7 +1233,7 @@
+     } else {
+       push @args, '-u', $user;
      }
--    ($status, $lout, $lerr) = rungpg('/dev/null', undef, $gpg, "--batch", "--force-v3-sigs", "--files-are-digests", "--allow-non-selfsigned-uid", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-sbo", "-", $args[0]);
-+    ($status, $lout, $lerr) = rungpg('/dev/null', undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--allow-non-selfsigned-uid", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-sbo", "-", $args[0]);
-     $lout = patchclasstime($lout, $classtime) if $classtime && !$status;
-     shift @args;
-     push @out, $lout;
-@@ -854,7 +854,7 @@ sub cmd_sign {
-       $classtime = $1;
-       $args[0] = substr($args[0], 0, -10)."0000000000";
-     }
--    ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--files-are-digests", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-u", $user, "-sbo", "-", $args[0]);
-+    ($status, $lout, $lerr) = rungpg("$phrases/$user", undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digest", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", "-u", $user, "-sbo", "-", $args[0]);
-     $lout = patchclasstime($lout, $classtime) if $classtime && !$status;
-     shift @args;
-     push @out, $lout;
-diff --git a/signd.8 b/signd.8
-index 2ba6bf9..0b95068 100644
---- a/signd.8
-+++ b/signd.8
-@@ -14,7 +14,7 @@ to another signd. The -f option makes signd fork on startup.
+-    return rungpg($phrasesfile, undef, $gpg, "--batch", "--force-v3-sigs", "--files-are-digests", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", @args, "-sbo", "-", $hash);
++    return rungpg($phrasesfile, undef, $gpg, "--batch", "--force-v3-sigs", "--file-is-digests", "--digest-algo=$hashalgo", "--no-verbose", "--no-armor", "--no-secmem-warning", "--ignore-time-conflict", @pinentrymode, "--passphrase-fd=0", @args, "-sbo", "-", $hash);
+   }
+ }
+ 
+diff -Naur obs-sign-2.6.1.orig/signd.8 obs-sign-2.6.1/signd.8
+--- obs-sign-2.6.1.orig/signd.8	2022-07-29 12:59:54.000000000 +0200
++++ obs-sign-2.6.1/signd.8	2022-11-14 09:16:33.118233765 +0100
+@@ -14,7 +14,7 @@
  
  signd uses the same configuration used for sign, /etc/sign.conf.
  It needs a gpg implementation that understands the
 -"--files-are-digests" option to work correctly.
-+"--file-is-digest" option to work correctly.
++"--file-is-digests" option to work correctly.
  
  .SH SECURITY
  Unless the allow-unprivileged-ports option is set to true in
--- 
-2.23.0
-
