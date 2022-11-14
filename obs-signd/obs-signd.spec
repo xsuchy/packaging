@@ -11,8 +11,9 @@ Name:             obs-signd
 Summary:          The OBS sign daemon
 License:          GPLv2
 URL:              https://github.com/openSUSE/obs-sign
-Version:          2.5.10
-Release:          %{baserelease}%{?snapshotrel}%{?dist}
+Version:          2.6.1
+Release:          0
+#Release:          %%{baserelease}%%{?snapshotrel}%%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/refs/tags/obs-sign-%{version}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
 Patch0:           0001-Rename-option-files-are-digests-to-file-is-digest.patch
