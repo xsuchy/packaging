@@ -12,7 +12,7 @@ Summary:          The OBS sign daemon
 License:          GPL-2.0-only
 URL:              https://github.com/openSUSE/obs-sign
 Version:          2.6.1
-Release:          1
+Release:          2
 #Release:          %%{baserelease}%%{?snapshotrel}%%{?dist}
 Source0:          https://github.com/openSUSE/obs-sign/archive/refs/tags/obs-sign-%{version}.tar.gz
 # We renamed the option in gnupg2 to 'file-is-digest'
@@ -86,6 +86,9 @@ exit 0
 %doc %{_mandir}/man*/*
 
 %changelog
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 2.6.1-2
+- use SPDX format for license
+
 * Mon Nov 14 2022 Miroslav Suchý <msuchy@redhat.com> 2.6.1-1
 - rebase patches
 - rebase obs-sign to 2.6.1
