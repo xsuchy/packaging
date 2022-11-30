@@ -1,6 +1,6 @@
 Name:           python-ibm-cloud-sdk-core
 Version:        3.16.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Core library used by SDKs for IBM Cloud Services
 
 License:        Apache-2.0
@@ -53,9 +53,18 @@ echo > requirements-dev.txt
 %exclude %{python3_sitelib}/test_integration
 
 %changelog
-* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 3.16.0-1
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 3.16.0-2
 - rebase to 3.16.0
-- use spdx license
+- use spdx license 
+
+* Tue Aug 02 2022 Pavel Raiskup <praiskup@redhat.com> - 3.15.3-1
+- new upstream version
+
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 3.15.1-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
+* Tue Jun 14 2022 Python Maint <python-maint@redhat.com> - 3.15.1-3
+- Rebuilt for Python 3.11
 
 * Mon May 23 2022 Miroslav Suchý <msuchy@redhat.com> 3.15.1-2
 - do not use dev requirements
