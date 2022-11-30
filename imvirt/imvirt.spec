@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    24%{?dist}
+Release:    25%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPL-2.0-only
@@ -62,6 +62,9 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 0.9.6-25
+- use spdx license
+
 * Tue Dec 01 2020 Miroslav Suchý <msuchy@redhat.com> 0.9.6-24
 - BR make
 
