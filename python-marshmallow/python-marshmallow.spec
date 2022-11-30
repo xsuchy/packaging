@@ -6,7 +6,7 @@
 
 Name:           python-%{modname}
 Version:        3.19.0
-Release:        0%{?dist}
+Release:        1%{?dist}
 Summary:        Python library for converting complex datatypes to and from primitive types
 License:        MIT
 URL:            http://marshmallow.readthedocs.org/
@@ -134,6 +134,9 @@ rm -rf html/{.buildinfo,.doctrees}
 
 
 %changelog
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 3.19.0-1
+- rebase to 3.19
+- use spdx license
 * Mon Jun 27 2022 Miroslav Suchý <msuchy@redhat.com> 3.17.0-1
 - allow to use sphinx-issues
 - rebase to 3.17.0
