@@ -3,7 +3,7 @@
 
 Name:           python-%{srcname}
 Version:        4.1.0
-Release:        2%{?dist}
+Release:        4%{?dist}
 Summary:        Custom MutableSet that remembers its order
 
 License:        MIT
@@ -52,8 +52,14 @@ Python 3 version.
 %{python3_sitelib}/%{dir_name}/__pycache__
 
 %changelog
-* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 4.1.0-2
-- use SPDX license 
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 4.1.0-4
+- use spdx license 
+
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 4.1.0-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
+* Mon Jun 13 2022 Python Maint <python-maint@redhat.com> - 4.1.0-2
+- Rebuilt for Python 3.11
 
 * Thu Jan 27 2022 Miroslav Suchý <msuchy@redhat.com> 4.1.0-1
 - remove old changelog entries
