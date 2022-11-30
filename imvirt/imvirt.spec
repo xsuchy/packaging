@@ -1,7 +1,7 @@
 Name:       imvirt
 Summary:    Detects several virtualizations
 Version:    0.9.6
-Release:    25%{?dist}
+Release:    31%{?dist}
 URL:        http://micky.ibh.net/~liske/imvirt.html
 Source0:    http://downloads.sourceforge.net/project/%{name}/%{name}/%{version}/%{name}-%{version}.tar.gz
 License:    GPL-2.0-only
@@ -62,8 +62,26 @@ make clean
 %{perl_vendorlib}/*
 
 %changelog
-* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 0.9.6-25
-- use spdx license
+* Wed Nov 30 2022 Miroslav Suchý <msuchy@redhat.com> 0.9.6-31
+- use spdx license 
+
+* Thu Jul 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-30
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
+* Mon May 30 2022 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-29
+- Perl 5.36 rebuild
+
+* Thu Jan 20 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-28
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-27
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Fri May 21 2021 Jitka Plesnikova <jplesnik@redhat.com> - 0.9.6-26
+- Perl 5.34 rebuild
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.9.6-25
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
 * Tue Dec 01 2020 Miroslav Suchý <msuchy@redhat.com> 0.9.6-24
 - BR make
