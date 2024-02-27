@@ -116,13 +116,13 @@ Recommends:     file-unpack == %version
 
 %description
 File::Unpack2 is an unpacker for archives and files
-(bz2/gz/zip/tar/cpio/iso/rpm/deb/cab/lzma/7z/rar/...).  We call
-it strong, because it is not fooled by file suffixes, or multiply wrapped packages.
-It reliably detects mime-types and recursivly descends into each archive found
-until it finally exposes all unpackable payload contents. 
-A precise logfile can be written, describing mimetypes and unpack actions.
-Most of the known archive file formats are supported. Shell-script-style
-plugins can be added to support additinal formats.
+(bz2/gz/zip/tar/cpio/iso/rpm/deb/cab/lzma/7z/rar/...).  We call it strong,
+because it is not fooled by file suffixes or multiple wrapped packages.  It
+reliably detects mime types and recursively descends into each archive found
+until it finally exposes all unpackable payload contents.  A precise log file
+can be written, describing mime types and unpacking actions.  Most of the known
+archive file formats are supported. Shell-script-style plugins can be added to
+support additional formats.
 
 %package -n file-unpack
 Summary:        Command line tool to unpack anything
@@ -150,11 +150,11 @@ install helper/* %{buildroot}/usr/share/File-Unpack/helper/
 
 %fdupes %{buildroot}/usr/share/File-Unpack/
 
-ln -s file-unpack %{buildroot}/%{_bindir}/file_unpack
-ln -s file-unpack %{buildroot}/%{_bindir}/unpack-file
-ln -s file-unpack %{buildroot}/%{_bindir}/unpack-file-deep
-ln -s file-unpack %{buildroot}/%{_bindir}/unpack-deep
-ln -s file-unpack %{buildroot}/%{_bindir}/file-unpack-deep
+ln -s file-unpack2 %{buildroot}/%{_bindir}/file_unpack
+ln -s file-unpack2 %{buildroot}/%{_bindir}/unpack-file
+ln -s file-unpack2 %{buildroot}/%{_bindir}/unpack-file-deep
+ln -s file-unpack2 %{buildroot}/%{_bindir}/unpack-deep
+ln -s file-unpack2 %{buildroot}/%{_bindir}/file-unpack-deep
 
 ## CAUTION: a line beginning with . is a macro-expanded by nroff.
 # echo .nf > file-unpack.1
@@ -197,7 +197,6 @@ rm contrib/stringsx # so that the Manifest in make check is not confused.
 %files
 %doc README Changes
 %{perl_vendorlib}/File
-%dir /usr/share/File-Unpack
 /usr/share/File-Unpack
 %doc %_mandir/man3/File::Unpack2.3pm*
 
@@ -209,9 +208,9 @@ rm contrib/stringsx # so that the Manifest in make check is not confused.
 %{_bindir}/unpack-deep
 %{_bindir}/unpack-file
 %{_bindir}/unpack-file-deep
-%_mandir/man1/file-unpack.1*
+%_mandir/man1/file-unpack2.1*
 %_mandir/man1/file_unpack2.1*
-%_mandir/man1/unpack_file.1*
+%_mandir/man1/unpack_file2.1*
 %license LICENSES/MIT.txt
 
 %changelog
