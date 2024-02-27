@@ -1,12 +1,12 @@
-diff -Naur marshmallow-3.8.0.orig/src/marshmallow/schema.py marshmallow-3.8.0/src/marshmallow/schema.py
---- marshmallow-3.8.0.orig/src/marshmallow/schema.py	2020-09-16 11:21:17.000000000 +0200
-+++ marshmallow-3.8.0/src/marshmallow/schema.py	2020-09-16 12:40:53.208395252 +0200
-@@ -14,7 +14,7 @@
- from marshmallow import base, fields as ma_fields, class_registry, types
+diff -Naur marshmallow-3.21.0.orig/src/marshmallow/schema.py marshmallow-3.21.0/src/marshmallow/schema.py
+--- marshmallow-3.21.0.orig/src/marshmallow/schema.py	2024-02-26 20:43:44.000000000 +0100
++++ marshmallow-3.21.0/src/marshmallow/schema.py	2024-02-27 21:54:51.917914969 +0100
+@@ -26,7 +26,7 @@
+ )
  from marshmallow.error_store import ErrorStore
- from marshmallow.exceptions import ValidationError, StringNotCollectionError
+ from marshmallow.exceptions import StringNotCollectionError, ValidationError
 -from marshmallow.orderedset import OrderedSet
 +from ordered_set import OrderedSet
- from marshmallow.decorators import (
-     POST_DUMP,
-     POST_LOAD,
+ from marshmallow.utils import (
+     EXCLUDE,
+     INCLUDE,

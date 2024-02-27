@@ -1,22 +1,22 @@
-diff -Naur marshmallow-3.19.0/docs/conf.py marshmallow-3.19.0.orig/docs/conf.py
---- marshmallow-3.19.0/docs/conf.py	2022-11-30 14:46:21.904301634 +0100
-+++ marshmallow-3.19.0.orig/docs/conf.py	2022-11-30 14:47:07.568642134 +0100
-@@ -14,7 +14,6 @@
-     "sphinx.ext.viewcode",
+diff -Naur marshmallow-3.21.0.orig/docs/conf.py marshmallow-3.21.0/docs/conf.py
+--- marshmallow-3.21.0.orig/docs/conf.py	2024-02-26 20:43:44.000000000 +0100
++++ marshmallow-3.21.0/docs/conf.py	2024-02-27 22:04:26.379014742 +0100
+@@ -9,7 +9,6 @@
      "alabaster",
      "sphinx_issues",
+     "versionwarning.extension",
 -    "autodocsumm",
  ]
  
  primary_domain = "py"
-diff -Naur marshmallow-3.19.0/setup.py marshmallow-3.19.0.orig/setup.py
---- marshmallow-3.19.0/setup.py	2022-11-30 14:46:21.904301634 +0100
-+++ marshmallow-3.19.0.orig/setup.py	2022-11-30 14:46:37.181415549 +0100
-@@ -14,7 +14,6 @@
-         "sphinx-issues==3.0.1",
-         "alabaster==0.7.12",
-         "sphinx-version-warning==1.1.2",
--        "autodocsumm==0.2.9",
-     ],
- }
- EXTRAS_REQUIRE["dev"] = EXTRAS_REQUIRE["tests"] + EXTRAS_REQUIRE["lint"] + ["tox"]
+diff -Naur marshmallow-3.21.0.orig/pyproject.toml marshmallow-3.21.0/pyproject.toml
+--- marshmallow-3.21.0.orig/pyproject.toml	2024-02-26 20:43:44.000000000 +0100
++++ marshmallow-3.21.0/pyproject.toml	2024-02-27 22:05:53.435787582 +0100
+@@ -37,7 +37,6 @@
+   "sphinx-issues==4.0.0",
+   "alabaster==0.7.16",
+   "sphinx-version-warning==1.1.2",
+-  "autodocsumm==0.2.12",
+ ]
+ tests = ["pytest", "pytz", "simplejson"]
+ dev = ["marshmallow[tests]", "tox", "pre-commit~=3.5"]
