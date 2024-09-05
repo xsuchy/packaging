@@ -1,0 +1,11 @@
+diff -Naur nanoblogger-3.4.2.orig/docs/examples/nanoblogger.bash_completion nanoblogger-3.4.2/docs/examples/nanoblogger.bash_completion
+--- nanoblogger-3.4.2.orig/docs/examples/nanoblogger.bash_completion	2008-09-16 18:05:12.000000000 +0200
++++ nanoblogger-3.4.2/docs/examples/nanoblogger.bash_completion	2024-09-05 18:38:11.791934438 +0200
+@@ -2,7 +2,6 @@
+ 
+ # NanoBlogger completion.
+ #
+-have nb &&
+ _nanoblogger()
+ {
+     local cur prev dashoptions special i

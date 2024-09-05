@@ -10,6 +10,7 @@ Url: http://nanoblogger.sourceforge.net/
 BuildArch: noarch
 
 Source: http://nanoblogger.sourceforge.net/downloads/%name-%version.tar.gz
+Patch0: bash-completion-have.patch
 Requires: nanoblogger
 
 %description
