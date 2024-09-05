@@ -1,6 +1,6 @@
 Name: nanoblogger-extra
 Version: 3.4.2
-Release: 2%{?dist}
+Release: 3%{?dist}
 
 Summary: Nanoblogger plugins
 License: GPLv2+
@@ -40,6 +40,9 @@ cp -a default/ lang/ plugins/ %{buildroot}/%{_datadir}/%{name}
 %{_datadir}/%{name}
 
 %changelog
+* Thu Sep 05 2024 Miroslav Suchý <msuchy@redhat.com> 3.4.2-3
+- fix bashcompletation with deprecated have function
+
 * Sat Sep 27 2014 Miroslav Suchý <miroslav@suchy.cz> 3.4.2-2
 - fix name in setup phase
 
